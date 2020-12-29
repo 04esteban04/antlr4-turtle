@@ -13,13 +13,13 @@ import com.nikoskatsanos.antlrturtle.LogoParser.RightContext;
 import com.nikoskatsanos.antlrturtle.LogoParser.SetContext;
 
 /**
- * A {@link LogoDriver} is effectively a {@link LogoBaseListener}, receiving the callbacks from Antlr parser and delegating the commands to the corresponding {@code painter}
+ * A {@link LogoListener} is effectively a {@link LogoBaseListener}, receiving the callbacks from Antlr parser and delegating the commands to the corresponding {@code painter}
  */
-public class LogoDriver extends LogoBaseListener {
+public class LogoListener extends LogoBaseListener {
 
     private final TurtlePainter painter;
 
-    public LogoDriver(TurtlePainter painter) {
+    public LogoListener(TurtlePainter painter) {
         this.painter = painter;
     }
 
