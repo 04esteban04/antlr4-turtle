@@ -2,7 +2,7 @@ package com.nikoskatsanos.turtle.ui;
 
 import com.nikoskatsanos.antlrturtle.LogoLexer;
 import com.nikoskatsanos.antlrturtle.LogoParser;
-import com.nikoskatsanos.turtle.LogoDriver;
+import com.nikoskatsanos.turtle.LogoListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -69,8 +69,8 @@ public class TurtleFXUIController {
             final ParseTree tree = parser.prog();
 
             final ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
-            final LogoDriver logoDriver = new LogoDriver(this.painter);
-            parseTreeWalker.walk(logoDriver, tree);
+            final LogoListener logoListener = new LogoListener(this.painter);
+            parseTreeWalker.walk(logoListener, tree);
         });
     }
 

@@ -3,7 +3,7 @@ package com.nikoskatsanos.turtle;
 /**
  * Interface to be implemented by classes that provide support on translating the commands from a logo program into a different representation
  * <p>
- * The methods in this interface are invoked by {@link LogoDriver}, by translating the input of a logo program. Implementations can be anything and not just UI tools. Some
+ * The methods in this interface are invoked by {@link LogoListener}, by translating the input of a logo program. Implementations can be anything and not just UI tools. Some
  * implementations of this interface might be:
  *     <ul>
  *         <li>A spy that records the commands and provides an assertion mechanism</li>
