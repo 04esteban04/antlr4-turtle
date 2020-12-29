@@ -28,11 +28,11 @@ resetAngle: RESET_ANGLE;
 
 // Lexer Rules
 
-fragment FD: ('forward' | 'fd');
-fragment BK: ('back' | 'bk');
-fragment LT: ('left' | 'lt');
-fragment RT: ('right' | 'rt');
-fragment CLS: ('clearscreen' | 'cls');
+fragment FD: ('adelante' | 'fd');
+fragment BK: ('atras' | 'bk');
+fragment LT: ('izquierda' | 'lt');
+fragment RT: ('derecha' | 'rt');
+fragment CLS: ('limpiar' | 'cls');
 fragment ST: ('set' | 'st');
 fragment PU: ('penUp' | 'pu');
 fragment PD: ('penDown' | 'pd');

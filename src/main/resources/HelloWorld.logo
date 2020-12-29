@@ -4,43 +4,43 @@ resetAngle
 penDown
 
 // H
-right 90
-forward 50
+derecha 90
+adelante 50
 penUp
-back 25
+atras 25
 penDown
-left 90
-forward 25
-left 90
-forward 25
+izquierda 90
+adelante 25
+izquierda 90
+adelante 25
 penUp
-back25
+atras 25
 penDown
-back 25
+atras 25
 
 // move to E position
 penUp
-forward 50
-right 90
-forward 15
+adelante 50
+derecha 90
+adelante 15
 penDown
 
 // E
-forward 25
+adelante 25
 penUp
-back 25
+atras 25
 penDown
-right 90
-forward 25
-left 90
-forward 25
+derecha 90
+adelante 25
+izquierda 90
+adelante 25
 penUp
-back 25
+atras 25
 penDown
-right 90
-forward 25
-left 90
-forward 25
+derecha 90
+adelante 25
+izquierda 90
+adelante 25
 
 // move to L
 penUp
