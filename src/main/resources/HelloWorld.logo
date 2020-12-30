@@ -44,131 +44,131 @@ adelante 25
 
 // move to L
 penUp
-forward 15
+adelante 15
 penDown
 
 // L
-forward 25
+adelante 25
 penUp
-back 25
+atras 25
 penDown
-left 90
-forward 50
+izquierda 90
+adelante 50
 
 // move to L
 penUp
-right 90
-forward 40
+derecha 90
+adelante 40
 penDown
 
 // L
-right 90
-forward 50
-left 90
-forward 25
+derecha 90
+adelante 50
+izquierda 90
+adelante 25
 
 // move to O
 penUp
-forward 15
+adelante 15
 penDown
 
 // O
-forward 25
-left 90
-forward 50
-left 90
-forward 25
-left 90
-forward 50
-left 90
+adelante 25
+izquierda 90
+adelante 50
+izquierda 90
+adelante 25
+izquierda 90
+adelante 50
+izquierda 90
 
 // move to second row
 set 20,90
 
 // W
-right 78
-forward 56
-left 78
-left 78
-forward 20
-left 12
-right 90
-right 78
-forward 20
-left 78
-left 78
-forward 56
-left 12
+derecha 78
+adelante 56
+izquierda 78
+izquierda 78
+adelante 20
+izquierda 12
+derecha 90
+derecha 78
+adelante 20
+izquierda 78
+izquierda 78
+adelante 56
+izquierda 12
 
 // Move to O
 penUp
-right 90
-forward 15
+derecha 90
+adelante 15
 penDown
 
 // O
-forward 25
-right 90
-forward 50
-right 90
-forward 25
-right 90
-forward 50
+adelante 25
+derecha 90
+adelante 50
+derecha 90
+adelante 25
+derecha 90
+adelante 50
 
 // move to R
 penUp
-right 90
-forward 40
+derecha 90
+adelante 40
 penDown
 
 // R
-right 90
-forward 50
+derecha 90
+adelante 50
 penUp
-back 25
-left 45
+atras 25
+izquierda 45
 penDown
-forward 35
+adelante 35
 penUp
-back 35
-left 135
-forward 25
+atras 35
+izquierda 135
+adelante 25
 penDown
-right 90
-forward 25
-right 90
-forward 25
-right 90
-forward 25
+derecha 90
+adelante 25
+derecha 90
+adelante 25
+derecha 90
+adelante 25
 
 // Move to L
 penUp
-right 90
-forward 25
-right 90
-forward 25
-forward 15
-right 90
+derecha 90
+adelante 25
+derecha 90
+adelante 25
+adelante 15
+derecha 90
 penDown
 
 // L
-forward 50
-left 90
-forward 25
+adelante 50
+izquierda 90
+adelante 25
 
 // Move to D
 penUp
-forward 15
+adelante 15
 penDown
 
 // D
-left 90
-forward 50
-right 90
-right 60
-forward 30
-right 60
-forward 30
+izquierda 90
+adelante 50
+derecha 90
+derecha 60
+adelante 30
+derecha 60
+adelante 30
 
 // beginning
 set 20,20

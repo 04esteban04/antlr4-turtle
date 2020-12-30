@@ -1,16 +1,7 @@
 package com.nikoskatsanos.turtle;
 
 import com.nikoskatsanos.antlrturtle.LogoBaseListener;
-import com.nikoskatsanos.antlrturtle.LogoParser.BackContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.ClearscreenContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.ForwardContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.LeftContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.PenDownContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.PenUpContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.ProgContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.ResetAngleContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.RightContext;
-import com.nikoskatsanos.antlrturtle.LogoParser.SetContext;
+import com.nikoskatsanos.antlrturtle.LogoParser.*;
 
 /**
  * A {@link LogoListener} is effectively a {@link LogoBaseListener}, receiving the callbacks from Antlr parser and delegating the commands to the corresponding {@code painter}
