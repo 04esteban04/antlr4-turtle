@@ -5,8 +5,20 @@ grammar Logo ;
 
 prog: logoExpression+ EOF ;
 
+coloExpresion:
+                blanco
+                | azul
+                | marron
+                | cian
+                | gris
+                | amarillo
+                | negro
+                | verde
+                | rojo
+                ;
+
 intExpression:  inc
-                |
+                |rumbo
                 ;
 
 logoExpression: forward
@@ -20,8 +32,37 @@ logoExpression: forward
                 | resetAngle
                 | ocultatortuga
                 | aparecetortuga
+                |haz
+                |inic
+                |ponx
+                |pony
+                |goma
+                |centro
+                |poncolorlapiz
+                |espera
+
+                |coloExpresion
+                |intExpression
                 ;
 
+blanco: BLANCO;
+azul: AZUL;
+marron: MARRON;
+cian: CIAN;
+gris: GRIS;
+amarillo: AMARILLO;
+negro: NEGRO;
+verde: VERDE;
+rojo: ROJO;
+
+espera: ESPERA INT | intExpression;
+centro : CENTRO;
+poncolorlapiz: PONCOLORLAPIZ coloExpresion;
+goma: GOMA;
+ponx : PONX intExpression | INT;
+pony : PONY intExpression | INT;
+rumbo: RUMBO;
+ponrumbo: PONRUMBO intExpression | INT;
 inc: INC '[' INT+ ']' ;
 inic: INIC ID '=' INT | STRING | intExpression;
 haz: HAZ ID ' ' INT | STRING | intExpression;
@@ -38,6 +79,24 @@ penDown: PEN_DOWN;
 resetAngle: RESET_ANGLE;
 
 // Lexer Rules
+fragment EP: ('espera' | 'ep');
+fragment CT: ('centro' | 'centro');
+fragment CB: ('blanco' | 'cb');
+fragment CA: ('azul' | 'ca');
+fragment CM: ('marron' | 'cm');
+fragment CC: ('cian' | 'cc');
+fragment CG: ('gris' | 'cg');
+fragment CAM:('amarillo' | 'cam');
+fragment CN: ('negro' | 'cn');
+fragment CV: ('verde' | 'cv');
+fragment CR: ('rojo' | 'cr');
+
+fragment PCL:('poncolorlapiz' | 'pcl');
+fragment GM: ('goma' | 'gm');
+fragment PX : ('ponx' | 'px');
+fragment PY : ('pony' | 'py');
+fragment R: ('rumbo' | 'r');
+fragment PR: ('ponrumbo' | 'pr');
 fragment AT: ('aparecetortuga' | 'at');
 fragment OT: ('ocultatortuga' | 'ot');
 fragment IC: ('inc'| 'ic');
@@ -52,6 +111,24 @@ fragment ST: ('ponxy' | 'st');
 fragment PU: ('subelapiz' | 'pu');
 fragment PD: ('bajalapiz' | 'pd');
 
+ESPERA: EP;
+CENTRO : CT;
+BLANCO : CB;
+AZUL : CA;
+MARRON : CM;
+CIAN : CC;
+GRIS : CG;
+AMARILLO : CAM;
+NEGRO : CN;
+ROJO : CR;
+VERDE : CV;
+
+PONCOLORLAPIZ: PCL;
+GOMA: GM;
+PONX: PX;
+PONY : PY;
+RUMBO: R;
+PONRUMBO: PR;
 APARECETORTUGA : AT;
 OCULTATORTUGA : OT;
 INC : IC;
