@@ -1,175 +1,23 @@
-// HelloWorld program in Logo
-set 20,20
+//inicio
+ponxy 20,20
 resetAngle
-penDown
-
+bajalapiz
+poncolorlapiz amarillo
 // H
-derecha 90
-adelante 50
-penUp
-atras 25
-penDown
-izquierda 90
-adelante 25
-izquierda 90
-adelante 25
-penUp
-atras 25
-penDown
-atras 25
+giraderecha 90
+avanza 50
+subelapiz
+retrocede 25
+bajalapiz
+giraizquierda 90
+avanza 25
+giraizquierda 90
+avanza 25
+subelapiz
+retrocede 25
+bajalapiz
+retrocede 25
 
-// move to E position
-penUp
-adelante 50
-derecha 90
-adelante 15
-penDown
-
-// E
-adelante 25
-penUp
-atras 25
-penDown
-derecha 90
-adelante 25
-izquierda 90
-adelante 25
-penUp
-atras 25
-penDown
-derecha 90
-adelante 25
-izquierda 90
-adelante 25
-
-// move to L
-penUp
-adelante 15
-penDown
-
-// L
-adelante 25
-penUp
-atras 25
-penDown
-izquierda 90
-adelante 50
-
-// move to L
-penUp
-derecha 90
-adelante 40
-penDown
-
-// L
-derecha 90
-adelante 50
-izquierda 90
-adelante 25
-
-// move to O
-penUp
-adelante 15
-penDown
-
-// O
-adelante 25
-izquierda 90
-adelante 50
-izquierda 90
-adelante 25
-izquierda 90
-adelante 50
-izquierda 90
-
-// move to second row
-set 20,90
-
-// W
-derecha 78
-adelante 56
-izquierda 78
-izquierda 78
-adelante 20
-izquierda 12
-derecha 90
-derecha 78
-adelante 20
-izquierda 78
-izquierda 78
-adelante 56
-izquierda 12
-
-// Move to O
-penUp
-derecha 90
-adelante 15
-penDown
-
-// O
-adelante 25
-derecha 90
-adelante 50
-derecha 90
-adelante 25
-derecha 90
-adelante 50
-
-// move to R
-penUp
-derecha 90
-adelante 40
-penDown
-
-// R
-derecha 90
-adelante 50
-penUp
-atras 25
-izquierda 45
-penDown
-adelante 35
-penUp
-atras 35
-izquierda 135
-adelante 25
-penDown
-derecha 90
-adelante 25
-derecha 90
-adelante 25
-derecha 90
-adelante 25
-
-// Move to L
-penUp
-derecha 90
-adelante 25
-derecha 90
-adelante 25
-adelante 15
-derecha 90
-penDown
-
-// L
-adelante 50
-izquierda 90
-adelante 25
-
-// Move to D
-penUp
-adelante 15
-penDown
-
-// D
-izquierda 90
-adelante 50
-derecha 90
-derecha 60
-adelante 30
-derecha 60
-adelante 30
-
-// beginning
-set 20,20
+// inicio
+ponxy 20,20
 resetAngle
