@@ -5,6 +5,11 @@ grammar Logo ;
 
 prog: logoExpression+ EOF ;
 
+variableExpreson:
+                intExpression
+                |STRING
+                ;
+
 coloExpresion:
                 blanco
                 | azul
@@ -17,8 +22,12 @@ coloExpresion:
                 | rojo
                 ;
 
-intExpression:  inc
+intExpression:  INT
+                |inc
                 |rumbo
+                |producto
+                |diferencia
+                |potencia
                 ;
 
 logoExpression: forward
@@ -40,11 +49,13 @@ logoExpression: forward
                 |centro
                 |poncolorlapiz
                 |espera
+                |ponrumbo
 
                 |coloExpresion
                 |intExpression
                 ;
 
+//Colores
 blanco: BLANCO;
 azul: AZUL;
 marron: MARRON;
@@ -55,23 +66,29 @@ negro: NEGRO;
 verde: VERDE;
 rojo: ROJO;
 
-espera: ESPERA INT | intExpression;
+//Operaciones matematicas
+producto : PRODUCTO intExpression+ ;
+diferencia: DIFERENCIA intExpression+;
+potencia: POTENCIA intExpression;
+
+//OTROS
+espera: ESPERA intExpression;
 centro : CENTRO;
 poncolorlapiz: PONCOLORLAPIZ coloExpresion;
 goma: GOMA;
-ponx : PONX intExpression | INT;
-pony : PONY intExpression | INT;
+ponx : PONX intExpression;
+pony : PONY intExpression;
 rumbo: RUMBO;
-ponrumbo: PONRUMBO intExpression | INT;
-inc: INC '[' INT+ ']' ;
-inic: INIC ID '=' INT | STRING | intExpression;
-haz: HAZ ID ' ' INT | STRING | intExpression;
+ponrumbo: PONRUMBO intExpression;
+inc: INC '[' intExpression+ ']' ;
+inic: INIC ID '=' variableExpreson;
+haz: HAZ ID variableExpreson;
 ocultatortuga: OCULTATORTUGA;
 aparecetortuga: APARECETORTUGA;
-forward: FORWARD INT ;
-back: BACK INT ;
-right: RIGHT INT;
-left: LEFT INT;
+forward: FORWARD intExpression ;
+back: BACK intExpression ;
+right: RIGHT intExpression;
+left: LEFT intExpression;
 clearscreen: CLEARSCREEN;
 set: SET POINT;
 penUp: PEN_UP;
@@ -79,8 +96,10 @@ penDown: PEN_DOWN;
 resetAngle: RESET_ANGLE;
 
 // Lexer Rules
+fragment POT: ('potencia' | 'pot');
 fragment EP: ('espera' | 'ep');
 fragment CT: ('centro' | 'centro');
+
 fragment CB: ('blanco' | 'cb');
 fragment CA: ('azul' | 'ca');
 fragment CM: ('marron' | 'cm');
@@ -90,6 +109,9 @@ fragment CAM:('amarillo' | 'cam');
 fragment CN: ('negro' | 'cn');
 fragment CV: ('verde' | 'cv');
 fragment CR: ('rojo' | 'cr');
+
+fragment PM: ('producto'| 'pm');
+fragment DR: ('diferencia' | 'dr');
 
 fragment PCL:('poncolorlapiz' | 'pcl');
 fragment GM: ('goma' | 'gm');
@@ -122,6 +144,10 @@ AMARILLO : CAM;
 NEGRO : CN;
 ROJO : CR;
 VERDE : CV;
+
+PRODUCTO: PM;
+DIFERENCIA: DR;
+POTENCIA: POT;
 
 PONCOLORLAPIZ: PCL;
 GOMA: GM;

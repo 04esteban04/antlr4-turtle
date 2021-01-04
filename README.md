@@ -17,7 +17,7 @@ The grammar and this program's capabilities __are not a full Logo Language imple
 
 ## Example
 
-An example of a simple `Hello World` logo program can be found at [HelloWorld.logo](src/main/resources/HelloWorld.logo)
+An example of a simple `Hello World` logo program can be found at [HelloWorld.logo](src/main/resources/HelloWorldBackup.logo)
 
 ## Running The UI
 

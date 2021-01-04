@@ -1,5 +1,7 @@
 package com.nikoskatsanos.turtle;
 
+import java.util.List;
+
 /**
  * Interface to be implemented by classes that provide support on translating the commands from a logo program into a different representation
  * <p>
@@ -15,6 +17,22 @@ package com.nikoskatsanos.turtle;
  * </p>
  */
 public interface TurtlePainter {
+
+    void producto(List<Integer> numeros);
+
+    void rumbo();
+
+    void centro();
+
+    void espera(final int n);
+
+    void ponx(final int point);
+
+    void pony(final int point);
+
+    void goma();
+
+    void poncolorlapiz(final String color);
 
     void forward(final int points);
 

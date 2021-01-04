@@ -1,7 +1,11 @@
 package com.nikoskatsanos.turtle;
 
 import com.nikoskatsanos.antlrturtle.LogoBaseListener;
+import com.nikoskatsanos.antlrturtle.LogoParser;
 import com.nikoskatsanos.antlrturtle.LogoParser.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A {@link LogoListener} is effectively a {@link LogoBaseListener}, receiving the callbacks from Antlr parser and delegating the commands to the corresponding {@code painter}
@@ -12,6 +16,53 @@ public class LogoListener extends LogoBaseListener {
 
     public LogoListener(TurtlePainter painter) {
         this.painter = painter;
+    }
+
+    @Override
+    public void exitProducto(ProductoContext ctx){
+        int x = 1;
+        List<Integer> numeros = new ArrayList<>();
+        while(ctx.getChild(x) != null ){
+            System.out.println(ctx.getChild(x).getText());
+            numeros.add(Integer.parseInt(ctx.getChild(x).getText()));
+            x++;
+        }
+        this.painter.producto(numeros);
+    }
+
+    @Override
+    public void exitRumbo(RumboContext ctx){
+        this.painter.rumbo();
+    }
+
+    @Override
+    public void exitCentro(CentroContext ctx){
+        this.painter.centro();
+    }
+
+    @Override
+    public void exitEspera(EsperaContext ctx){
+        this.painter.espera(Integer.parseInt(ctx.getChild(1).getText()));
+    }
+
+    @Override
+    public void exitGoma(GomaContext ctx){
+        this.painter.goma();
+    }
+
+    @Override
+    public void exitPonx(PonxContext ctx){
+        this.painter.ponx(Integer.parseInt(ctx.getChild(1).getText()));
+    }
+
+    @Override
+    public void exitPony(PonyContext ctx){
+        this.painter.pony(Integer.parseInt(ctx.getChild(1).getText()));
+    }
+
+    @Override
+    public void exitPoncolorlapiz(PoncolorlapizContext ctx){
+        this.painter.poncolorlapiz(ctx.getChild(1).getText());
     }
 
     @Override

@@ -50,6 +50,7 @@ public class TurtleFXUIController {
             } catch (final IOException e) {
                 JavaFXThreadHelper.runOrDefer(() -> this.codeEditor.setText("ERROR"));
             }
+
         });
 
         this.painter = new TurtleFXCanvasPainter(this.logoCanvas);
@@ -72,30 +73,6 @@ public class TurtleFXUIController {
             final LogoListener logoListener = new LogoListener(this.painter);
             parseTreeWalker.walk(logoListener, tree);
         });
-    }
-
-    @FXML
-    public void onAbout() {
-        final Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("About");
-        alert.setHeaderText("Logo Turtle");
-        alert.setContentText("Simple Logo language implementation using ANTLR to generate a language parser and JavaFX for the UI.\n"
-            + "Author: Nikolaos Katsanos\n"
-            + "Website: nikoskatsanos.com");
-
-        WebView webView = new WebView();
-        final String html = "<html>"
-            + "<body>"
-            + "<p>Simple Logo language implementation using ANTLR to generate a language parser and JavaFX for the UI.</p>"
-            + "<b>Author:</b> Nikolaos Katsanos"
-            + "<b>Website:</b> <a href=\"https://www.nikoskatsanos.com\">nikoskatsanos.com</a>"
-            + "</body>"
-            + "</html>";
-        webView.getEngine().loadContent(html);
-        webView.setPrefSize(300, 250);
-        alert.getDialogPane().setContent(webView);
-
-        alert.showAndWait();
     }
 
     @FXML

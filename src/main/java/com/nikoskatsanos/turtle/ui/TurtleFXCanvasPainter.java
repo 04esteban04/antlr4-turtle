@@ -14,6 +14,8 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
+import java.util.List;
+
 public class TurtleFXCanvasPainter implements TurtlePainter {
 
     private final Region sceneGraph;
@@ -23,6 +25,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
 
     private double direction = 0;// 0 degrees == EAST
     private final Circle turtle;
+    private Color color = Color.BLACK;
 
     private boolean isPenDown = true;
 
@@ -40,6 +43,108 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         this.paintTurtle(this.turtle.getCenterX(), this.turtle.getCenterY());
 
         this.animation.setCycleCount(1);
+    }
+
+
+    @Override
+    public void producto(List<Integer> numeros) {
+        int respuesta = 1;
+        for(Integer x : numeros){
+            respuesta *= x;
+        }
+        System.out.println(respuesta);
+    }
+
+    @Override
+    public void rumbo() {
+        System.out.println(this.direction);
+    }
+
+    @Override
+    public void centro() {
+        JavaFXThreadHelper.runOrDefer(() -> {
+            final boolean wasPenDown = this.isPenDown;
+            if (this.isPenDown) {
+                this.penUp();
+            }
+            this.moveTurtle(300, 300 );
+            if (wasPenDown) {
+                this.penDown();
+            }
+        });
+
+    }
+
+    @Override
+    public void espera(final int n) {
+        try {
+            Thread.sleep(n * 1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void ponx(int point) {
+        JavaFXThreadHelper.runOrDefer(() -> {
+            final boolean wasPenDown = this.isPenDown;
+            if (this.isPenDown) {
+                this.penUp();
+            }
+            this.moveTurtle(point, this.turtle.getCenterY());
+            if (wasPenDown) {
+                this.penDown();
+            }
+        });
+    }
+
+    @Override
+    public void pony(int point) {
+        JavaFXThreadHelper.runOrDefer(() -> {
+            final boolean wasPenDown = this.isPenDown;
+            if (this.isPenDown) {
+                this.penUp();
+            }
+            this.moveTurtle(this.turtle.getCenterX(), point);
+            if (wasPenDown) {
+                this.penDown();
+            }
+        });
+    }
+
+    @Override
+    public void goma() {
+        this.color = Color.WHITE;
+    }
+
+    @Override
+    public void poncolorlapiz(String color) {
+        System.out.println("color: " + color);
+        if (color.equals("amarillo")){
+            this.color = Color.YELLOW;
+        }
+        if (color.equals("azul")){
+            this.color = Color.BLUE;
+        }
+        if (color.equals("marron")){
+            this.color = Color.BROWN;
+        }
+        if (color.equals("cian")){
+            this.color = Color.CYAN;
+        }
+        if (color.equals("gris")){
+            this.color = Color.GRAY;
+        }
+        if (color.equals("negro")){
+            this.color = Color.BLACK;
+        }
+        if (color.equals("verde")){
+            this.color = Color.GREEN;
+        }
+        if (color.equals("rojo")){
+            this.color = Color.RED;
+        }
+
     }
 
     @Override
@@ -69,6 +174,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
 
             if (this.isPenDown) {
                 final Line line = new Line(this.turtle.getCenterX(), this.turtle.getCenterY(), x, y);
+                line.setStroke(color);
                 pathTransition.setOnFinished(onFinished -> this.canvas.getChildren().add(line));
             }
 
