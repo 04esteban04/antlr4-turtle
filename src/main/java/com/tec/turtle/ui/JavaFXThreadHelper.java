@@ -1,4 +1,4 @@
-package com.nikoskatsanos.turtle.ui;
+package com.tec.turtle.ui;
 
 import javafx.application.Platform;
 

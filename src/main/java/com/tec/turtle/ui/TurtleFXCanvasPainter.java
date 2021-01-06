@@ -1,6 +1,6 @@
-package com.nikoskatsanos.turtle.ui;
+package com.tec.turtle.ui;
 
-import com.nikoskatsanos.turtle.TurtlePainter;
+import com.tec.turtle.TurtlePainter;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
@@ -47,17 +47,102 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
 
 
     @Override
-    public void producto(List<Integer> numeros) {
+    public int diferencia(List<Integer> numeros) {
+        int respuesta = 0;
+        for(Integer x : numeros){
+            respuesta -= x;
+        }
+        System.out.println(respuesta);
+        return respuesta;
+    }
+
+    @Override
+    public int azar(int n) {
+        int random = (int) (Math.random() * (n - 1)) + 1;
+        System.out.println(random);
+        return random;
+    }
+
+    @Override
+    public int menos(int x) {
+        int result = x - (2 * x);
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public int division(int x, int y) {
+        int result = x / y;
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public int resto(int x, int y) {
+        int respuesta = x - y;
+        System.out.println(respuesta);
+        return respuesta;
+    }
+
+    @Override
+    public int suma(List<Integer> numeros) {
+        int respuesta = 0;
+        for(Integer x : numeros){
+            respuesta += x;
+        }
+        System.out.println(respuesta);
+        return respuesta;
+    }
+
+    @Override
+    public boolean o(boolean condicion, boolean condicion2) {
+        boolean result = condicion || condicion2;
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public boolean y(boolean condicion, boolean condicion2) {
+        boolean result = condicion && condicion2;
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public boolean iguales(int x, int y) {
+        boolean result = x == y;
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public boolean menorque(int x, int y) {
+        boolean result = x < y;
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public boolean mayorque(int x, int y) {
+        boolean result = x > y;
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public int producto(List<Integer> numeros) {
         int respuesta = 1;
         for(Integer x : numeros){
             respuesta *= x;
         }
         System.out.println(respuesta);
+        return respuesta;
     }
 
     @Override
-    public void rumbo() {
+    public double rumbo() {
         System.out.println(this.direction);
+        return this.direction;
     }
 
     @Override

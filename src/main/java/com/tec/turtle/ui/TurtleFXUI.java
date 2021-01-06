@@ -1,4 +1,4 @@
-package com.nikoskatsanos.turtle.ui;
+package com.tec.turtle.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class TurtleFXUI extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Logo Turtle");
+        primaryStage.setTitle("Logo Turtle TEC");
         primaryStage.centerOnScreen();
         primaryStage.setOnCloseRequest(windowEvent -> System.exit(0));
 

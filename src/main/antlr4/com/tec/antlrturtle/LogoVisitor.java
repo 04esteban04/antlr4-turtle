@@ -1,4 +1,4 @@
-// Generated from C:/Users/Daniel Brenes/Desktop/antlr4-turtle-master/antlr4-turtle-master/src/main/antlr4/com/nikoskatsanos/antlrturtle\Logo.g4 by ANTLR 4.9
+// Generated from C:/Users/danbg/IdeaProjects/antlr4-turtle/src/main/antlr4/com/tec/antlrturtle\Logo.g4 by ANTLR 4.9
 
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -30,6 +30,12 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitColoExpresion(LogoParser.ColoExpresionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LogoParser#booleanExpresion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanExpresion(LogoParser.BooleanExpresionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LogoParser#intExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -41,6 +47,36 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLogoExpression(LogoParser.LogoExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#mayorque}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMayorque(LogoParser.MayorqueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#menorque}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMenorque(LogoParser.MenorqueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#iguales}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIguales(LogoParser.IgualesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#o}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitO(LogoParser.OContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#y}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitY(LogoParser.YContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#blanco}.
 	 * @param ctx the parse tree
@@ -96,11 +132,59 @@ public interface LogoVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRojo(LogoParser.RojoContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LogoParser#suma}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSuma(LogoParser.SumaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#resto}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitResto(LogoParser.RestoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#division}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDivision(LogoParser.DivisionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#menos}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMenos(LogoParser.MenosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#azar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAzar(LogoParser.AzarContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LogoParser#producto}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitProducto(LogoParser.ProductoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#diferencia}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDiferencia(LogoParser.DiferenciaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#potencia}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPotencia(LogoParser.PotenciaContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LogoParser#redondea}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRedondea(LogoParser.RedondeaContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LogoParser#espera}.
 	 * @param ctx the parse tree

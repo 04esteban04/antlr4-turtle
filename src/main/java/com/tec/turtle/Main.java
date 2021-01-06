@@ -1,6 +1,6 @@
-package com.nikoskatsanos.turtle;
+package com.tec.turtle;
 
-import com.nikoskatsanos.turtle.ui.TurtleFXUI;
+import com.tec.turtle.ui.TurtleFXUI;
 import javafx.application.Application;
 
 public class Main {

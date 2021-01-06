@@ -1,8 +1,8 @@
-package com.nikoskatsanos.turtle.ui;
+package com.tec.turtle.ui;
 
-import com.nikoskatsanos.antlrturtle.LogoLexer;
-import com.nikoskatsanos.antlrturtle.LogoParser;
-import com.nikoskatsanos.turtle.LogoListener;
+import com.tec.antlrturtle.LogoLexer;
+import com.tec.antlrturtle.LogoParser;
+import com.tec.turtle.LogoListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,14 +12,12 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import org.antlr.v4.runtime.CharStreams;

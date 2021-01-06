@@ -22,12 +22,29 @@ coloExpresion:
                 | rojo
                 ;
 
-intExpression:  INT
-                |inc
+booleanExpresion:
+                mayorque
+                |menorque
+                |o
+                |y
+                |iguales
+                |TRUE
+                |FALSE
+                ;
+
+intExpression:
+                inc
                 |rumbo
                 |producto
                 |diferencia
                 |potencia
+                |redondea
+                |azar
+                |menos
+                |division
+                |resto
+                |suma
+                |INT
                 ;
 
 logoExpression: forward
@@ -53,7 +70,15 @@ logoExpression: forward
 
                 |coloExpresion
                 |intExpression
+                |booleanExpresion
                 ;
+
+//Booleans
+mayorque: MAYORQUE intExpression intExpression;
+menorque: MENORQUE intExpression intExpression;
+iguales: IGUALES intExpression intExpression;
+o: O booleanExpresion booleanExpresion;
+y: Y booleanExpresion booleanExpresion;
 
 //Colores
 blanco: BLANCO;
@@ -67,9 +92,15 @@ verde: VERDE;
 rojo: ROJO;
 
 //Operaciones matematicas
+suma: SUMA intExpression intExpression+;
+resto: RESTO intExpression intExpression;
+division: DIVISION intExpression intExpression;
+menos: MENOS intExpression;
+azar: AZAR intExpression;
 producto : PRODUCTO intExpression+ ;
 diferencia: DIFERENCIA intExpression+;
-potencia: POTENCIA intExpression;
+potencia: POTENCIA intExpression intExpression;
+redondea : REDONDEA intExpression;
 
 //OTROS
 espera: ESPERA intExpression;
@@ -96,6 +127,17 @@ penDown: PEN_DOWN;
 resetAngle: RESET_ANGLE;
 
 // Lexer Rules
+fragment MAQ: ('mayorque?' | 'maq');
+fragment MEQ: ('menorque?' | 'meq');
+fragment IG: ('iguales?' | 'ig');
+fragment OB: ('O' | 'o');
+fragment YB: ('Y' | 'y');
+fragment SM: ('suma' | 'sm');
+fragment RS: ('resto' | 'rs');
+fragment DV: ('division' | 'dv');
+fragment MN: ('menos' | 'mn');
+fragment RM: ('azar' | 'rm');
+fragment RD: ('redondea' | 'rd');
 fragment POT: ('potencia' | 'pot');
 fragment EP: ('espera' | 'ep');
 fragment CT: ('centro' | 'centro');
@@ -128,11 +170,16 @@ fragment FD: ('avanza' | 'fd');
 fragment BK: ('retrocede' | 'bk');
 fragment LT: ('giraizquierda' | 'lt');
 fragment RT: ('giraderecha' | 'rt');
-fragment CLS: ('clearscreen' | 'cls');
+fragment CLS: ('borrapantalla' | 'cls');
 fragment ST: ('ponxy' | 'st');
 fragment PU: ('subelapiz' | 'pu');
 fragment PD: ('bajalapiz' | 'pd');
 
+MAYORQUE: MAQ;
+MENORQUE: MEQ;
+IGUALES: IG;
+Y : YB;
+O : OB;
 ESPERA: EP;
 CENTRO : CT;
 BLANCO : CB;
@@ -145,6 +192,12 @@ NEGRO : CN;
 ROJO : CR;
 VERDE : CV;
 
+RESTO: RS;
+SUMA : SM;
+DIVISION : DV;
+AZAR: RM;
+MENOS: MN;
+REDONDEA: RD;
 PRODUCTO: PM;
 DIFERENCIA: DR;
 POTENCIA: POT;
@@ -168,6 +221,9 @@ CLEARSCREEN: CLS;
 SET: ST;
 PEN_UP: PU;
 PEN_DOWN: PD;
+
+TRUE: 'true';
+FALSE: 'false';
 RESET_ANGLE: 'resetAngle';
 
 ID:[a-zA-Z_][a-zA-Z0-9_]*;

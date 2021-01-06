@@ -1,4 +1,4 @@
-package com.nikoskatsanos.turtle;
+package com.tec.turtle;
 
 import java.util.List;
 
@@ -18,9 +18,31 @@ import java.util.List;
  */
 public interface TurtlePainter {
 
-    void producto(List<Integer> numeros);
+    int diferencia(List<Integer> numeros);
 
-    void rumbo();
+    int azar(int n);
+
+    int menos(int x);
+
+    int division(int x, int y);
+
+    int resto(int x, int y);
+
+    int suma(List<Integer> numeros);
+
+    boolean o(boolean condicion, boolean condicion2);
+
+    boolean y(boolean condicion, boolean condicion2);
+
+    boolean iguales(int x, int y);
+
+    boolean menorque(int x, int y);
+
+    boolean mayorque(int x, int y);
+
+    int producto(List<Integer> numeros);
+
+    double rumbo();
 
     void centro();
 

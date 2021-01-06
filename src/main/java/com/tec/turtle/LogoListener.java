@@ -1,8 +1,8 @@
-package com.nikoskatsanos.turtle;
+package com.tec.turtle;
 
-import com.nikoskatsanos.antlrturtle.LogoBaseListener;
-import com.nikoskatsanos.antlrturtle.LogoParser;
-import com.nikoskatsanos.antlrturtle.LogoParser.*;
+import com.tec.antlrturtle.LogoBaseListener;
+import com.tec.antlrturtle.LogoParser;
+import com.tec.antlrturtle.LogoParser.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,82 @@ public class LogoListener extends LogoBaseListener {
     public LogoListener(TurtlePainter painter) {
         this.painter = painter;
     }
+
+    @Override
+    public void exitDiferencia(DiferenciaContext ctx) {
+        int x = 1;
+        List<Integer> numeros = new ArrayList<>();
+        while(ctx.getChild(x) != null ){
+            numeros.add(Integer.parseInt(ctx.getChild(x).getText()));
+            x++;
+        }
+        this.painter.diferencia(numeros);
+    }
+
+
+    @Override
+    public void exitAzar(AzarContext ctx) {
+        this.painter.azar(Integer.parseInt(ctx.getChild(1).getText()));
+    }
+
+
+    @Override
+    public void exitMenos(LogoParser.MenosContext ctx) {
+        this.painter.menos(Integer.parseInt(ctx.getChild(1).getText()));
+    }
+
+
+    @Override
+    public void exitDivision(DivisionContext ctx) {
+        this.painter.division(Integer.parseInt(ctx.getChild(1).getText()),
+                Integer.parseInt(ctx.getChild(2).getText()));
+    }
+
+
+    @Override public void exitSuma(SumaContext ctx) {
+        int x = 1;
+        List<Integer> numeros = new ArrayList<>();
+        while(ctx.getChild(x) != null ){
+            numeros.add(Integer.parseInt(ctx.getChild(x).getText()));
+            x++;
+        }
+        this.painter.suma(numeros);
+    }
+
+    @Override
+    public void exitY(YContext ctx) {
+        this.painter.y(Boolean.parseBoolean(ctx.getChild(1).getText()),
+                Boolean.parseBoolean(ctx.getChild(2).getText()));
+    }
+
+
+    @Override
+    public void exitO(OContext ctx) {
+        this.painter.o(Boolean.parseBoolean(ctx.getChild(1).getText()),
+                Boolean.parseBoolean(ctx.getChild(2).getText()));
+    }
+
+
+    @Override
+    public void exitIguales(IgualesContext ctx) {
+        this.painter.iguales(Integer.parseInt(ctx.getChild(1).getText()),
+                Integer.parseInt(ctx.getChild(2).getText()));
+    }
+
+
+    @Override
+    public void exitMenorque(MenorqueContext ctx) {
+        this.painter.menorque(Integer.parseInt(ctx.getChild(1).getText()),
+                Integer.parseInt(ctx.getChild(2).getText()));
+    }
+
+
+    @Override
+    public void exitMayorque(MayorqueContext ctx) {
+        this.painter.mayorque(Integer.parseInt(ctx.getChild(1).getText()),
+                Integer.parseInt(ctx.getChild(2).getText()));
+    }
+
 
     @Override
     public void exitProducto(ProductoContext ctx){

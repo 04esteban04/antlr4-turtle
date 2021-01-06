@@ -1,4 +1,4 @@
-// Generated from C:/Users/Daniel Brenes/Desktop/antlr4-turtle-master/antlr4-turtle-master/src/main/antlr4/com/nikoskatsanos/antlrturtle\Logo.g4 by ANTLR 4.9
+// Generated from C:/Users/danbg/IdeaProjects/antlr4-turtle/src/main/antlr4/com/tec/antlrturtle\Logo.g4 by ANTLR 4.9
 
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -39,6 +39,16 @@ public interface LogoListener extends ParseTreeListener {
 	 */
 	void exitColoExpresion(LogoParser.ColoExpresionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LogoParser#booleanExpresion}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanExpresion(LogoParser.BooleanExpresionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#booleanExpresion}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanExpresion(LogoParser.BooleanExpresionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LogoParser#intExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -58,6 +68,56 @@ public interface LogoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLogoExpression(LogoParser.LogoExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#mayorque}.
+	 * @param ctx the parse tree
+	 */
+	void enterMayorque(LogoParser.MayorqueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#mayorque}.
+	 * @param ctx the parse tree
+	 */
+	void exitMayorque(LogoParser.MayorqueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#menorque}.
+	 * @param ctx the parse tree
+	 */
+	void enterMenorque(LogoParser.MenorqueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#menorque}.
+	 * @param ctx the parse tree
+	 */
+	void exitMenorque(LogoParser.MenorqueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#iguales}.
+	 * @param ctx the parse tree
+	 */
+	void enterIguales(LogoParser.IgualesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#iguales}.
+	 * @param ctx the parse tree
+	 */
+	void exitIguales(LogoParser.IgualesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#o}.
+	 * @param ctx the parse tree
+	 */
+	void enterO(LogoParser.OContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#o}.
+	 * @param ctx the parse tree
+	 */
+	void exitO(LogoParser.OContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#y}.
+	 * @param ctx the parse tree
+	 */
+	void enterY(LogoParser.YContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#y}.
+	 * @param ctx the parse tree
+	 */
+	void exitY(LogoParser.YContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LogoParser#blanco}.
 	 * @param ctx the parse tree
@@ -149,6 +209,56 @@ public interface LogoListener extends ParseTreeListener {
 	 */
 	void exitRojo(LogoParser.RojoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LogoParser#suma}.
+	 * @param ctx the parse tree
+	 */
+	void enterSuma(LogoParser.SumaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#suma}.
+	 * @param ctx the parse tree
+	 */
+	void exitSuma(LogoParser.SumaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#resto}.
+	 * @param ctx the parse tree
+	 */
+	void enterResto(LogoParser.RestoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#resto}.
+	 * @param ctx the parse tree
+	 */
+	void exitResto(LogoParser.RestoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#division}.
+	 * @param ctx the parse tree
+	 */
+	void enterDivision(LogoParser.DivisionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#division}.
+	 * @param ctx the parse tree
+	 */
+	void exitDivision(LogoParser.DivisionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#menos}.
+	 * @param ctx the parse tree
+	 */
+	void enterMenos(LogoParser.MenosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#menos}.
+	 * @param ctx the parse tree
+	 */
+	void exitMenos(LogoParser.MenosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#azar}.
+	 * @param ctx the parse tree
+	 */
+	void enterAzar(LogoParser.AzarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#azar}.
+	 * @param ctx the parse tree
+	 */
+	void exitAzar(LogoParser.AzarContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LogoParser#producto}.
 	 * @param ctx the parse tree
 	 */
@@ -158,6 +268,36 @@ public interface LogoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProducto(LogoParser.ProductoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#diferencia}.
+	 * @param ctx the parse tree
+	 */
+	void enterDiferencia(LogoParser.DiferenciaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#diferencia}.
+	 * @param ctx the parse tree
+	 */
+	void exitDiferencia(LogoParser.DiferenciaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#potencia}.
+	 * @param ctx the parse tree
+	 */
+	void enterPotencia(LogoParser.PotenciaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#potencia}.
+	 * @param ctx the parse tree
+	 */
+	void exitPotencia(LogoParser.PotenciaContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LogoParser#redondea}.
+	 * @param ctx the parse tree
+	 */
+	void enterRedondea(LogoParser.RedondeaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LogoParser#redondea}.
+	 * @param ctx the parse tree
+	 */
+	void exitRedondea(LogoParser.RedondeaContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LogoParser#espera}.
 	 * @param ctx the parse tree
