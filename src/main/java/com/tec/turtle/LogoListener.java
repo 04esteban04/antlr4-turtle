@@ -19,6 +19,29 @@ public class LogoListener extends LogoBaseListener {
     }
 
     @Override
+    public void exitAparecetortuga(AparecetortugaContext ctx) {
+        this.painter.aparecer();
+    }
+
+    @Override
+    public void exitOcultatortuga(OcultatortugaContext ctx) {
+        this.painter.ocultar();
+    }
+
+
+    @Override
+    public void exitRedondea(RedondeaContext ctx) {
+        this.painter.redondea(Double.parseDouble(ctx.getChild(1).getText()));
+    }
+
+    @Override
+    public void exitPotencia(PotenciaContext ctx) {
+        this.painter.potencia(Integer.parseInt(ctx.getChild(1).getText()),
+                Integer.parseInt(ctx.getChild(2).getText()));
+    }
+
+
+    @Override
     public void exitDiferencia(DiferenciaContext ctx) {
         int x = 1;
         List<Integer> numeros = new ArrayList<>();

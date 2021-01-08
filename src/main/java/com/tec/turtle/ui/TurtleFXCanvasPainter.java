@@ -15,6 +15,7 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TurtleFXCanvasPainter implements TurtlePainter {
 
@@ -45,6 +46,51 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         this.animation.setCycleCount(1);
     }
 
+
+    @Override
+    public void ocultar() {
+        this.turtle.setVisible(false);
+    }
+
+    @Override
+    public void aparecer() {
+        this.turtle.setVisible(true);
+    }
+
+    @Override
+    public int inc(Integer x, Integer n) {
+
+        if (n == null){
+            n = 1;
+        }
+        int result = 0;
+        while (n != 0){
+            result += x;
+            n--;
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public void ponRumbo(int rumbo) {
+        this.direction = rumbo;
+        System.out.println(this.direction);
+    }
+
+    @Override
+    public Long redondea(double x) {
+        Long result = Math.round(x);
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public double potencia(int n, int p) {
+        double result = Math.pow(n, p);
+        System.out.println(result);
+        return result;
+    }
 
     @Override
     public int diferencia(List<Integer> numeros) {
