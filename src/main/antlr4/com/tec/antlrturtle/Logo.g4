@@ -231,7 +231,7 @@ INT: [0-9]+ ;
 STRING: '"' ~('"')* '"';
 POINT: INT','INT;
 
-
 NEWLINE: '\r'? '\n' -> skip;
 WS: ' '+ -> skip;
 COMMENT: '//' ~[\n]* -> skip;
+

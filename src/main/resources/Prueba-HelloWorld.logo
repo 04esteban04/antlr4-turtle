@@ -1,0 +1,175 @@
+// Programa HELLOWORLD de ejemplo
+ponxy 20,20
+resetAngle
+bajalapiz
+
+// H
+giraderecha 90
+avanza 50
+subelapiz
+retrocede 25
+bajalapiz
+giraizquierda 90
+avanza 25
+giraizquierda 90
+avanza 25
+subelapiz
+retrocede 25
+bajalapiz
+retrocede 25
+
+// Moverse a E
+subelapiz
+avanza 50
+giraderecha 90
+avanza 15
+bajalapiz
+
+// E
+avanza 25
+subelapiz
+retrocede 25
+bajalapiz
+giraderecha 90
+avanza 25
+giraizquierda 90
+avanza 25
+subelapiz
+retrocede 25
+bajalapiz
+giraderecha 90
+avanza 25
+giraizquierda 90
+avanza 25
+
+// Moverse a L
+subelapiz
+avanza 15
+bajalapiz
+
+// L
+avanza 25
+subelapiz
+retrocede 25
+bajalapiz
+giraizquierda 90
+avanza 50
+
+// Moverse a L
+subelapiz
+giraderecha 90
+avanza 40
+bajalapiz
+
+// L
+giraderecha 90
+avanza 50
+giraizquierda 90
+avanza 25
+
+// Moverse a O
+subelapiz
+avanza 15
+bajalapiz
+
+// O
+avanza 25
+giraizquierda 90
+avanza 50
+giraizquierda 90
+avanza 25
+giraizquierda 90
+avanza 50
+giraizquierda 90
+
+// moverse a segunda fila
+ponxy 20,90
+
+// W
+giraderecha 78
+avanza 56
+giraizquierda 78
+giraizquierda 78
+avanza 20
+giraizquierda 12
+giraderecha 90
+giraderecha 78
+avanza 20
+giraizquierda 78
+giraizquierda 78
+avanza 56
+giraizquierda 12
+
+// Moverse a O
+subelapiz
+giraderecha 90
+avanza 15
+bajalapiz
+
+// O
+avanza 25
+giraderecha 90
+avanza 50
+giraderecha 90
+avanza 25
+giraderecha 90
+avanza 50
+
+// moverse a R
+subelapiz
+giraderecha 90
+avanza 40
+bajalapiz
+
+// R
+giraderecha 90
+avanza 50
+subelapiz
+retrocede 25
+giraizquierda 45
+bajalapiz
+avanza 35
+subelapiz
+retrocede 35
+giraizquierda 135
+avanza 25
+bajalapiz
+giraderecha 90
+avanza 25
+giraderecha 90
+avanza 25
+giraderecha 90
+avanza 25
+
+// Moverse a L
+subelapiz
+giraderecha 90
+avanza 25
+giraderecha 90
+avanza 25
+avanza 15
+giraderecha 90
+bajalapiz
+
+// L
+avanza 50
+giraizquierda 90
+avanza 25
+
+// Moverse a D
+subelapiz
+avanza 15
+bajalapiz
+
+// D
+giraizquierda 90
+avanza 50
+giraderecha 90
+giraderecha 60
+avanza 30
+giraderecha 60
+avanza 30
+
+// volver a posición inicial
+ponxy 20,20
+resetAngle

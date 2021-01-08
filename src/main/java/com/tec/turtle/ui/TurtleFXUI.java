@@ -16,7 +16,7 @@ public class TurtleFXUI extends Application {
 
         final FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/LogoTurtle.fxml"));
         final Parent parent = fxmlLoader.load();
-        final Scene primaryScene = new Scene(parent, 650, 500);
+        final Scene primaryScene = new Scene(parent, 750, 600);
 
         primaryStage.setScene(primaryScene);
         primaryStage.show();

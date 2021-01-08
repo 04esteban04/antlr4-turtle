@@ -45,7 +45,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         this.animation.setCycleCount(1);
     }
 
-
     @Override
     public int diferencia(List<Integer> numeros) {
         int respuesta = 0;
