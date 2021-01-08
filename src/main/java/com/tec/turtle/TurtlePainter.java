@@ -18,6 +18,18 @@ import java.util.List;
  */
 public interface TurtlePainter {
 
+    void ocultar();
+
+    void aparecer();
+
+    int inc(Integer x, Integer n);
+
+    void ponRumbo(int rumbo);
+
+    Long redondea(double x);
+
+    double potencia(int n, int p);
+
     int diferencia(List<Integer> numeros);
 
     int azar(int n);
