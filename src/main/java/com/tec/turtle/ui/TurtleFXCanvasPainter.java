@@ -15,7 +15,8 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.List;
-import java.util.Objects;
+
+import static com.tec.turtle.ui.TurtleFXUIController.boolError;
 
 public class TurtleFXCanvasPainter implements TurtlePainter {
 
@@ -284,7 +285,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
             final double x = this.turtle.getCenterX() + points * Math.cos(radian);
             final double y = this.turtle.getCenterY() - points * Math.sin(radian);
 
-            this.validateBounds(x, y);
+            this.validarPosicionTortuga(x, y);
 
             this.moveTurtle(x, y);
         });
@@ -321,7 +322,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
             final double x = this.turtle.getCenterX() - points * Math.cos(radian);
             final double y = this.turtle.getCenterY() + points * Math.sin(radian);
 
-            this.validateBounds(x, y);
+            this.validarPosicionTortuga(x, y);
 
             this.moveTurtle(x, y);
         });
@@ -380,12 +381,28 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         JavaFXThreadHelper.runOrDefer(this.animation::play);
     }
 
-    private void validateBounds(final double newX, final double newY) {
-        if ((newX < 0 || newX > this.width) || (newY < 0 || newY > this.height)) {
-            throw new IllegalArgumentException(
-                String.format("Action results in turtle out of canvas. CanvasDimensions=(%f, %f), TurtleCurrentPosition=(%f, %f), NewPosition=(%f, %f)",
-                    this.width, this.height, this.turtle.getCenterX(), this.turtle.getCenterY(), newX, newY));
-        }
+    /**
+     * Metodo que valida la posicion de la tortuga en le canvas de dibujo
+     * @param newX Nueva posicion en eje x
+     * @param newY Nueva posicion en eje Y
+     */
+    private void validarPosicionTortuga(final double newX, final double newY) {
+        JavaFXThreadHelper.runOrDefer(() -> {
+            if ((newX < 0 || newX > this.width) || (newY < 0 || newY > this.height)) {
+                if (!boolError) {
+                    TurtleFXUIController.error(String.format("-> La tortuga se salio del canvas! " +
+                                    "\n\n    - Dimensiones del canvas = (%f, %f), " +
+                                    "\n    - Posicion actual = (%f, %f), " +
+                                    "\n    - Nueva posicion = (%f, %f)",
+                            this.width,
+                            this.height,
+                            this.turtle.getCenterX(),
+                            this.turtle.getCenterY(),
+                            newX,
+                            newY));
+                }
+            }
+        });
     }
 
     private void paintTurtle(final double x, final double y) {
