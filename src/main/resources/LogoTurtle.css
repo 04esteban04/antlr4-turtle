@@ -1,0 +1,71 @@
+/*
+    Personalizacion de menu
+*/
+.menu{
+    -fx-effect: dropshadow(gaussian, black, 10, 0.0, 1, 1);
+    -fx-font: normal normal 16px 'serif';
+}
+
+/*
+.slider{
+    -fx-border-color: black;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+}
+*/
+
+/*
+    Personalizacion de botones
+*/
+.button{
+    -fx-font: normal normal 16px 'serif';
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-background-radius: 30;
+    -fx-padding: 6 10 6 10;
+}
+
+.button:hover{
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-color: #268835;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-background-radius: 30;
+    -fx-padding: 6 10 6 10;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-text-fill: white;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+    -fx-effect: dropshadow(gaussian, black, 10, 0.0, 1, 1);
+    -fx-font: normal normal 16px 'serif';
+}
+
+.button:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+
+/*
+    Personalizacion del slider
+*/
+.slider:hover {
+    -fx-scale-y: 1.5;
+    -fx-scale-x: 1.5;
+    -fx-background-insets: 4, 2, 2, 4;
+    -fx-background-radius: 30;
+    -fx-padding: 10 10 10 10;
+}
+
+
+/*
+    Personalizacion del editor de texto
+*/
+.text-area {
+    -fx-font-family: Consolas;
+    -fx-font-size: 14;
+    -fx-text-fill: #ffffff;
+    -fx-display-caret:true;
+}
+
+.text-area .content {
+    -fx-background-color: #000000;
+}

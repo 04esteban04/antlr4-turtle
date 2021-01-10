@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class TurtleFXUI extends Application {
 
@@ -16,9 +17,12 @@ public class TurtleFXUI extends Application {
 
         final FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/LogoTurtle.fxml"));
         final Parent parent = fxmlLoader.load();
-        final Scene primaryScene = new Scene(parent, 750, 600);
+        final Scene primaryScene = new Scene(parent, 1000, 620);
+        primaryScene.getStylesheets().add("LogoTurtle.css");
 
         primaryStage.setScene(primaryScene);
+        primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
     }
 }

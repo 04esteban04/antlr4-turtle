@@ -268,4 +268,10 @@ public class TurtleFXUIController {
             }
         }
     }
+
+    @FXML
+    public void cerrar(){
+        System.exit(0);
+    }
+
 }
