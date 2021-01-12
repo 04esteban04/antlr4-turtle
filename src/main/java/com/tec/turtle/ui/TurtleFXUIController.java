@@ -4,9 +4,11 @@ import com.tec.antlrturtle.LogoLexer;
 import com.tec.antlrturtle.LogoParser;
 import com.tec.turtle.ErrorListener;
 import com.tec.turtle.LogoListener;
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,10 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -41,6 +41,16 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class TurtleFXUIController {
+
+    public Button botonEjecutar;
+    public Button botonCompilar;
+    public Button botonAST;
+
+    public BorderPane borderPane;
+
+    FadeTransition fadeTransitionEjecutar;
+    FadeTransition fadeTransitionCompilar;
+    FadeTransition fadeTransitionAST;
 
     @FXML
     private TextArea codeEditor;
@@ -76,6 +86,60 @@ public class TurtleFXUIController {
 
         this.painter.setAnimationDurationMs(this.animationSpeed.valueProperty().longValue());
         this.animationSpeed.valueProperty().addListener((observable, oldValue, newValue) -> this.painter.setAnimationDurationMs(newValue.longValue()));
+
+        fadeTransitionEjecutar = new FadeTransition(Duration.seconds(0.9), botonEjecutar);
+        fadeTransitionEjecutar.setFromValue(1.0);
+        fadeTransitionEjecutar.setToValue(0.1);
+        fadeTransitionEjecutar.setAutoReverse(true);
+        fadeTransitionEjecutar.setCycleCount(Animation.INDEFINITE);
+
+        fadeTransitionCompilar = new FadeTransition(Duration.seconds(0.9), botonCompilar);
+        fadeTransitionCompilar.setFromValue(1.0);
+        fadeTransitionCompilar.setToValue(0.1);
+        fadeTransitionCompilar.setAutoReverse(true);
+        fadeTransitionCompilar.setCycleCount(Animation.INDEFINITE);
+
+        fadeTransitionAST = new FadeTransition(Duration.seconds(0.9), botonAST);
+        fadeTransitionAST.setFromValue(1.0);
+        fadeTransitionAST.setToValue(0.1);
+        fadeTransitionAST.setAutoReverse(true);
+        fadeTransitionAST.setCycleCount(Animation.INDEFINITE);
+
+        botonEjecutar.setOnMouseEntered(mouseEvent -> {
+            fadeTransitionEjecutar.pause();
+            botonEjecutar.setOpacity(1.0);
+
+        });
+
+        botonEjecutar.setOnMouseExited(mouseEvent -> fadeTransitionEjecutar.play());
+
+        botonCompilar.setOnMouseEntered(mouseEvent -> {
+            fadeTransitionCompilar.pause();
+            botonCompilar.setOpacity(1.0);
+
+        });
+
+        botonCompilar.setOnMouseExited(mouseEvent -> fadeTransitionCompilar.play());
+
+        botonAST.setOnMouseEntered(mouseEvent -> {
+            fadeTransitionAST.pause();
+            botonAST.setOpacity(1.0);
+
+        });
+
+        botonAST.setOnMouseExited(mouseEvent -> fadeTransitionAST.play());
+
+        borderPane.setOnMouseEntered(mouseEvent -> {
+            fadeTransitionEjecutar.play();
+            fadeTransitionCompilar.play();
+            fadeTransitionAST.play();
+        });
+
+        borderPane.setOnMouseExited(mouseEvent -> {
+            fadeTransitionEjecutar.play();
+            fadeTransitionCompilar.play();
+            fadeTransitionAST.play();
+        });
     }
 
     @FXML
