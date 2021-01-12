@@ -29,12 +29,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -196,6 +198,39 @@ public class TurtleFXUIController {
                 exito();
             }
         }
+    }
+
+    @FXML
+    public void verAST(){
+        try {
+            LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.codeEditor.getText()));
+            lexer.removeErrorListeners();
+            lexer.addErrorListener(ErrorListener.INSTANCE);
+
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+            LogoParser parser = new LogoParser(tokens);
+            parser.removeErrorListeners();
+            parser.addErrorListener(ErrorListener.INSTANCE);
+
+            ParseTree tree = parser.prog();
+
+            TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()),tree);
+            viewer.open();
+
+        } catch (Exception e) {
+            boolExito = true;
+            if (!boolError) {
+                error(e.getMessage());
+            }
+        }
+        /*
+        finally {
+            if(!boolExito && !boolError) {
+                exito();
+            }
+        }
+        */
     }
 
     /**

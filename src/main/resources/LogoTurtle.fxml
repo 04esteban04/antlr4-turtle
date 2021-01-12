@@ -62,8 +62,9 @@
                                 <Insets bottom="2.0" left="2.0" right="8.0" top="2.0"/>
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="botonAST" alignment="TOP_LEFT" minWidth="-Infinity" mnemonicParsing="false"
-                                nodeOrientation="LEFT_TO_RIGHT"
+                        <Button fx:id="botonAST" alignment="TOP_LEFT" minWidth="-Infinity"
+                                mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT"
+                                onAction="#verAST"
                                 text="Ver AST" textAlignment="JUSTIFY" VBox.vgrow="NEVER">
                             <HBox.margin>
                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
