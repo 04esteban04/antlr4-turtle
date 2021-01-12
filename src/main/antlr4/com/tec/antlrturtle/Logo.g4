@@ -115,7 +115,7 @@ ponx : PONX intExpression;
 pony : PONY intExpression;
 rumbo: RUMBO;
 ponrumbo: PONRUMBO intExpression;
-inc: INC '[' ID intExppression ']' ;
+inc: INC '[' ID intExpression ']' ;
 inic: INIC ID '=' variableExpreson;
 haz: HAZ ID variableExpreson;
 ocultatortuga: OCULTATORTUGA;
