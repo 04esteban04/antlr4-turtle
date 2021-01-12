@@ -1,5 +1,9 @@
 grammar Logo ;
 
+@parser::members{
+    Map<String,Integer>memory=newHashMap<String,Integer>();
+}
+
 @header {
 }
 
@@ -111,7 +115,7 @@ ponx : PONX intExpression;
 pony : PONY intExpression;
 rumbo: RUMBO;
 ponrumbo: PONRUMBO intExpression;
-inc: INC '[' intExpression+ ']' ;
+inc: INC '[' ID intExppression ']' ;
 inic: INIC ID '=' variableExpreson;
 haz: HAZ ID variableExpreson;
 ocultatortuga: OCULTATORTUGA;

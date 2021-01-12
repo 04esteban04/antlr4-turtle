@@ -5,6 +5,7 @@ import com.tec.antlrturtle.LogoParser;
 import com.tec.antlrturtle.LogoParser.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,10 +13,26 @@ import java.util.List;
  */
 public class LogoListener extends LogoBaseListener {
 
+    private final HashMap<String, String> variables = new HashMap<>();
+
     private final TurtlePainter painter;
 
     public LogoListener(TurtlePainter painter) {
         this.painter = painter;
+    }
+
+    @Override
+    public void exitInc(IncContext ctx){
+        String var = ctx.getChild(2).getText();
+        String rep = ctx.getChild(3).getText();
+
+        this.painter.inc(Integer.parseInt(variables.get(var)), Integer.parseInt(rep));
+    }
+
+    @Override
+    public void exitInic(InicContext ctx) {
+        String value = ctx.getChild(3).getText();
+        variables.put(ctx.getChild(1).getText(), value);
     }
 
     @Override
