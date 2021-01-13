@@ -6,6 +6,7 @@ variableExpresion:
                 intExpression
                 |booleanExpresion
                 |STRING
+                |ID
                 ;
 
 coloExpresion:
@@ -79,10 +80,12 @@ listaExpression: lista
                 |elemento
                 ;
 
+//Listas
 primero:PRIMERO lista;
 ultimo: ULTIMO lista;
 elemento: ELEMENTO INT lista;
-lista : '[' ( variableExpresion (variableExpresion )* )? ']';
+
+lista : OPENBRA variableExpresion* CLOSEBRA;
 
 
 //Booleans

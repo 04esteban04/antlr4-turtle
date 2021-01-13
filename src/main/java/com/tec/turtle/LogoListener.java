@@ -410,11 +410,14 @@ public class LogoListener extends LogoBaseListener {
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
-        String var2 = point[2];
+        String var2 = point[1];
 
         if(Objects.nonNull(variables.get(var2))){
             var2 = variables.get(var2);
         }
+
+        System.out.println(var);
+        System.out.println(var2);
         final int x = Integer.parseInt(var);
         final int y = Integer.parseInt(var2);
 
