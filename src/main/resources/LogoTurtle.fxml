@@ -10,7 +10,7 @@
     <top>
         <MenuBar>
             <Menu text="Opciones">
-                <MenuItem text=" Abrir archivo " onAction="#onOpen"/>
+                <MenuItem text=" Abrir archivo " onAction="#abrirArchivo"/>
                 <MenuItem text=" Cerrar " onAction="#cerrar"/>
             </Menu>
         </MenuBar>
@@ -29,7 +29,7 @@
                 <VBox alignment="CENTER" layoutX="11.0" layoutY="15.0" nodeOrientation="LEFT_TO_RIGHT"
                       prefHeight="366.0" prefWidth="152.0" AnchorPane.bottomAnchor="17.0"
                       AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="15.0">
-                    <TextArea fx:id="codeEditor" prefHeight="326.0" prefWidth="152.0" promptText="Logo Program"
+                    <TextArea fx:id="editorDeTexto" prefHeight="326.0" prefWidth="152.0" promptText="Logo Program"
                               VBox.vgrow="ALWAYS">
                         <VBox.margin>
                             <Insets bottom="5.0" top="5.0"/>
@@ -37,7 +37,7 @@
                     </TextArea>
 
                     <HBox alignment="CENTER">
-                        <Slider fx:id="animationSpeed" accessibleText="Animation Speed" min="10" max="1000"
+                        <Slider fx:id="velocidadDeAnimacion" accessibleText="Animation Speed" min="10" max="1000"
                                 majorTickUnit="100" minorTickCount="50"
                                 showTickLabels="true" showTickMarks="true" value="100"/>
                         <HBox.margin>

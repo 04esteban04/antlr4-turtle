@@ -7,8 +7,6 @@ import com.tec.turtle.LogoListener;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -42,52 +39,96 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+/**
+ * Clase que se encarga del controller de la interfaz grafica
+ */
 public class TurtleFXUIController {
 
+    /**
+     * Boton que se encarga de la accion de ejecutar el programa
+     */
     public Button botonEjecutar;
+    /**
+     * Boton que se encarga de la accion de compilar el programa
+     */
     public Button botonCompilar;
+    /**
+     * Boton que se encarga de mostrar el AST del programa
+     */
     public Button botonAST;
-
+    /**
+     * Panel principal de la interfaz grafica
+     */
     public BorderPane borderPane;
 
+    /**
+     * Animacion del boton ejecutar
+     */
     FadeTransition fadeTransitionEjecutar;
+    /**
+     * Animacion del boton compilar
+     */
     FadeTransition fadeTransitionCompilar;
+    /**
+     * Animacion del boton AST
+     */
     FadeTransition fadeTransitionAST;
 
+    /**
+     * Variable que contiene el editor de texto de la ventana principal
+     */
     @FXML
-    private TextArea codeEditor;
+    private TextArea editorDeTexto;
 
+    /**
+     * Variable que almacena la velocidad de la animacion de dibujo mediante un slider
+     */
     @FXML
-    private Slider animationSpeed;
+    private Slider velocidadDeAnimacion;
 
+    /**
+     * Variable para el canvas de dibujo
+     */
     @FXML
     private Group logoCanvas;
 
+    /**
+     * Variable que almacena el painter (se encarga de dibujar en el canvas)
+     */
     private TurtleFXCanvasPainter painter;
 
+    /**
+     * Variable utilizada para manejar threads en segundo plano
+     */
     private final Executor backgroundThread = Executors.newSingleThreadExecutor();
 
-    //public static int errores = 0;
-    //public static int exitos = 0;
-
+    /**
+     * Variable utilizada para validacion en ventana de error
+     */
     public static boolean boolError = false;
+    /**
+     * Variable utilizada para validacion en ventana de exito
+     */
     public static boolean boolExito = false;
 
+    /**
+     * Metodo que se encarga de inicializar el programa
+     */
     public void initialize() {
         backgroundThread.execute(() -> {
             try (final BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/Prueba-H.logo")))) {
                 final String demoProg = reader.lines().collect(Collectors.joining("\n"));
-                JavaFXThreadHelper.runOrDefer(() -> this.codeEditor.setText(demoProg));
+                JavaFXThreadHelper.runOrDefer(() -> this.editorDeTexto.setText(demoProg));
             } catch (final IOException e) {
-                JavaFXThreadHelper.runOrDefer(() -> this.codeEditor.setText("ERROR"));
+                JavaFXThreadHelper.runOrDefer(() -> this.editorDeTexto.setText("ERROR"));
             }
 
         });
 
         this.painter = new TurtleFXCanvasPainter(this.logoCanvas);
 
-        this.painter.setAnimationDurationMs(this.animationSpeed.valueProperty().longValue());
-        this.animationSpeed.valueProperty().addListener((observable, oldValue, newValue) -> this.painter.setAnimationDurationMs(newValue.longValue()));
+        this.painter.setDuracionAnimacion(this.velocidadDeAnimacion.valueProperty().longValue());
+        this.velocidadDeAnimacion.valueProperty().addListener((observable, oldValue, newValue) -> this.painter.setDuracionAnimacion(newValue.longValue()));
 
         fadeTransitionEjecutar = new FadeTransition(Duration.seconds(0.9), botonEjecutar);
         fadeTransitionEjecutar.setFromValue(1.0);
@@ -144,20 +185,23 @@ public class TurtleFXUIController {
         });
     }
 
+    /**
+     * Metodo que se encarga de la accion de ejecutar un programa Logo
+     */
     @FXML
-    public void ejecutarPrograma(ActionEvent event) {
+    public void ejecutarPrograma() {
         this.painter.cls();
         this.backgroundThread.execute(() -> {
             try {
-                LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.codeEditor.getText()));
+                LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.editorDeTexto.getText()));
                 lexer.removeErrorListeners();
-                lexer.addErrorListener(ErrorListener.INSTANCE);
+                lexer.addErrorListener(ErrorListener.errorListener);
 
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
 
                 LogoParser parser = new LogoParser(tokens);
                 parser.removeErrorListeners();
-                parser.addErrorListener(ErrorListener.INSTANCE);
+                parser.addErrorListener(ErrorListener.errorListener);
 
                 ParseTree tree = parser.prog();
 
@@ -167,31 +211,34 @@ public class TurtleFXUIController {
 
             } catch (Exception exception){
                 if (!boolError) {
-                    error(exception.getMessage());
+                    error(exception.getMessage(), "excepcion");
                 }
             }
         });
     }
 
+    /**
+     * Metodo que se encarga de la accion de compilar un programa Logo
+     */
     @FXML
-    public void compilarPrograma(ActionEvent event) {
+    public void compilarPrograma() {
         try {
-            LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.codeEditor.getText()));
+            LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.editorDeTexto.getText()));
             lexer.removeErrorListeners();
-            lexer.addErrorListener(ErrorListener.INSTANCE);
+            lexer.addErrorListener(ErrorListener.errorListener);
 
             CommonTokenStream tokens = new CommonTokenStream(lexer);
 
             LogoParser parser = new LogoParser(tokens);
             parser.removeErrorListeners();
-            parser.addErrorListener(ErrorListener.INSTANCE);
+            parser.addErrorListener(ErrorListener.errorListener);
 
             ParseTree tree = parser.prog();
 
         } catch (Exception e) {
             boolExito = true;
             if (!boolError) {
-                error(e.getMessage());
+                error(e.getMessage(), "excepcion");
             }
         } finally {
             if(!boolExito && !boolError) {
@@ -200,18 +247,21 @@ public class TurtleFXUIController {
         }
     }
 
+    /**
+     * Metodo que se encarga de la accion de visualizar el AST de un programa Logo
+     */
     @FXML
     public void verAST(){
         try {
-            LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.codeEditor.getText()));
+            LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.editorDeTexto.getText()));
             lexer.removeErrorListeners();
-            lexer.addErrorListener(ErrorListener.INSTANCE);
+            lexer.addErrorListener(ErrorListener.errorListener);
 
             CommonTokenStream tokens = new CommonTokenStream(lexer);
 
             LogoParser parser = new LogoParser(tokens);
             parser.removeErrorListeners();
-            parser.addErrorListener(ErrorListener.INSTANCE);
+            parser.addErrorListener(ErrorListener.errorListener);
 
             ParseTree tree = parser.prog();
 
@@ -221,90 +271,139 @@ public class TurtleFXUIController {
         } catch (Exception e) {
             boolExito = true;
             if (!boolError) {
-                error(e.getMessage());
+                error(e.getMessage(), "excepcion");
             }
         }
-        /*
-        finally {
-            if(!boolExito && !boolError) {
-                exito();
-            }
-        }
-        */
     }
 
     /**
      * Metodo que muestra la ventana de error en caso de alguna excepcion generada por el programa
      */
-    public static void error(String e){
-        //errores++;
-        //System.out.println("Errores: " + errores + " - " + e);
+    public static void error(String excepcion, String error){ 
         boolError = true;
-        Platform.runLater(() -> {
-            Stage stage = new Stage();
-            VBox vBox = new VBox();
-            Rectangle rect = new Rectangle(500, 280);
-            TextArea textoError = new TextArea();
-            Label labelInformacion = new Label("Se detectó un error en el programa:");
-            labelInformacion.setFont(new Font("Sylfaen", 18));
+        if(error.equals("excepcion")) {
+            Platform.runLater(() -> {
+                Stage stage = new Stage();
+                VBox vBox = new VBox();
+                Rectangle rect = new Rectangle(500, 280);
+                TextArea textoError = new TextArea();
+                Label labelInformacion = new Label("Se detectó un error en el programa:");
+                labelInformacion.setFont(new Font("Sylfaen", 18));
 
-            Button botonAceptar = new Button("Aceptar");
-            botonAceptar.setFont(new Font("Sylfaen", 14));
-            botonAceptar.setOnAction(actionEvent -> {
-                boolError = false;
-                stage.close();
+                Button botonAceptar = new Button("Aceptar");
+                botonAceptar.setFont(new Font("Sylfaen", 14));
+                botonAceptar.setOnAction(actionEvent -> {
+                    boolError = false;
+                    stage.close();
+                });
+
+                rect.setArcHeight(60.0);
+                rect.setArcWidth(60.0);
+
+                textoError.setText("Excepción encontrada en: \n\n" + excepcion);
+                textoError.setPrefSize(420, 150);
+                textoError.setMaxWidth(420);
+                textoError.setMaxHeight(150);
+                textoError.setEditable(false);
+                textoError.setStyle("-fx-control-inner-background:#000000;" +
+                        " -fx-font-family: Consolas;" +
+                        " -fx-highlight-fill: #ff0000; " +
+                        "-fx-highlight-text-fill: #000000; " +
+                        "-fx-text-fill: #ff0000; " +
+                        "-fx-font-size: 12pt ;");
+
+                vBox.getChildren().addAll(labelInformacion, textoError, botonAceptar);
+                vBox.setSpacing(20);
+                vBox.setAlignment(Pos.CENTER);
+                vBox.setClip(rect);
+                vBox.setBackground(new Background(new BackgroundFill(Color.rgb(240, 150, 100), CornerRadii.EMPTY, Insets.EMPTY)));
+
+                Scene scene = new Scene(vBox);
+                scene.setFill(Color.TRANSPARENT);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.setX(500);
+                stage.setY(250);
+                stage.setWidth(500);
+                stage.setHeight(280);
+                stage.setResizable(false);
+
+                // Transicion
+                FadeTransition fadeInTransition = new FadeTransition(Duration.millis(250), rect);
+                fadeInTransition.setFromValue(0.0);
+                fadeInTransition.setToValue(1.0);
+                fadeInTransition.setCycleCount(5);
+                fadeInTransition.setAutoReverse(true);
+                fadeInTransition.play();
+
+                stage.showAndWait();
             });
+        } else if (error.equals("abrirArchivo")){
+            Platform.runLater(() -> {
+                Stage stage = new Stage();
+                VBox vBox = new VBox();
+                Rectangle rect = new Rectangle(500, 280);
+                TextArea textoError = new TextArea();
+                Label labelInformacion = new Label("Se detectó un error en el programa:");
+                labelInformacion.setFont(new Font("Sylfaen", 18));
 
-            rect.setArcHeight(60.0);
-            rect.setArcWidth(60.0);
+                Button botonAceptar = new Button("Aceptar");
+                botonAceptar.setFont(new Font("Sylfaen", 14));
+                botonAceptar.setOnAction(actionEvent -> {
+                    boolError = false;
+                    stage.close();
+                });
 
-            textoError.setText("Excepción encontrada en: \n\n" + e);
-            textoError.setPrefSize(420, 150);
-            textoError.setMaxWidth(420);
-            textoError.setMaxHeight(150);
-            textoError.setEditable(false);
-            textoError.setStyle("-fx-control-inner-background:#000000;" +
-                    " -fx-font-family: Consolas;" +
-                    " -fx-highlight-fill: #ff0000; " +
-                    "-fx-highlight-text-fill: #000000; " +
-                    "-fx-text-fill: #ff0000; " +
-                    "-fx-font-size: 12pt ;");
+                rect.setArcHeight(60.0);
+                rect.setArcWidth(60.0);
 
-            vBox.getChildren().addAll(labelInformacion, textoError, botonAceptar);
-            vBox.setSpacing(20);
-            vBox.setAlignment(Pos.CENTER);
-            vBox.setClip(rect);
-            vBox.setBackground(new Background(new BackgroundFill(Color.rgb(240, 150, 100), CornerRadii.EMPTY, Insets.EMPTY)));
+                textoError.setText("Error al abrir el archivo: \n\n" + excepcion);
+                textoError.setPrefSize(420, 150);
+                textoError.setMaxWidth(420);
+                textoError.setMaxHeight(150);
+                textoError.setEditable(false);
+                textoError.setStyle("-fx-control-inner-background:#000000;" +
+                        " -fx-font-family: Consolas;" +
+                        " -fx-highlight-fill: #ff0000; " +
+                        "-fx-highlight-text-fill: #000000; " +
+                        "-fx-text-fill: #ff0000; " +
+                        "-fx-font-size: 12pt ;");
 
-            Scene scene = new Scene(vBox);
-            scene.setFill(Color.TRANSPARENT);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(scene);
-            stage.setX(500);
-            stage.setY(250);
-            stage.setWidth(500);
-            stage.setHeight(280);
-            stage.setResizable(false);
+                vBox.getChildren().addAll(labelInformacion, textoError, botonAceptar);
+                vBox.setSpacing(20);
+                vBox.setAlignment(Pos.CENTER);
+                vBox.setClip(rect);
+                vBox.setBackground(new Background(new BackgroundFill(Color.rgb(240, 150, 100), CornerRadii.EMPTY, Insets.EMPTY)));
 
-            // Transicion
-            FadeTransition fadeInTransition = new FadeTransition(Duration.millis(250), rect);
-            fadeInTransition.setFromValue(0.0);
-            fadeInTransition.setToValue(1.0);
-            fadeInTransition.setCycleCount(5);
-            fadeInTransition.setAutoReverse(true);
-            fadeInTransition.play();
+                Scene scene = new Scene(vBox);
+                scene.setFill(Color.TRANSPARENT);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.setX(500);
+                stage.setY(250);
+                stage.setWidth(500);
+                stage.setHeight(280);
+                stage.setResizable(false);
 
-            stage.showAndWait();
-        });
+                // Transicion
+                FadeTransition fadeInTransition = new FadeTransition(Duration.millis(250), rect);
+                fadeInTransition.setFromValue(0.0);
+                fadeInTransition.setToValue(1.0);
+                fadeInTransition.setCycleCount(5);
+                fadeInTransition.setAutoReverse(true);
+                fadeInTransition.play();
+
+                stage.showAndWait();
+            });
+        }
     }
 
     /**
      * Metodo que muestra la ventana de exito en caso de que el programa se ejecute correctamente
      */
     public void exito() {
-        //exitos++;
-        //System.out.println("Exito: " + exitos);
         boolExito = true;
         Platform.runLater(() -> {
             Stage stage = new Stage();
@@ -352,22 +451,30 @@ public class TurtleFXUIController {
         });
     }
 
+    /**
+     * Metodo que se encarga de abrir un archivo en el editor de texto
+     */
     @FXML
-    public void onOpen() {
-        final FileChooser logoFileChooser = new FileChooser();
-        logoFileChooser.setTitle("Select Logo File");
-        logoFileChooser.getExtensionFilters().add(new ExtensionFilter("Logo Files", "*.logo"));
-        final File logoFile = logoFileChooser.showOpenDialog(null);
-        if (Objects.nonNull(logoFile)) {
-            try (final BufferedReader fileReader = new BufferedReader(new FileReader(logoFile))) {
-                final String logoProgram = fileReader.lines().collect(Collectors.joining("\n"));
-                JavaFXThreadHelper.runOrDefer(() -> this.codeEditor.setText(logoProgram));
+    public void abrirArchivo() {
+        final FileChooser selectorDeArchivo = new FileChooser();
+        selectorDeArchivo.setTitle("Seleccione un archivo Logo");
+        selectorDeArchivo.getExtensionFilters().add(new ExtensionFilter("Archivos Logo", "*.logo"));
+
+        final File archivoLogo = selectorDeArchivo.showOpenDialog(null);
+
+        if (Objects.nonNull(archivoLogo)) {
+            try (final BufferedReader fileReader = new BufferedReader(new FileReader(archivoLogo))) {
+                final String programaLogo = fileReader.lines().collect(Collectors.joining("\n"));
+                JavaFXThreadHelper.runOrDefer(() -> this.editorDeTexto.setText(programaLogo));
             } catch (final IOException e) {
-                e.printStackTrace();
+                error(e.getMessage(),"abrirArchivo");
             }
         }
     }
 
+    /**
+     * Metodo que se encarga de cerrar la ventana principal
+     */
     @FXML
     public void cerrar(){
         System.exit(0);
