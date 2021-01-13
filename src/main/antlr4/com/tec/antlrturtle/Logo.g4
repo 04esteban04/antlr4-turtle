@@ -73,6 +73,17 @@ logoExpression: forward
                 |intExpression
                 |booleanExpresion
                 ;
+listaExpression: lista
+                |primero
+                |ultimo
+                |elemento
+                ;
+
+primero:PRIMERO lista;
+ultimo: ULTIMO lista;
+elemento: ELEMENTO INT lista;
+lista : '[' ( variableExpresion (variableExpresion )* )? ']';
+
 
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
@@ -179,6 +190,10 @@ fragment CLS: ('borrapantalla' | 'cls');
 fragment ST: ('ponxy' | 'st');
 fragment PU: ('subelapiz' | 'pu');
 fragment PD: ('bajalapiz' | 'pd');
+fragment EL: ('elemento' | 'el');
+fragment UL: ('ultimo' | 'ul');
+fragment PRI: ('primero' | 'pri');
+
 
 MAYORQUE: MAQ;
 MENORQUE: MEQ;
@@ -206,6 +221,10 @@ REDONDEA: RD;
 PRODUCTO: PM;
 DIFERENCIA: DR;
 POTENCIA: POT;
+
+ELEMENTO :EL;
+ULTIMO:UL;
+PRIMERO:PRI;
 
 PONCOLORLAPIZ: PCL;
 GOMA: GM;
