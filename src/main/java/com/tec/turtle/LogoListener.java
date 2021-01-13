@@ -24,6 +24,17 @@ public class LogoListener extends LogoBaseListener {
     }
 
     @Override
+    public void exitHaz2(Haz2Context ctx) {
+        variables.put(ctx.ID().getText(), null);
+    }
+
+    @Override
+    public void exitHaz(HazContext ctx) {
+        String value = ctx.variableExpresion().getText();
+        variables.put(ctx.ID().getText(), value);
+    }
+
+    @Override
     public void exitInc(IncContext ctx){
         String var = ctx.intExpression().get(0).getText();
         System.out.println(variables.get(var));
@@ -42,10 +53,12 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitInic(InicContext ctx) {
+
         String value = ctx.variableExpresion().getText();
         variables.put(ctx.ID().getText(), value);
 
         System.out.println(variables.get(ctx.ID().getText()));
+
     }
 
     @Override
@@ -238,15 +251,41 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitMenorque(MenorqueContext ctx) {
-        this.painter.menorque(Integer.parseInt(ctx.getChild(1).getText()),
-                Integer.parseInt(ctx.getChild(2).getText()));
+
+        String var = ctx.intExpression().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.intExpression().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.menorque(Integer.parseInt(var),
+                Integer.parseInt(var2));
     }
 
 
     @Override
     public void exitMayorque(MayorqueContext ctx) {
-        this.painter.mayorque(Integer.parseInt(ctx.getChild(1).getText()),
-                Integer.parseInt(ctx.getChild(2).getText()));
+
+        String var = ctx.intExpression().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.intExpression().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.mayorque(Integer.parseInt(var),
+                Integer.parseInt(var2));
     }
 
 
@@ -255,8 +294,14 @@ public class LogoListener extends LogoBaseListener {
         int x = 1;
         List<Integer> numeros = new ArrayList<>();
         while(ctx.getChild(x) != null ){
-            System.out.println(ctx.getChild(x).getText());
-            numeros.add(Integer.parseInt(ctx.getChild(x).getText()));
+
+            String var = ctx.intExpression().get(x).getText();
+
+            if(Objects.nonNull(variables.get(var))){
+                var = variables.get(var);
+            }
+
+            numeros.add(Integer.parseInt(var));
             x++;
         }
         this.painter.producto(numeros);
@@ -274,7 +319,14 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitEspera(EsperaContext ctx){
-        this.painter.espera(Integer.parseInt(ctx.getChild(1).getText()));
+
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        this.painter.espera(Integer.parseInt(var));
     }
 
     @Override
@@ -284,44 +336,88 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitPonx(PonxContext ctx){
-        this.painter.ponx(Integer.parseInt(ctx.getChild(1).getText()));
+
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        this.painter.ponx(Integer.parseInt(var));
     }
 
     @Override
     public void exitPony(PonyContext ctx){
-        this.painter.pony(Integer.parseInt(ctx.getChild(1).getText()));
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+        this.painter.pony(Integer.parseInt(var));
     }
 
     @Override
     public void exitPoncolorlapiz(PoncolorlapizContext ctx){
-        this.painter.poncolorlapiz(ctx.getChild(1).getText());
+        this.painter.poncolorlapiz(ctx.coloExpresion().getText());
     }
 
     @Override
     public void exitForward(final ForwardContext ctx) {
-        this.painter.forward(Integer.parseInt(ctx.getChild(1).getText()));
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+        this.painter.forward(Integer.parseInt(var));
     }
 
     @Override
     public void exitBack(final BackContext ctx) {
-        this.painter.back(Integer.parseInt(ctx.getChild(1).getText()));
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+        this.painter.back(Integer.parseInt(var));
     }
 
     @Override
     public void exitRight(final RightContext ctx) {
-        this.painter.right(Integer.parseInt(ctx.getChild(1).getText()));
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        this.painter.right(Integer.parseInt(var));
     }
 
     @Override
-    public void exitLeft(final LeftContext ctx) {
-        this.painter.left(Integer.parseInt(ctx.getChild(1).getText()));
+    public void exitLeft(final LeftContext ctx){
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+        this.painter.left(Integer.parseInt(var));
     }
 
     @Override
     public void exitSet(final SetContext ctx) {
         final String[] point = ctx.POINT().getText().split(",");
-        final int x = Integer.parseInt(point[0]);
-        final int y = Integer.parseInt(point[1]);
+        String var = point[0];
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+        String var2 = point[2];
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+        final int x = Integer.parseInt(var);
+        final int y = Integer.parseInt(var2);
+
         this.painter.set(x, y);
     }
 
