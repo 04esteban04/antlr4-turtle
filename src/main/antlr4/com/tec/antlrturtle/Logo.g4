@@ -1,16 +1,10 @@
 grammar Logo ;
 
-@parser::members{
-    Map<String,Integer>memory=newHashMap<String,Integer>();
-}
-
-@header {
-}
-
 prog: logoExpression+ EOF ;
 
-variableExpreson:
+variableExpresion:
                 intExpression
+                |booleanExpresion
                 |STRING
                 ;
 
@@ -34,6 +28,7 @@ booleanExpresion:
                 |iguales
                 |TRUE
                 |FALSE
+                |ID
                 ;
 
 intExpression:
@@ -49,6 +44,7 @@ intExpression:
                 |resto
                 |suma
                 |INT
+                |ID
                 ;
 
 logoExpression: forward
@@ -63,6 +59,7 @@ logoExpression: forward
                 | ocultatortuga
                 | aparecetortuga
                 |haz
+                |haz2
                 |inic
                 |ponx
                 |pony
@@ -105,19 +102,14 @@ producto : PRODUCTO intExpression+ ;
 diferencia: DIFERENCIA intExpression+;
 potencia: POTENCIA intExpression intExpression;
 redondea : REDONDEA intExpression;
+inc: INC OPENBRA intExpression intExpression CLOSEBRA;
 
-//OTROS
-espera: ESPERA intExpression;
-centro : CENTRO;
-poncolorlapiz: PONCOLORLAPIZ coloExpresion;
-goma: GOMA;
-ponx : PONX intExpression;
-pony : PONY intExpression;
-rumbo: RUMBO;
-ponrumbo: PONRUMBO intExpression;
-inc: INC '[' ID intExpression ']' ;
-inic: INIC ID '=' variableExpreson;
-haz: HAZ ID variableExpreson;
+//Variables
+inic: INIC ID EQUALS variableExpresion;
+haz2: HAZ ID;
+haz: HAZ ID variableExpresion;
+
+//Tortuga
 ocultatortuga: OCULTATORTUGA;
 aparecetortuga: APARECETORTUGA;
 forward: FORWARD intExpression ;
@@ -129,6 +121,15 @@ set: SET POINT;
 penUp: PEN_UP;
 penDown: PEN_DOWN;
 resetAngle: RESET_ANGLE;
+espera: ESPERA intExpression;
+centro : CENTRO;
+poncolorlapiz: PONCOLORLAPIZ coloExpresion;
+goma: GOMA;
+ponx : PONX intExpression;
+pony : PONY intExpression;
+rumbo: RUMBO;
+ponrumbo: PONRUMBO intExpression;
+
 
 // Lexer Rules
 fragment MAQ: ('mayorque?' | 'maq');
@@ -229,6 +230,10 @@ PEN_DOWN: PD;
 TRUE: 'true';
 FALSE: 'false';
 RESET_ANGLE: 'resetAngle';
+
+OPENBRA : '[';
+CLOSEBRA : ']';
+EQUALS : '=';
 
 ID:[a-zA-Z_][a-zA-Z0-9_]*;
 INT: [0-9]+ ;

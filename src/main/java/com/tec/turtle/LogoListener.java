@@ -7,10 +7,12 @@ import com.tec.antlrturtle.LogoParser.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A {@link LogoListener} is effectively a {@link LogoBaseListener}, receiving the callbacks from Antlr parser and delegating the commands to the corresponding {@code painter}
  */
+
 public class LogoListener extends LogoBaseListener {
 
     private final HashMap<String, String> variables = new HashMap<>();
@@ -23,16 +25,27 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitInc(IncContext ctx){
-        String var = ctx.getChild(2).getText();
-        String rep = ctx.getChild(3).getText();
+        String var = ctx.intExpression().get(0).getText();
+        System.out.println(variables.get(var));
+        String rep = ctx.intExpression().get(1).getText();
+        System.out.println(variables.get(rep));
 
-        this.painter.inc(Integer.parseInt(variables.get(var)), Integer.parseInt(rep));
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+        if(Objects.nonNull(variables.get(rep))){
+            rep = variables.get(rep);
+        }
+
+        this.painter.inc(Integer.parseInt(var), Integer.parseInt(rep));
     }
 
     @Override
     public void exitInic(InicContext ctx) {
-        String value = ctx.getChild(3).getText();
-        variables.put(ctx.getChild(1).getText(), value);
+        String value = ctx.variableExpresion().getText();
+        variables.put(ctx.ID().getText(), value);
+
+        System.out.println(variables.get(ctx.ID().getText()));
     }
 
     @Override
@@ -48,13 +61,34 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitRedondea(RedondeaContext ctx) {
-        this.painter.redondea(Double.parseDouble(ctx.getChild(1).getText()));
+
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        this.painter.redondea(Double.parseDouble(var));
+
     }
 
     @Override
     public void exitPotencia(PotenciaContext ctx) {
-        this.painter.potencia(Integer.parseInt(ctx.getChild(1).getText()),
-                Integer.parseInt(ctx.getChild(2).getText()));
+
+        String var = ctx.intExpression().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.intExpression().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.potencia(Integer.parseInt(var),
+                Integer.parseInt(var2));
     }
 
 
@@ -62,8 +96,14 @@ public class LogoListener extends LogoBaseListener {
     public void exitDiferencia(DiferenciaContext ctx) {
         int x = 1;
         List<Integer> numeros = new ArrayList<>();
-        while(ctx.getChild(x) != null ){
-            numeros.add(Integer.parseInt(ctx.getChild(x).getText()));
+        while(ctx.intExpression().get(x) != null ){
+            String var = ctx.intExpression().get(x).getText();
+
+            if(Objects.nonNull(variables.get(var))){
+                var = variables.get(var);
+            }
+
+            numeros.add(Integer.parseInt(var));
             x++;
         }
         this.painter.diferencia(numeros);
@@ -72,20 +112,49 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitAzar(AzarContext ctx) {
-        this.painter.azar(Integer.parseInt(ctx.getChild(1).getText()));
+
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        this.painter.azar(Integer.parseInt(var));
     }
 
 
     @Override
     public void exitMenos(LogoParser.MenosContext ctx) {
-        this.painter.menos(Integer.parseInt(ctx.getChild(1).getText()));
+
+        String var = ctx.intExpression().getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        this.painter.menos(Integer.parseInt(var));
+
     }
 
 
     @Override
     public void exitDivision(DivisionContext ctx) {
-        this.painter.division(Integer.parseInt(ctx.getChild(1).getText()),
-                Integer.parseInt(ctx.getChild(2).getText()));
+
+        String var = ctx.intExpression().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.intExpression().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.division(Integer.parseInt(var),
+                Integer.parseInt(var2));
+
     }
 
 
@@ -93,7 +162,14 @@ public class LogoListener extends LogoBaseListener {
         int x = 1;
         List<Integer> numeros = new ArrayList<>();
         while(ctx.getChild(x) != null ){
-            numeros.add(Integer.parseInt(ctx.getChild(x).getText()));
+
+            String var = ctx.intExpression().get(x).getText();
+
+            if(Objects.nonNull(variables.get(var))){
+                var = variables.get(var);
+            }
+
+            numeros.add(Integer.parseInt(var));
             x++;
         }
         this.painter.suma(numeros);
@@ -101,22 +177,62 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitY(YContext ctx) {
-        this.painter.y(Boolean.parseBoolean(ctx.getChild(1).getText()),
-                Boolean.parseBoolean(ctx.getChild(2).getText()));
+
+        String var = ctx.booleanExpresion().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.booleanExpresion().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.y(Boolean.parseBoolean(var),
+                Boolean.parseBoolean(var2));
+
     }
 
 
     @Override
     public void exitO(OContext ctx) {
-        this.painter.o(Boolean.parseBoolean(ctx.getChild(1).getText()),
-                Boolean.parseBoolean(ctx.getChild(2).getText()));
+
+        String var = ctx.booleanExpresion().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.booleanExpresion().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.o(Boolean.parseBoolean(var),
+                Boolean.parseBoolean(var2));
     }
 
 
     @Override
     public void exitIguales(IgualesContext ctx) {
-        this.painter.iguales(Integer.parseInt(ctx.getChild(1).getText()),
-                Integer.parseInt(ctx.getChild(2).getText()));
+
+        String var = ctx.intExpression().get(0).getText();
+
+        if(Objects.nonNull(variables.get(var))){
+            var = variables.get(var);
+        }
+
+        String var2 = ctx.intExpression().get(1).getText();
+
+        if(Objects.nonNull(variables.get(var2))){
+            var2 = variables.get(var2);
+        }
+
+        this.painter.iguales(Integer.parseInt(var),
+                Integer.parseInt(var2));
     }
 
 
