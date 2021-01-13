@@ -69,7 +69,8 @@ logoExpression: forward
                 |poncolorlapiz
                 |espera
                 |ponrumbo
-
+                |si
+                |sisino
                 |coloExpresion
                 |intExpression
                 |booleanExpresion
@@ -84,9 +85,11 @@ listaExpression: lista
 primero:PRIMERO lista;
 ultimo: ULTIMO lista;
 elemento: ELEMENTO INT lista;
+lista: OPENBRA variableExpresion* CLOSEBRA;
+//codicionales
 
-lista : OPENBRA variableExpresion* CLOSEBRA;
-
+si: SI booleanExpresion OPENBRA ( logoExpression (variableExpresion)? )* CLOSEBRA;
+sisino:SISINO booleanExpresion OPENBRA ( logoExpression (variableExpresion)? )* CLOSEBRA OPENBRA ( logoExpression (variableExpresion)? )* CLOSEBRA;
 
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
@@ -196,7 +199,9 @@ fragment PD: ('bajalapiz' | 'pd');
 fragment EL: ('elemento' | 'el');
 fragment UL: ('ultimo' | 'ul');
 fragment PRI: ('primero' | 'pri');
-
+fragment LST: ('lista' | 'lst');
+fragment S: ('si' | 's');
+fragment SSN: ('sisino' | 'ssn');
 
 MAYORQUE: MAQ;
 MENORQUE: MEQ;
@@ -228,6 +233,10 @@ POTENCIA: POT;
 ELEMENTO :EL;
 ULTIMO:UL;
 PRIMERO:PRI;
+LISTA:LST;
+
+SI:S;
+SISINO:SSN;
 
 PONCOLORLAPIZ: PCL;
 GOMA: GM;
