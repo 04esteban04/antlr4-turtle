@@ -73,15 +73,8 @@ public class LogoListener extends LogoBaseListener {
      * @param ctx Contexto de uso
      */
     @Override
-    public void exitSi(SiContext ctx) {
+    public void exitSi(SiContext ctx) {}
 
-        if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
-            System.out.println("entrando si");
-            for(LogoExpressionContext x : ctx.logoExpression()){
-                System.out.println("entrando condicion");
-            }
-        }
-    }
 
     /**
      * Metodo para retornar el n elemento de una lista
