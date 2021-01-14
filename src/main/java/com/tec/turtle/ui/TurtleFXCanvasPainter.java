@@ -300,7 +300,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     }
 
     /**
-     * Metodo que se encarga del comando ponRumbo
+     * Metodo que se encarga del comando azar
      * @param n Valor a utilizar
      * @return Valor escogido
      */
