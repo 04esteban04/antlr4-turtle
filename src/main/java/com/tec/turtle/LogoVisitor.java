@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class LogoVisitor extends LogoBaseVisitor<Value> {
+public class LogoVisitor extends LogoBaseVisitor<Void> {
 
     private final HashMap<String, String> variables = new HashMap<>();
 
@@ -28,7 +28,7 @@ public class LogoVisitor extends LogoBaseVisitor<Value> {
      * @param ctx
      */
     @Override
-    public Value visitRedondea(LogoParser.RedondeaContext ctx) {
+    public Void visitRedondea(LogoParser.RedondeaContext ctx) {
 
         double var = Double.parseDouble(ctx.intExpression().getText());
 
@@ -40,26 +40,22 @@ public class LogoVisitor extends LogoBaseVisitor<Value> {
 
 
     @Override
-    public Value visitSi(LogoParser.SiContext ctx) {
+    public Void visitSi(LogoParser.SiContext ctx) {
 
-        //List<LogoParser.BooleanExpressionContext> conditions =  ctx.booleanExpression();
 
-        boolean evaluatedBlock = false;
-        Value evaluated = this.visit(ctx.booleanExpression());
 
-        if(evaluated.asBoolean()) {
-            evaluatedBlock = true;
-            // evaluate this block whose expr==true
-            int i=0;
-            for (LogoParser.LogoExpressionContext x : ctx.logoExpression()) {
-                this.visit(ctx.logoExpression(i));
-                i++;
-            }
+        if(Boolean.parseBoolean(ctx.booleanExpression().getText())) {
+
+
+            System.out.println(ctx.logoExpression(0).getText());
+               return this.visit(ctx.logoExpression(0));
+
+
             //this.visit(ctx.logoExpression(1));
            
         }
         
-        return Value.VOID;
+        return null;
 
         /*if (Boolean.parseBoolean(ctx.booleanExpression().getText())) {
             System.out.println("entrando si");
@@ -70,4 +66,22 @@ public class LogoVisitor extends LogoBaseVisitor<Value> {
         return Value.VOID;*/
     }
 
+    @Override
+    public Void visitSisino(LogoParser.SisinoContext ctx) {
+        if(Boolean.parseBoolean(ctx.booleanExpression().getText())) {
+
+
+            System.out.println(ctx.logoExpression(0).getText());
+            return this.visit(ctx.logoExpression(0));
+
+        }
+        else{
+            System.out.println(ctx.logoExpression(1).getText());
+            return this.visit(ctx.logoExpression(1));
+        }
+
+
+
+
+    }
 }
