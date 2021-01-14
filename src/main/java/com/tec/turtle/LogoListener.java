@@ -160,6 +160,7 @@ public class LogoListener extends LogoBaseListener {
     }
 
 
+    /*
     @Override
     public void exitRedondea(RedondeaContext ctx) {
 
@@ -172,6 +173,8 @@ public class LogoListener extends LogoBaseListener {
         this.painter.redondea(Double.parseDouble(var));
 
     }
+
+     */
 
     @Override
     public void exitPotencia(PotenciaContext ctx) {
