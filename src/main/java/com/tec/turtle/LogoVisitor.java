@@ -54,7 +54,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
             //this.visit(ctx.logoExpression(1));
            
         }
-        
+
         return null;
 
         /*if (Boolean.parseBoolean(ctx.booleanExpression().getText())) {
@@ -71,7 +71,11 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
         if(Boolean.parseBoolean(ctx.booleanExpression().getText())) {
 
 
-            System.out.println(ctx.logoExpression(0).getText());
+            //System.out.println(ctx.logoExpression(0).getText());
+            System.out.println(ctx.logoExpression(1).toString());
+            ctx.logoExpression(1).removeLastChild();
+
+            System.out.println(ctx.logoExpression(1).toString());
             return this.visit(ctx.logoExpression(0));
 
         }
