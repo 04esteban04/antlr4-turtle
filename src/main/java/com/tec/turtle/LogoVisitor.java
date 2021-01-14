@@ -34,5 +34,6 @@ public class LogoVisitor extends LogoBaseVisitor<Double> {
         this.painter.redondea(var);
 
         return visit(ctx.intExpression());
-    }
+}
+
 }

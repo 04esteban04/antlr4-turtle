@@ -4,6 +4,7 @@ import com.tec.antlrturtle.LogoLexer;
 import com.tec.antlrturtle.LogoParser;
 import com.tec.turtle.ErrorListener;
 import com.tec.turtle.LogoListener;
+import com.tec.turtle.LogoVisitor;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -207,7 +208,11 @@ public class TurtleFXUIController {
 
                 ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
                 LogoListener logoListener = new LogoListener(this.painter);
+
                 parseTreeWalker.walk(logoListener, tree);
+
+                LogoVisitor eval = new LogoVisitor(this.painter);
+                eval.visit(tree);
 
             } catch (Exception exception){
                 if (!boolError) {
