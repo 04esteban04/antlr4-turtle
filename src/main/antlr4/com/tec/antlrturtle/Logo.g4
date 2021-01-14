@@ -2,14 +2,14 @@ grammar Logo ;
 
 prog: logoExpression+ EOF ;
 
-variableExpresion:
+variableExpression:
                 intExpression
-                |booleanExpresion
+                |booleanExpression
                 |STRING
                 |ID
                 ;
 
-coloExpresion:
+colorExpression:
                 blanco
                 | azul
                 | marron
@@ -21,7 +21,7 @@ coloExpresion:
                 | rojo
                 ;
 
-booleanExpresion:
+booleanExpression:
                 mayorque
                 |menorque
                 |o
@@ -44,6 +44,11 @@ intExpression:
                 |division
                 |resto
                 |suma
+                |cuenta
+                |ultimo
+                |elemento
+                |primero
+                |elegir
                 |INT
                 |ID
                 ;
@@ -69,34 +74,35 @@ logoExpression: forward
                 |poncolorlapiz
                 |espera
                 |ponrumbo
+
+                |colorExpression
                 |si
                 |sisino
-                |coloExpresion
+                |colorExpression
                 |intExpression
-                |booleanExpresion
-                ;
-listaExpression: lista
-                |primero
-                |ultimo
-                |elemento
+                |booleanExpression
                 ;
 
 //Listas
+cuenta: CUENTA lista;
+elegir: ELEGIR lista;
 primero:PRIMERO lista;
 ultimo: ULTIMO lista;
-elemento: ELEMENTO INT lista;
-lista: OPENBRA variableExpresion* CLOSEBRA;
-//codicionales
+elemento: ELEMENTO intExpression lista;
 
-si: SI booleanExpresion OPENBRA ( logoExpression (variableExpresion)? )* CLOSEBRA;
-sisino:SISINO booleanExpresion OPENBRA ( logoExpression (variableExpresion)? )* CLOSEBRA OPENBRA ( logoExpression (variableExpresion)? )* CLOSEBRA;
+lista : OPENBRA intExpression* CLOSEBRA;
+
+si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
+
+sisino : SISINO booleanExpression   OPENBRA logoExpression* CLOSEBRA
+                                    OPENBRA logoExpression* CLOSEBRA;
 
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
 menorque: MENORQUE intExpression intExpression;
 iguales: IGUALES intExpression intExpression;
-o: O booleanExpresion booleanExpresion;
-y: Y booleanExpresion booleanExpresion;
+o: O booleanExpression booleanExpression;
+y: Y booleanExpression booleanExpression;
 
 //Colores
 blanco: BLANCO;
@@ -122,9 +128,9 @@ redondea : REDONDEA intExpression;
 inc: INC OPENBRA intExpression intExpression CLOSEBRA;
 
 //Variables
-inic: INIC ID EQUALS variableExpresion;
+inic: INIC ID EQUALS variableExpression;
 haz2: HAZ ID;
-haz: HAZ ID variableExpresion;
+haz: HAZ ID variableExpression;
 
 //Tortuga
 ocultatortuga: OCULTATORTUGA;
@@ -140,7 +146,7 @@ penDown: PEN_DOWN;
 resetAngle: RESET_ANGLE;
 espera: ESPERA intExpression;
 centro : CENTRO;
-poncolorlapiz: PONCOLORLAPIZ coloExpresion;
+poncolorlapiz: PONCOLORLAPIZ colorExpression;
 goma: GOMA;
 ponx : PONX intExpression;
 pony : PONY intExpression;
@@ -196,10 +202,12 @@ fragment CLS: ('borrapantalla' | 'cls');
 fragment ST: ('ponxy' | 'st');
 fragment PU: ('subelapiz' | 'pu');
 fragment PD: ('bajalapiz' | 'pd');
+
+fragment EG: ('elegir'| 'elg');
+fragment CUE: ('cuenta' | 'cu');
 fragment EL: ('elemento' | 'el');
 fragment UL: ('ultimo' | 'ul');
 fragment PRI: ('primero' | 'pri');
-fragment LST: ('lista' | 'lst');
 fragment S: ('si' | 's');
 fragment SSN: ('sisino' | 'ssn');
 
@@ -230,12 +238,14 @@ PRODUCTO: PM;
 DIFERENCIA: DR;
 POTENCIA: POT;
 
+CUENTA : CUE;
+ELEGIR : EG;
 ELEMENTO :EL;
 ULTIMO:UL;
 PRIMERO:PRI;
-LISTA:LST;
 
 SI:S;
+
 SISINO:SSN;
 
 PONCOLORLAPIZ: PCL;

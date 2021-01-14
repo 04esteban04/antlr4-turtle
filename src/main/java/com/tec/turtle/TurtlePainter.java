@@ -7,6 +7,43 @@ import java.util.List;
  * Los metodos en esta interfaz son invocados por {@link LogoListener}, mediante la traduccion de la entrada de un programa Logo.
  */
 public interface TurtlePainter {
+
+    /**
+     * Retorna el n elemento de una lista
+     * @param lista lista a buscar el elemento
+     * @param n posicion en la que se encuentra el elemento
+     * @return numero encontrado
+     */
+    double elemento(List<Double> lista, int n);
+
+    /**
+     * Retorna el ultimo elemento de la lista
+     * @param lista lista a buscar el ultimo elemento
+     * @return numero que se encuentra en la ultima posicion
+     */
+    double ultimo(List<Double> lista);
+
+    /**
+     * Cuenta la cantidad de elementos de una lista
+     * @param lista lista a contar
+     * @return entero respectivo a la cantidad de elementos
+     */
+    int cuenta(List<Double> lista);
+
+    /**
+     * Elige un numero al azar de una lista
+     * @param lista lista de la cual se elige
+     * @return numero elegido
+     */
+    double elegir(List<Double> lista);
+
+    /**
+     * Metodo que retorna el primer elemento de una lista
+     * @param lista lista a obtener el primer elemento
+     * @return numero como primero elemento de la lista
+     */
+    double primero(List<Double> lista);
+
     /**
      * Metodo que se encarga del comando aparecer
      */

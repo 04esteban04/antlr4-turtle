@@ -24,33 +24,113 @@ public class LogoListener extends LogoBaseListener {
     }
 
     @Override
+    public void exitSi(SiContext ctx) {
+
+        if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
+            System.out.println("entrando si");
+            for(LogoExpressionContext x : ctx.logoExpression()){
+                System.out.println("entrando condicion");
+            }
+        }
+    }
+
+    @Override
+    public void exitElemento(ElementoContext ctx) {
+        List<Double> list = new ArrayList<>();
+
+        for (IntExpressionContext x : ctx.lista().intExpression()){
+            String data = x.getText();
+            if(Objects.nonNull(variables.get(data))){
+                data = variables.get(data);
+            }
+            list.add(Double.parseDouble(data));
+        }
+
+        int n = Integer.parseInt(ctx.intExpression().getText());
+
+        this.painter.elemento(list, n);
+    }
+
+    @Override
+    public void exitUltimo(UltimoContext ctx) {
+        List<Double> list = new ArrayList<>();
+
+        for (IntExpressionContext x : ctx.lista().intExpression()){
+            String data = x.getText();
+            if(Objects.nonNull(variables.get(data))){
+                data = variables.get(data);
+            }
+            list.add(Double.parseDouble(data));
+        }
+        this.painter.ultimo(list);
+    }
+
+    @Override
+    public void exitElegir(ElegirContext ctx) {
+
+        List<Double> list = new ArrayList<>();
+
+        for (IntExpressionContext x : ctx.lista().intExpression()){
+            String data = x.getText();
+            if(Objects.nonNull(variables.get(data))){
+                data = variables.get(data);
+            }
+            list.add(Double.parseDouble(data));
+        }
+
+        this.painter.elegir(list);
+    }
+
+    @Override
+    public void exitCuenta(CuentaContext ctx) {
+        List<Double> list = new ArrayList<>();
+
+        for (IntExpressionContext x : ctx.lista().intExpression()){
+            String data = x.getText();
+            if(Objects.nonNull(variables.get(data))){
+                data = variables.get(data);
+            }
+            list.add(Double.parseDouble(data));
+        }
+
+        this.painter.cuenta(list);
+    }
+
+    @Override
+    public void exitPrimero(PrimeroContext ctx) {
+
+        List<Double> list = new ArrayList<>();
+
+        for (IntExpressionContext x : ctx.lista().intExpression()){
+            String data = x.getText();
+            if(Objects.nonNull(variables.get(data))){
+                data = variables.get(data);
+            }
+            list.add(Double.parseDouble(data));
+        }
+
+        this.painter.primero(list);
+
+    }
+
+    @Override
     public void exitHaz2(Haz2Context ctx) {
         variables.put(ctx.ID().getText(), null);
     }
 
     @Override
-    public void exitPrimero(PrimeroContext ctx) {
-        String var = ctx.getText();
-
-        //System.out.println(var);
-    }
-
-    @Override
     public void exitHaz(HazContext ctx) {
-        String value = ctx.variableExpresion().getText();
+        String value = ctx.variableExpression().getText();
         variables.put(ctx.ID().getText(), value);
     }
 
     @Override
     public void exitInc(IncContext ctx){
         String var = ctx.intExpression().get(0).getText();
-        //System.out.println(variables.get(var));
-        String rep = ctx.intExpression().get(1).getText();
-        //System.out.println(variables.get(rep));
-
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
+        String rep = ctx.intExpression().get(1).getText();
         if(Objects.nonNull(variables.get(rep))){
             rep = variables.get(rep);
         }
@@ -59,42 +139,13 @@ public class LogoListener extends LogoBaseListener {
     }
 
     @Override
-    public void exitSi(SiContext ctx) {
-
-        boolean resultado=false;
-        String var =ctx.booleanExpresion().getChild(0).getChild(0).getText();
-        if(var.equals("o") ){
-            resultado=this.painter.o(Boolean.parseBoolean(ctx.booleanExpresion().getChild(0).getChild(1).getText()),
-                    Boolean.parseBoolean(ctx.booleanExpresion().getChild(0).getChild(2).getText()));
-        }
-        if(var.equals("y")){
-            resultado=this.painter.y(Boolean.parseBoolean(ctx.booleanExpresion().getChild(0).getChild(1).getText()),
-                    Boolean.parseBoolean(ctx.booleanExpresion().getChild(0).getChild(2).getText()));
-        }
-        if(var.equals("iguales?")){
-            resultado=this.painter.iguales(Integer.parseInt(ctx.booleanExpresion().getChild(0).getChild(1).getText()),
-                    Integer.parseInt(ctx.booleanExpresion().getChild(0).getChild(2).getText()));
-        }
-        if(var.equals("mayorque?")){
-            resultado=this.painter.mayorque(Integer.parseInt(ctx.booleanExpresion().getChild(0).getChild(1).getText()),
-                    Integer.parseInt(ctx.booleanExpresion().getChild(0).getChild(2).getText()));
-        }
-        if(var.equals("menoque?")){
-            resultado=this.painter.menorque(Integer.parseInt(ctx.booleanExpresion().getChild(0).getChild(1).getText()),
-                    Integer.parseInt(ctx.booleanExpresion().getChild(0).getChild(2).getText()));
-        }
-        if(!resultado){//hacer que pare
-           }
-
-    }//System.out.println();
-
-    @Override
     public void exitInic(InicContext ctx) {
 
-        String value = ctx.variableExpresion().getText();
+        String value = ctx.variableExpression().getText();
+
         variables.put(ctx.ID().getText(), value);
 
-        //System.out.println(variables.get(ctx.ID().getText()));
+        System.out.println(variables.get(ctx.ID().getText()));
 
     }
 
@@ -228,13 +279,13 @@ public class LogoListener extends LogoBaseListener {
     @Override
     public void exitY(YContext ctx) {
 
-        String var = ctx.booleanExpresion().get(0).getText();
+        String var = ctx.booleanExpression().get(0).getText();
 
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
 
-        String var2 = ctx.booleanExpresion().get(1).getText();
+        String var2 = ctx.booleanExpression().get(1).getText();
 
         if(Objects.nonNull(variables.get(var2))){
             var2 = variables.get(var2);
@@ -249,13 +300,13 @@ public class LogoListener extends LogoBaseListener {
     @Override
     public void exitO(OContext ctx) {
 
-        String var = ctx.booleanExpresion().get(0).getText();
+        String var = ctx.booleanExpression().get(0).getText();
 
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
 
-        String var2 = ctx.booleanExpresion().get(1).getText();
+        String var2 = ctx.booleanExpression().get(1).getText();
 
         if(Objects.nonNull(variables.get(var2))){
             var2 = variables.get(var2);
@@ -395,7 +446,7 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitPoncolorlapiz(PoncolorlapizContext ctx){
-        this.painter.poncolorlapiz(ctx.coloExpresion().getText());
+        this.painter.poncolorlapiz(ctx.colorExpression().getText());
     }
 
     @Override
@@ -453,8 +504,8 @@ public class LogoListener extends LogoBaseListener {
             var2 = variables.get(var2);
         }
 
-        //System.out.println(var);
-        //System.out.println(var2);
+        System.out.println(var);
+        System.out.println(var2);
         final int x = Integer.parseInt(var);
         final int y = Integer.parseInt(var2);
 

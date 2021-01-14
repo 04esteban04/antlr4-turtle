@@ -15,6 +15,7 @@ import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.tec.turtle.ui.TurtleFXUIController.boolError;
 
@@ -22,6 +23,7 @@ import static com.tec.turtle.ui.TurtleFXUIController.boolError;
  * Clase que se encarga de todas las acciones de la tortuga
  */
 public class TurtleFXCanvasPainter implements TurtlePainter {
+
     /**
      * Variable que se encarga de la region de la ventana
      */
@@ -81,6 +83,75 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         this.paintTurtle(this.tortuga.getCenterX(), this.tortuga.getCenterY());
 
         this.animacion.setCycleCount(1);
+    }
+
+    /**
+     * Retorna el n elemento de una lista
+     *
+     * @param lista lista a buscar el elemento
+     * @param n     posicion en la que se encuentra el elemento
+     * @return numero encontrado
+     */
+    @Override
+    public double elemento(List<Double> lista, int n) {
+        Double elemento = lista.get(n);
+        System.out.println(elemento);
+        return elemento;
+    }
+
+    /**
+     * Retorna el ultimo elemento de la lista
+     *
+     * @param lista lista a buscar el ultimo elemento
+     * @return numero que se encuentra en la ultima posicion
+     */
+    @Override
+    public double ultimo(List<Double> lista) {
+        int ultimoelemento = lista.size();
+        double elemeto = lista.get(ultimoelemento - 1);
+        System.out.println(elemeto);
+
+        return elemeto;
+    }
+
+    /**
+     * Cuenta la cantidad de elementos de una lista
+     *
+     * @param lista lista a contar
+     * @return entero respectivo a la cantidad de elementos
+     */
+    @Override
+    public int cuenta(List<Double> lista) {
+        int n = lista.size();
+        System.out.println(n);
+        return n;
+    }
+
+    /**
+     * Elige un numero al azar de una lista
+     *
+     * @param lista lista de la cual se elige
+     * @return numero elegido
+     */
+    @Override
+    public double elegir(List<Double> lista) {
+        Random rand = new Random();
+        double randomElement = lista.get(rand.nextInt(lista.size()));
+        System.out.println(randomElement);
+        return randomElement;
+    }
+
+    /**
+     * Metodo que retorna el primer elemento de una lista
+     *
+     * @param lista lista a obtener el primer elemento
+     * @return numero como primero elemento de la lista
+     */
+    @Override
+    public double primero(List<Double> lista) {
+        double elemento = lista.get(0);
+        System.out.println(elemento);
+        return elemento;
     }
 
     /**
