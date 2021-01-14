@@ -260,19 +260,17 @@ public class LogoListener extends LogoBaseListener {
 
 
     @Override public void exitSuma(SumaContext ctx) {
-        int x = 1;
         List<Integer> numeros = new ArrayList<>();
-        while(ctx.getChild(x) != null ){
-
-            String var = ctx.intExpression().get(x).getText();
+        for (IntExpressionContext x: ctx.intExpression()){
+            String var = x.getText();
 
             if(Objects.nonNull(variables.get(var))){
                 var = variables.get(var);
             }
 
             numeros.add(Integer.parseInt(var));
-            x++;
         }
+
         this.painter.suma(numeros);
     }
 
@@ -379,18 +377,15 @@ public class LogoListener extends LogoBaseListener {
 
     @Override
     public void exitProducto(ProductoContext ctx){
-        int x = 1;
         List<Integer> numeros = new ArrayList<>();
-        while(ctx.getChild(x) != null ){
-
-            String var = ctx.intExpression().get(x).getText();
+        for (IntExpressionContext x: ctx.intExpression()){
+            String var = x.getText();
 
             if(Objects.nonNull(variables.get(var))){
                 var = variables.get(var);
             }
 
             numeros.add(Integer.parseInt(var));
-            x++;
         }
         this.painter.producto(numeros);
     }

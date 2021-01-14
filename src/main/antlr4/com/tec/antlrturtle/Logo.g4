@@ -116,7 +116,7 @@ verde: VERDE;
 rojo: ROJO;
 
 //Operaciones matematicas
-suma: SUMA intExpression intExpression+;
+suma: SUMA intExpression+;
 resto: RESTO intExpression intExpression;
 division: DIVISION intExpression intExpression;
 menos: MENOS intExpression;
