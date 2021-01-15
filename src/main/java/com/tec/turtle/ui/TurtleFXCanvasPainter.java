@@ -200,7 +200,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
             if (this.seEstaDibujando) {
                 this.penUp();
             }
-            this.moveTurtle(300, 300 );
+            this.moveTurtle(320, 280);
             if (seEstabaDibujando) {
                 this.penDown();
             }
@@ -215,7 +215,8 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     @Override
     public void espera(final int n) {
         try {
-            Thread.sleep(n * 1000L);
+            long segundos = (n * 1000L) / 60;
+            Thread.sleep(segundos);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

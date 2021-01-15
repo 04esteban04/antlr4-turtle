@@ -116,6 +116,7 @@ public class TurtleFXUIController {
      * Metodo que se encarga de inicializar el programa
      */
     public void initialize() {
+        /*
         backgroundThread.execute(() -> {
             try (final BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/Prueba-H.logo")))) {
                 final String demoProg = reader.lines().collect(Collectors.joining("\n"));
@@ -125,6 +126,7 @@ public class TurtleFXUIController {
             }
 
         });
+         */
 
         this.painter = new TurtleFXCanvasPainter(this.logoCanvas);
 
@@ -206,11 +208,13 @@ public class TurtleFXUIController {
 
                 ParseTree tree = parser.prog();
 
+                //Listener
                 ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
                 LogoListener logoListener = new LogoListener(this.painter);
 
                 parseTreeWalker.walk(logoListener, tree);
 
+                //Visitor
                 LogoVisitor eval = new LogoVisitor(this.painter);
                 eval.visit(tree);
 

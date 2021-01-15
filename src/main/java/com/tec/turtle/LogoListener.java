@@ -34,20 +34,12 @@ public class LogoListener extends LogoBaseListener {
         this.painter = painter;
     }
 
-    /**
-     * Metodo que se encarga del comando haz
-     * @param ctx Contexto de uso
-     */
     @Override
     public void exitHaz(HazContext ctx) {
         String value = ctx.variableExpression().getText();
         variables.put(ctx.ID().getText(), value);
     }
 
-    /**
-     * Metodo que se encarga del comando haz
-     * @param ctx Contexto de uso
-     */
     @Override
     public void exitHaz2(Haz2Context ctx) {
         variables.put(ctx.ID().getText(), null);
@@ -73,8 +65,13 @@ public class LogoListener extends LogoBaseListener {
      * @param ctx Contexto de uso
      */
     @Override
-    public void exitSi(SiContext ctx) {}
+    public void exitSi(SiContext ctx) {
 
+        if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
+            
+        }
+
+    }
 
     /**
      * Metodo para retornar el n elemento de una lista

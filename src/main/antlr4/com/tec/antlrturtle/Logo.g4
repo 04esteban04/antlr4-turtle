@@ -92,8 +92,8 @@ elemento: ELEMENTO intExpression lista;
 
 lista : OPENBRA intExpression* CLOSEBRA;
 
+//Condicionales
 si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
-
 sisino : SISINO booleanExpression   OPENBRA logoExpression* CLOSEBRA
                                     OPENBRA logoExpression* CLOSEBRA;
 
