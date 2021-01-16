@@ -21,7 +21,7 @@
                 <Pane maxHeight="600" maxWidth="800" minHeight="600" minWidth="800">
                     <Group fx:id="logoCanvas"/>
                     <style>
-                        -fx-background-color: #017CF6;
+                        -fx-background-color: #FFFFFF;
                     </style>
                 </Pane>
             </AnchorPane>

@@ -1,6 +1,6 @@
 grammar Logo ;
 
-prog: logoExpression+ EOF ;
+prog: EJECUTA OPENBRA logoExpression+ CLOSEBRA EOF ;
 
 variableExpression:
                 intExpression
@@ -267,6 +267,8 @@ CLEARSCREEN: CLS;
 SET: ST;
 PEN_UP: PU;
 PEN_DOWN: PD;
+
+EJECUTA : 'ejecuta';
 
 TRUE: 'true';
 FALSE: 'false';
