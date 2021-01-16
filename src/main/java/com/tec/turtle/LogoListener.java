@@ -3,6 +3,7 @@ package com.tec.turtle;
 import com.tec.antlrturtle.LogoBaseListener;
 import com.tec.antlrturtle.LogoParser;
 import com.tec.antlrturtle.LogoParser.*;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,23 +34,22 @@ public class LogoListener extends LogoBaseListener {
     public LogoListener(TurtlePainter painter) {
         this.painter = painter;
     }
-
-    @Override
+/*@Override
     public void exitHaz(HazContext ctx) {
         String value = ctx.variableExpression().getText();
         variables.put(ctx.ID().getText(), value);
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void exitHaz2(Haz2Context ctx) {
         variables.put(ctx.ID().getText(), null);
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando inic
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitInic(InicContext ctx) {
 
         String value = ctx.variableExpression().getText();
@@ -58,27 +58,27 @@ public class LogoListener extends LogoBaseListener {
 
         System.out.println(variables.get(ctx.ID().getText()));
 
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando si
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitSi(SiContext ctx) {
 
         if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
-            
+
         }
 
-    }
+    }*/
 
     /**
      * Metodo para retornar el n elemento de una lista
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitElemento(ElementoContext ctx) {
+    //@Override
+    /*public void exitElemento(ElementoContext ctx) {
         List<Double> list = new ArrayList<>();
 
         for (IntExpressionContext x : ctx.lista().intExpression()){
@@ -92,14 +92,14 @@ public class LogoListener extends LogoBaseListener {
         int n = Integer.parseInt(ctx.intExpression().getText());
 
         this.painter.elemento(list, n);
-    }
+    }*/
 
     /**
      * Metodo para retornar el ultimo elemento de la lista
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitUltimo(UltimoContext ctx) {
+    //@Override
+    /*public void exitUltimo(UltimoContext ctx) {
         List<Double> list = new ArrayList<>();
 
         for (IntExpressionContext x : ctx.lista().intExpression()){
@@ -110,13 +110,13 @@ public class LogoListener extends LogoBaseListener {
             list.add(Double.parseDouble(data));
         }
         this.painter.ultimo(list);
-    }
+    }*/
 
     /**
      * Cuenta la cantidad de elementos de una lista
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitCuenta(CuentaContext ctx) {
         List<Double> list = new ArrayList<>();
 
@@ -129,13 +129,13 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.cuenta(list);
-    }
+    }*/
 
     /**
      * Elige un numero al azar de una lista
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitElegir(ElegirContext ctx) {
 
         List<Double> list = new ArrayList<>();
@@ -149,13 +149,13 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.elegir(list);
-    }
+    }*/
 
     /**
      * Metodo que retorna el primer elemento de una lista
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitPrimero(PrimeroContext ctx) {
 
         List<Double> list = new ArrayList<>();
@@ -170,49 +170,49 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.primero(list);
 
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando Aparecetortuga
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitAparecetortuga(AparecetortugaContext ctx) {
         this.painter.aparecer();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando Ocultatortuga
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitOcultatortuga(OcultatortugaContext ctx) {
+    //@Override
+    /*public void exitOcultatortuga(OcultatortugaContext ctx) {
         this.painter.ocultar();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando Rumbo
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitRumbo(RumboContext ctx){
+    //@Override
+    /*public void exitRumbo(RumboContext ctx){
         this.painter.rumbo();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando centro
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitCentro(CentroContext ctx){
         this.painter.centro();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando espera
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitEspera(EsperaContext ctx){
 
         String var = ctx.intExpression().getText();
@@ -222,14 +222,14 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.espera(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando ponx
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitPonx(PonxContext ctx){
+    // @Override
+   /* public void exitPonx(PonxContext ctx){
 
         String var = ctx.intExpression().getText();
 
@@ -238,45 +238,45 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.ponx(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando pony
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitPony(PonyContext ctx){
+    //@Override
+   /* public void exitPony(PonyContext ctx){
         String var = ctx.intExpression().getText();
 
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
         this.painter.pony(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando poncolorlapiz
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitPoncolorlapiz(PoncolorlapizContext ctx){
+    //@Override
+   /* public void exitPoncolorlapiz(PoncolorlapizContext ctx){
         this.painter.poncolorlapiz(ctx.colorExpression().getText());
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando goma
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitGoma(GomaContext ctx){
         this.painter.goma();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando azar
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitAzar(AzarContext ctx) {
 
         String var = ctx.intExpression().getText();
@@ -286,14 +286,14 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.azar(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando inc
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitInc(IncContext ctx){
+    //@Override
+    /*public void exitInc(IncContext ctx){
         String var = ctx.intExpression().get(0).getText();
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
@@ -304,13 +304,13 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.inc(Integer.parseInt(var), Integer.parseInt(rep));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando suma
      * @param ctx Contexto de uso
      */
-    @Override public void exitSuma(SumaContext ctx) {
+    /*@Override public void exitSuma(SumaContext ctx) {
         List<Integer> numeros = new ArrayList<>();
         for (IntExpressionContext x: ctx.intExpression()){
             String var = x.getText();
@@ -323,13 +323,13 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.suma(numeros);
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando diferencia
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitDiferencia(DiferenciaContext ctx) {
         int x = 1;
         List<Integer> numeros = new ArrayList<>();
@@ -344,14 +344,14 @@ public class LogoListener extends LogoBaseListener {
             x++;
         }
         this.painter.diferencia(numeros);
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando menos
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitMenos(LogoParser.MenosContext ctx) {
+    //@Override
+    /*public void exitMenos(LogoParser.MenosContext ctx) {
 
         String var = ctx.intExpression().getText();
 
@@ -361,14 +361,14 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.menos(Integer.parseInt(var));
 
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando potencia
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitPotencia(PotenciaContext ctx) {
+    //@Override
+    /*public void exitPotencia(PotenciaContext ctx) {
 
         String var = ctx.intExpression().get(0).getText();
 
@@ -384,13 +384,13 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.potencia(Integer.parseInt(var),
                 Integer.parseInt(var2));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando producto
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitProducto(ProductoContext ctx){
         List<Integer> numeros = new ArrayList<>();
         for (IntExpressionContext x: ctx.intExpression()){
@@ -403,13 +403,13 @@ public class LogoListener extends LogoBaseListener {
             numeros.add(Integer.parseInt(var));
         }
         this.painter.producto(numeros);
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando division
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitDivision(DivisionContext ctx) {
 
         String var = ctx.intExpression().get(0).getText();
@@ -427,7 +427,7 @@ public class LogoListener extends LogoBaseListener {
         this.painter.division(Integer.parseInt(var),
                 Integer.parseInt(var2));
 
-    }
+    }*/
 
 
 
@@ -457,8 +457,8 @@ public class LogoListener extends LogoBaseListener {
      * Metodo que se encarga del comando o logico
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitO(OContext ctx) {
+    //@Override
+    /*public void exitO(OContext ctx) {
 
         String var = ctx.booleanExpression().get(0).getText();
 
@@ -474,14 +474,14 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.o(Boolean.parseBoolean(var),
                 Boolean.parseBoolean(var2));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando y logico
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitY(YContext ctx) {
+    //@Override
+    /*public void exitY(YContext ctx) {
 
         String var = ctx.booleanExpression().get(0).getText();
 
@@ -498,13 +498,13 @@ public class LogoListener extends LogoBaseListener {
         this.painter.y(Boolean.parseBoolean(var),
                 Boolean.parseBoolean(var2));
 
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando iguales
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitIguales(IgualesContext ctx) {
 
         String var = ctx.intExpression().get(0).getText();
@@ -521,14 +521,14 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.iguales(Integer.parseInt(var),
                 Integer.parseInt(var2));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando menorque
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitMenorque(MenorqueContext ctx) {
+    //@Override
+    /*public void exitMenorque(MenorqueContext ctx) {
 
         String var = ctx.intExpression().get(0).getText();
 
@@ -544,14 +544,14 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.menorque(Integer.parseInt(var),
                 Integer.parseInt(var2));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando mayorque
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitMayorque(MayorqueContext ctx) {
+    //@Override
+   /* public void exitMayorque(MayorqueContext ctx) {
 
         String var = ctx.intExpression().get(0).getText();
 
@@ -567,13 +567,13 @@ public class LogoListener extends LogoBaseListener {
 
         this.painter.mayorque(Integer.parseInt(var),
                 Integer.parseInt(var2));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando forward
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitForward(final ForwardContext ctx) {
         String var = ctx.intExpression().getText();
 
@@ -581,13 +581,13 @@ public class LogoListener extends LogoBaseListener {
             var = variables.get(var);
         }
         this.painter.forward(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando back
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitBack(final BackContext ctx) {
         String var = ctx.intExpression().getText();
 
@@ -595,13 +595,13 @@ public class LogoListener extends LogoBaseListener {
             var = variables.get(var);
         }
         this.painter.back(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando right
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitRight(final RightContext ctx) {
         String var = ctx.intExpression().getText();
 
@@ -610,27 +610,27 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.right(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando left
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitLeft(final LeftContext ctx){
+    //@Override
+    /*public void exitLeft(final LeftContext ctx){
         String var = ctx.intExpression().getText();
 
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
         this.painter.left(Integer.parseInt(var));
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando set
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitSet(final SetContext ctx) {
         final String[] point = ctx.POINT().getText().split(",");
         String var = point[0];
@@ -650,50 +650,51 @@ public class LogoListener extends LogoBaseListener {
         final int y = Integer.parseInt(var2);
 
         this.painter.set(x, y);
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando penUp
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitPenUp(final PenUpContext ctx) {
+    //@Override
+    /*public void exitPenUp(final PenUpContext ctx) {
         this.painter.penUp();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando penDown
      * @param ctx Contexto de uso
      */
-    @Override
+    /*@Override
     public void exitPenDown(final PenDownContext ctx) {
         this.painter.penDown();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando Clearscreen
      * @param ctx Contexto de uso
      */
-    @Override
-    public void exitClearscreen(ClearscreenContext ctx) {
+    //@Override
+    /*public void exitClearscreen(ClearscreenContext ctx) {
         this.painter.cls();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando resetAngle
      * @param ctx Contexto de uso
      */
-    @Override
+   /*@Override
     public void exitResetAngle(ResetAngleContext ctx) {
         this.painter.resetAngle();
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando finish
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public void exitProg(ProgContext ctx) {
         this.painter.finish();
-    }
+    }*/
+
 }

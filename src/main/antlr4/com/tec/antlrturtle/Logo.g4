@@ -94,8 +94,8 @@ lista : OPENBRA intExpression* CLOSEBRA;
 
 //Condicionales
 si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
-sisino : SISINO booleanExpression   OPENBRA logoExpression* CLOSEBRA
-                                    OPENBRA logoExpression* CLOSEBRA;
+sisino : SISINO booleanExpression   OPENBRA (logoExpression*) CLOSEBRA
+                                    OPENBRA (logoExpression*)? CLOSEBRA;
 
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
