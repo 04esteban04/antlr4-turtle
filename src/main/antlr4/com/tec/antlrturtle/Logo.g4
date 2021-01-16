@@ -52,7 +52,7 @@ intExpression:
                 |INT
                 |ID
                 ;
-
+bloqExpression: logoExpression;
 logoExpression: forward
                 | back
                 | right
@@ -95,7 +95,7 @@ lista : OPENBRA intExpression* CLOSEBRA;
 //Condicionales
 si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
 sisino : SISINO booleanExpression   OPENBRA (logoExpression*) CLOSEBRA
-                                    OPENBRA (logoExpression*)? CLOSEBRA;
+                                  OPENBRA (bloqExpression*) CLOSEBRA;
 
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
@@ -211,6 +211,7 @@ fragment PRI: ('primero' | 'pri');
 fragment S: ('si' | 's');
 fragment SSN: ('sisino' | 'ssn');
 
+
 MAYORQUE: MAQ;
 MENORQUE: MEQ;
 IGUALES: IG;
@@ -247,6 +248,7 @@ PRIMERO:PRI;
 SI:S;
 
 SISINO:SSN;
+
 
 PONCOLORLAPIZ: PCL;
 GOMA: GM;

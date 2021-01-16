@@ -176,43 +176,43 @@ public class LogoListener extends LogoBaseListener {
      * Metodo que se encarga del comando Aparecetortuga
      * @param ctx Contexto de uso
      */
-   /* @Override
+    @Override
     public void exitAparecetortuga(AparecetortugaContext ctx) {
         this.painter.aparecer();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando Ocultatortuga
      * @param ctx Contexto de uso
      */
-    //@Override
-    /*public void exitOcultatortuga(OcultatortugaContext ctx) {
+    @Override
+    public void exitOcultatortuga(OcultatortugaContext ctx) {
         this.painter.ocultar();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando Rumbo
      * @param ctx Contexto de uso
      */
-    //@Override
-    /*public void exitRumbo(RumboContext ctx){
+    @Override
+    public void exitRumbo(RumboContext ctx){
         this.painter.rumbo();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando centro
      * @param ctx Contexto de uso
      */
-   /* @Override
+   @Override
     public void exitCentro(CentroContext ctx){
         this.painter.centro();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando espera
      * @param ctx Contexto de uso
      */
-    /*@Override
+    @Override
     public void exitEspera(EsperaContext ctx){
 
         String var = ctx.intExpression().getText();
@@ -222,14 +222,14 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.espera(Integer.parseInt(var));
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando ponx
      * @param ctx Contexto de uso
      */
-    // @Override
-   /* public void exitPonx(PonxContext ctx){
+    @Override
+   public void exitPonx(PonxContext ctx){
 
         String var = ctx.intExpression().getText();
 
@@ -238,36 +238,36 @@ public class LogoListener extends LogoBaseListener {
         }
 
         this.painter.ponx(Integer.parseInt(var));
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando pony
      * @param ctx Contexto de uso
      */
-    //@Override
-   /* public void exitPony(PonyContext ctx){
+    @Override
+   public void exitPony(PonyContext ctx){
         String var = ctx.intExpression().getText();
 
         if(Objects.nonNull(variables.get(var))){
             var = variables.get(var);
         }
         this.painter.pony(Integer.parseInt(var));
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando poncolorlapiz
      * @param ctx Contexto de uso
      */
-    //@Override
-   /* public void exitPoncolorlapiz(PoncolorlapizContext ctx){
+    @Override
+    public void exitPoncolorlapiz(PoncolorlapizContext ctx){
         this.painter.poncolorlapiz(ctx.colorExpression().getText());
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando goma
      * @param ctx Contexto de uso
-     */
-    /*@Override
+     *//*
+    @Override
     public void exitGoma(GomaContext ctx){
         this.painter.goma();
     }*/
@@ -572,8 +572,8 @@ public class LogoListener extends LogoBaseListener {
     /**
      * Metodo que se encarga del comando forward
      * @param ctx Contexto de uso
-     */
-    /*@Override
+     *//*
+    @Override
     public void exitForward(final ForwardContext ctx) {
         String var = ctx.intExpression().getText();
 
@@ -586,8 +586,8 @@ public class LogoListener extends LogoBaseListener {
     /**
      * Metodo que se encarga del comando back
      * @param ctx Contexto de uso
-     */
-   /* @Override
+     *//*
+    @Override
     public void exitBack(final BackContext ctx) {
         String var = ctx.intExpression().getText();
 
@@ -600,8 +600,8 @@ public class LogoListener extends LogoBaseListener {
     /**
      * Metodo que se encarga del comando right
      * @param ctx Contexto de uso
-     */
-   /* @Override
+     *//*
+    @Override
     public void exitRight(final RightContext ctx) {
         String var = ctx.intExpression().getText();
 
@@ -615,9 +615,9 @@ public class LogoListener extends LogoBaseListener {
     /**
      * Metodo que se encarga del comando left
      * @param ctx Contexto de uso
-     */
-    //@Override
-    /*public void exitLeft(final LeftContext ctx){
+     *//*
+    @Override
+    public void exitLeft(final LeftContext ctx){
         String var = ctx.intExpression().getText();
 
         if(Objects.nonNull(variables.get(var))){
@@ -629,8 +629,8 @@ public class LogoListener extends LogoBaseListener {
     /**
      * Metodo que se encarga del comando set
      * @param ctx Contexto de uso
-     */
-    /*@Override
+     *//*
+    @Override
     public void exitSet(final SetContext ctx) {
         final String[] point = ctx.POINT().getText().split(",");
         String var = point[0];
@@ -656,45 +656,45 @@ public class LogoListener extends LogoBaseListener {
      * Metodo que se encarga del comando penUp
      * @param ctx Contexto de uso
      */
-    //@Override
-    /*public void exitPenUp(final PenUpContext ctx) {
+    @Override
+    public void exitPenUp(final PenUpContext ctx) {
         this.painter.penUp();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando penDown
      * @param ctx Contexto de uso
      */
-    /*@Override
+    @Override
     public void exitPenDown(final PenDownContext ctx) {
         this.painter.penDown();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando Clearscreen
      * @param ctx Contexto de uso
      */
-    //@Override
-    /*public void exitClearscreen(ClearscreenContext ctx) {
+    @Override
+    public void exitClearscreen(ClearscreenContext ctx) {
         this.painter.cls();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando resetAngle
      * @param ctx Contexto de uso
      */
-   /*@Override
+   @Override
     public void exitResetAngle(ResetAngleContext ctx) {
         this.painter.resetAngle();
-    }*/
+    }
 
     /**
      * Metodo que se encarga del comando finish
      * @param ctx Contexto de uso
      */
-   /* @Override
+    @Override
     public void exitProg(ProgContext ctx) {
         this.painter.finish();
-    }*/
+    }
 
 }

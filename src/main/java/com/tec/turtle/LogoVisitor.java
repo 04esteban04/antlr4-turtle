@@ -19,12 +19,12 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
     public LogoVisitor(TurtlePainter painter) {
         this.painter = painter;
     }
-
+/*
     @Override
     public Void visitAparecetortuga(LogoParser.AparecetortugaContext ctx) {
         this.painter.aparecer();
         return super.visitAparecetortuga(ctx);
-    }
+    }*/
 
     @Override
     public Void visitAzar(LogoParser.AzarContext ctx) {
@@ -48,18 +48,19 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
         this.painter.back(Integer.parseInt(var));
         return super.visitBack(ctx);
     }
-
+/*
     @Override
     public Void visitCentro(LogoParser.CentroContext ctx) {
         this.painter.centro();
         return super.visitCentro(ctx);
     }
-
+*/
+    /*
     @Override
     public Void visitClearscreen(LogoParser.ClearscreenContext ctx) {
         this.painter.cls();
         return super.visitClearscreen(ctx);
-    }
+    }*/
 
     @Override
     public Void visitCuenta(LogoParser.CuentaContext ctx) {
@@ -148,7 +149,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
         this.painter.elemento(list, n);
         return super.visitElemento(ctx);
     }
-
+/*
     @Override
     public Void visitEspera(LogoParser.EsperaContext ctx) {
         String var = ctx.intExpression().getText();
@@ -159,7 +160,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
 
         this.painter.espera(Integer.parseInt(var));
         return super.visitEspera(ctx);
-    }
+    }*/
 
     @Override
     public Void visitForward(LogoParser.ForwardContext ctx) {
@@ -235,6 +236,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
      * Metodo que se encarga del comando left
      * @param ctx Contexto de uso
      */
+
     @Override
     public Void visitLeft(LogoParser.LeftContext ctx) {
         String var = ctx.intExpression().getText();
@@ -332,11 +334,11 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
      * Metodo que se encarga del comando Ocultatortuga
      * @param ctx Contexto de uso
      */
-    @Override
+   /* @Override
     public Void visitOcultatortuga(LogoParser.OcultatortugaContext ctx) {
         this.painter.ocultar();
         return super.visitOcultatortuga(ctx);
-    }
+    }*/
     /**
      * Metodo que se encarga del comando penDown
      * @param ctx Contexto de uso
@@ -358,17 +360,17 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
     /**
      * Metodo que se encarga del comando poncolorlapiz
      * @param ctx Contexto de uso
-     */
+     *//*
     @Override
     public Void visitPoncolorlapiz(LogoParser.PoncolorlapizContext ctx) {
         this.painter.poncolorlapiz(ctx.colorExpression().getText());
         return super.visitPoncolorlapiz(ctx);
-    }
+    }*/
 
     /**
      * Metodo que se encarga del comando ponx
      * @param ctx Contexto de uso
-     */
+     *//*
     @Override
     public Void visitPonx(LogoParser.PonxContext ctx) {
 
@@ -384,7 +386,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
     /**
      * Metodo que se encarga del comando pony
      * @param ctx Contexto de uso
-     */
+     *//*
     @Override
     public Void visitPony(LogoParser.PonyContext ctx) {
         String var = ctx.intExpression().getText();
@@ -394,7 +396,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
         }
         this.painter.pony(Integer.parseInt(var));
         return super.visitPony(ctx);
-    }
+    }*/
     /**
      * Metodo que se encarga del comando potencia
      * @param ctx Contexto de uso
@@ -460,11 +462,12 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
      * Metodo que se encarga del comando finish
      * @param ctx Contexto de uso
      */
+    /*
     @Override
     public Void visitProg(LogoParser.ProgContext ctx) {
         this.painter.finish();
         return super.visitProg(ctx);
-    }
+    }*/
     @Override
     public Void visitRedondea(LogoParser.RedondeaContext ctx) {
         String var = ctx.intExpression().getText();
@@ -481,15 +484,17 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
      * Metodo que se encarga del comando resetAngle
      * @param ctx Contexto de uso
      */
+    /*
     @Override
     public Void visitResetAngle(LogoParser.ResetAngleContext ctx) {
         this.painter.resetAngle();
         return super.visitResetAngle(ctx);
-    }
+    }*/
     /**
      * Metodo que se encarga del comando right
      * @param ctx Contexto de uso
      */
+
     @Override
     public Void visitRight(LogoParser.RightContext ctx) {
         String var = ctx.intExpression().getText();
@@ -505,17 +510,22 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
      * Metodo que se encarga del comando Rumbo
      * @param ctx Contexto de uso
      */
+    /*
     @Override
     public Void visitRumbo(LogoParser.RumboContext ctx) {
         this.painter.rumbo();
         return super.visitRumbo(ctx);
-    }
+    }*/
 
     @Override
     public Void visitSi(LogoParser.SiContext ctx) {
        if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
-           //ctx.logoExpression(1).removeLastChild();
-           return visit(ctx.logoExpression(0));
+           int i =0;
+           for (LogoParser.LogoExpressionContext x : ctx.logoExpression()) {
+               this.visit(ctx.logoExpression(i));
+               i++;
+           }
+           return null;
        }
        return visit(ctx.booleanExpression());
     }
@@ -524,13 +534,24 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
     @Override
     public Void visitSisino(LogoParser.SisinoContext ctx) {
         if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
-            ctx.logoExpression(1).removeLastChild();
-            return visit(ctx.logoExpression(0));
+
+            int i =0;
+
+            for (LogoParser.LogoExpressionContext x : ctx.logoExpression()) {
+                this.visit(ctx.logoExpression(i));
+                i++;
+            }
+            return null;
 
         }
         else{
-            ctx.logoExpression(0).removeLastChild();
-            return visit(ctx.logoExpression(1));
+
+            int i =0;
+            for (LogoParser.BloqExpressionContext x : ctx.bloqExpression()) {
+                this.visit(ctx.bloqExpression(i).logoExpression());
+                i++;
+            }
+            return null;//visit(ctx.logoExpression(1));
 
 
         }
@@ -542,6 +563,7 @@ public class LogoVisitor extends LogoBaseVisitor<Void> {
      * Metodo que se encarga del comando set
      * @param ctx Contexto de uso
      */
+
     @Override
     public Void visitSet(LogoParser.SetContext ctx) {
         final String[] point = ctx.POINT().getText().split(",");
