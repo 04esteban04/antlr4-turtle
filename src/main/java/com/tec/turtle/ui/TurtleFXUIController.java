@@ -208,15 +208,17 @@ public class TurtleFXUIController {
 
                 ParseTree tree = parser.prog();
 
+                //Visitor
+                LogoVisitor eval = new LogoVisitor(this.painter);
+                eval.visit(tree);
+
                 //Listener
                 ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
                 LogoListener logoListener = new LogoListener(this.painter);
 
                 parseTreeWalker.walk(logoListener, tree);
 
-                //Visitor
-                LogoVisitor eval = new LogoVisitor(this.painter);
-                eval.visit(tree);
+
 
             } catch (Exception exception){
                 if (!boolError) {
