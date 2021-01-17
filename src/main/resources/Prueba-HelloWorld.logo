@@ -1,5 +1,6 @@
 // Programa HELLOWORLD de ejemplo
-ponxy 20,20
+ejecuta[
+ponxy 20 20
 resetAngle
 bajalapiz
 
@@ -83,7 +84,7 @@ avanza 50
 giraizquierda 90
 
 // moverse a segunda fila
-ponxy 20,90
+ponxy 20 90
 
 // W
 giraderecha 78
@@ -171,5 +172,6 @@ giraderecha 60
 avanza 30
 
 // volver a posición inicial
-ponxy 20,20
+ponxy 20 20
 resetAngle
+]

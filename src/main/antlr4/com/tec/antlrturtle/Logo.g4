@@ -2,13 +2,6 @@ grammar Logo;
 
 prog: EJECUTA OPENBRA logoExpression+ CLOSEBRA EOF;
 
-variableExpression:
-                intExpression
-                |booleanExpression
-                |ID
-                |STRING
-                ;
-
 colorExpression:
                 blanco
                 | azul
@@ -22,13 +15,13 @@ colorExpression:
                 ;
 
 booleanExpression:
-                mayorque
-                |menorque
-                |o
-                |y
-                |iguales
-                |TRUE
-                |FALSE
+                mayorque            #MayorQueB
+                |menorque           #MenorQueB
+                |o                  #OB
+                |y                  #YB
+                |iguales            #IgualesG
+                |TRUE               #TrueB
+                |FALSE              #FalseB
                 ;
 
 intExpression:
@@ -132,9 +125,9 @@ redondea : REDONDEA intExpression;
 inc: INC OPENBRA intExpression intExpression CLOSEBRA;
 
 //Variables
-inic: INIC ID EQUALS variableExpression;
+inic: INIC ID EQUALS intExpression;
 haz2: HAZ ID;
-haz: HAZ ID variableExpression;
+haz: HAZ ID intExpression;
 
 //Tortuga
 ocultatortuga: OCULTATORTUGA;
@@ -144,7 +137,7 @@ back: BACK intExpression ;
 right: RIGHT intExpression;
 left: LEFT intExpression;
 clearscreen: CLEARSCREEN;
-set: SET POINT;
+set: SET intExpression intExpression;
 penUp: PEN_UP;
 penDown: PEN_DOWN;
 resetAngle: RESET_ANGLE;
@@ -288,7 +281,6 @@ EQUALS : '=';
 INT: [0-9]+ ;
 ID:[a-zA-Z_][a-zA-Z0-9_]*;
 STRING: '"' ~('"')* '"';
-POINT: INT','INT;
 
 NEWLINE: '\r'? '\n' -> skip;
 WS: ' '+ -> skip;

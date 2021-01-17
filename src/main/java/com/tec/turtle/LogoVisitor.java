@@ -20,12 +20,81 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
         this.painter = painter;
     }
 
-/*
     @Override
-    public Void visitAparecetortuga(LogoParser.AparecetortugaContext ctx) {
-        this.painter.aparecer();
-        return super.visitAparecetortuga(ctx);
-    }*/
+    public Integer visitPoncolorlapiz(LogoParser.PoncolorlapizContext ctx) {
+        this.painter.poncolorlapiz(ctx.colorExpression().getText());
+        return null;
+    }
+
+    @Override
+    public Integer visitRumbo(LogoParser.RumboContext ctx) {
+        return (int) this.painter.rumbo();
+    }
+
+    @Override
+    public Integer visitResetAngle(LogoParser.ResetAngleContext ctx) {
+        this.painter.resetAngle();
+        return null;
+    }
+
+    @Override
+    public Integer visitClearscreen(LogoParser.ClearscreenContext ctx) {
+        this.painter.cls();
+        return null;
+    }
+
+    @Override
+    public Integer visitPonrumbo(LogoParser.PonrumboContext ctx) {
+        this.painter.ponRumbo(visit(ctx.intExpression()));
+
+        return null;
+    }
+
+    @Override
+    public Integer visitPony(LogoParser.PonyContext ctx) {
+        int var = visit(ctx.intExpression());
+
+        this.painter.pony(var);
+
+        return null;
+    }
+
+    @Override
+    public Integer visitPonx(LogoParser.PonxContext ctx) {
+        int var = visit(ctx.intExpression());
+
+        this.painter.ponx(var);
+
+        return null;
+    }
+
+    @Override
+    public Integer visitEspera(LogoParser.EsperaContext ctx) {
+        int var = visit(ctx.intExpression());
+
+        painter.espera(var);
+
+        return null;
+
+    }
+
+    @Override
+    public Integer visitCentro(LogoParser.CentroContext ctx) {
+        this.painter.centro();
+        return null;
+    }
+
+    @Override
+    public Integer visitAparecetortuga(LogoParser.AparecetortugaContext ctx) {
+        painter.aparecer();
+        return null;
+    }
+
+    @Override
+    public Integer visitOcultatortuga(LogoParser.OcultatortugaContext ctx) {
+        this.painter.ocultar();
+        return null;
+    }
 
     @Override
     public Integer visitIncI(LogoParser.IncIContext ctx) {
@@ -184,16 +253,11 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
         return Integer.parseInt(ctx.INT().getText());
     }
 
-
-
     @Override
     public Integer visitRepite(LogoParser.RepiteContext ctx) {
 
-        visit(ctx.intExpression());
-
-        for (int x = Integer.parseInt(ctx.intExpression().getText()); x > 0 ; x-- ){
-            int i =0;
-            for (LogoParser.LogoExpressionContext y : ctx.logoExpression()) {
+        for (int x = visit(ctx.intExpression()); x > 0 ; x-- ){
+            for (int i = 0; i < ctx.logoExpression().size(); i++) {
                 this.visit(ctx.logoExpression(i));
                 i++;
             }
@@ -203,39 +267,15 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitAzar(LogoParser.AzarContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        this.painter.azar(Integer.parseInt(var));
+        this.painter.azar(visit(ctx.intExpression()));
         return super.visitAzar(ctx);
     }
 
     @Override
     public Integer visitBack(LogoParser.BackContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-        this.painter.back(Integer.parseInt(var));
-        return super.visitBack(ctx);
+        this.painter.back(visit(ctx.intExpression()));
+        return null;
     }
-/*
-    @Override
-    public Void visitCentro(LogoParser.CentroContext ctx) {
-        this.painter.centro();
-        return super.visitCentro(ctx);
-    }
-*/
-    /*
-    @Override
-    public Void visitClearscreen(LogoParser.ClearscreenContext ctx) {
-        this.painter.cls();
-        return super.visitClearscreen(ctx);
-    }*/
 
     @Override
     public Integer visitCuenta(LogoParser.CuentaContext ctx) {
@@ -255,20 +295,17 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitDiferencia(LogoParser.DiferenciaContext ctx) {
-        int x = 0;
         List<Integer> numeros = new ArrayList<>();
-        while(ctx.intExpression().get(x) != null ){
-            String var = ctx.intExpression().get(x).getText();
 
-            if(Objects.nonNull(variables.get(var))){
-                var = variables.get(var);
-            }
+        for (int x = 0; x < ctx.intExpression().size() ; x++){
 
-            numeros.add(Integer.parseInt(var));
-            x++;
+            int var = visit(ctx.intExpression().get(x));
+
+            numeros.add(var);
+
         }
-        this.painter.diferencia(numeros);
-        return super.visitDiferencia(ctx);
+
+        return this.painter.diferencia(numeros);
     }
 
     @Override
@@ -278,19 +315,6 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
         int var2 = visit(ctx.intExpression().get(1));
 
-        /*
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-         */
-
         return this.painter.division(var,
                 var2);
 
@@ -298,141 +322,80 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitElegir(LogoParser.ElegirContext ctx) {
-        List<Double> list = new ArrayList<>();
-
-        for (LogoParser.IntExpressionContext x : ctx.lista().intExpression()){
-            String data = x.getText();
-            if(Objects.nonNull(variables.get(data))){
-                data = variables.get(data);
-            }
-            list.add(Double.parseDouble(data));
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.lista().intExpression().size() ; x++){
+            int var = visit(ctx.lista().intExpression().get(x));
+            numeros.add((double)var);
         }
-
-        this.painter.elegir(list);
-        return super.visitElegir(ctx);
+        return (int) painter.elegir(numeros);
     }
 
     @Override
     public Integer visitElemento(LogoParser.ElementoContext ctx) {
-        List<Double> list = new ArrayList<>();
-
-        for (LogoParser.IntExpressionContext x : ctx.lista().intExpression()){
-            String data = x.getText();
-            if(Objects.nonNull(variables.get(data))){
-                data = variables.get(data);
-            }
-            list.add(Double.parseDouble(data));
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.lista().intExpression().size() ; x++){
+            int var = visit(ctx.lista().intExpression().get(x));
+            numeros.add((double)var);
         }
-
-        int n = Integer.parseInt(ctx.intExpression().getText());
-
-        this.painter.elemento(list, n);
-        return super.visitElemento(ctx);
+        return (int) painter.ultimo(numeros);
     }
-/*
-    @Override
-    public Void visitEspera(LogoParser.EsperaContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        this.painter.espera(Integer.parseInt(var));
-        return super.visitEspera(ctx);
-    }*/
 
     @Override
     public Integer visitForward(LogoParser.ForwardContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-        this.painter.forward(Integer.parseInt(var));
+        this.painter.forward(visit(ctx.intExpression()));
         return null;
     }
 
     @Override
     public Integer visitGoma(LogoParser.GomaContext ctx) {
         this.painter.goma();
-        return super.visitGoma(ctx);
+        return null;
     }
     @Override
     public Integer visitHaz(LogoParser.HazContext ctx) {
-        String value = ctx.variableExpression().getText();
-        variables.put(ctx.ID().getText(), value);
-        return super.visitHaz(ctx);
+        Integer value = visit(ctx.intExpression());
+        if(Objects.nonNull(value)){
+            variables.put(ctx.ID().getText(), value + "");
+        }
+        return null;
     }
     @Override
     public Integer visitHaz2(LogoParser.Haz2Context ctx) {
         variables.put(ctx.ID().getText(), null);
-        return super.visitHaz2(ctx);
+        return null;
     }
     @Override
     public Integer visitIguales(LogoParser.IgualesContext ctx) {
-        String var = ctx.intExpression().get(0).getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        String var2 = ctx.intExpression().get(1).getText();
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        this.painter.iguales(Integer.parseInt(var),
-                Integer.parseInt(var2));
-        return super.visitIguales(ctx);
+        this.painter.iguales(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
+        return null;
     }
 
     @Override
     public Integer visitInc(LogoParser.IncContext ctx) {
-        boolean variable = false;
-        visit(ctx.intExpression().get(0));
-        visit(ctx.intExpression().get(1));
-        String var = ctx.intExpression().get(0).getText();
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-            variable = true;
-        }
-        String rep = ctx.intExpression().get(1).getText();
-        if(Objects.nonNull(variables.get(rep))){
-            rep = variables.get(rep);
-        }
-
-        int res = this.painter.inc(Integer.parseInt(var), Integer.parseInt(rep));
-        if(variable){
-            variables.put(var, res + "");
-        }
-
-        return super.visitInc(ctx);
+        return painter.inc(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
     }
 
     @Override
     public Integer visitInic(LogoParser.InicContext ctx) {
-        String value = ctx.variableExpression().getText();
 
-        variables.put(ctx.ID().getText(), value);
+        Integer value = visit(ctx.intExpression());
+        if(Objects.nonNull(value)){
+            variables.put(ctx.ID().getText(), value + "");
+        }
 
-        System.out.println(variables.get(ctx.ID().getText()));
-        return super.visitInic(ctx);
+        return null;
     }
+
+
     /**
      * Metodo que se encarga del comando left
      * @param ctx Contexto de uso
      */
-
     @Override
     public Integer visitLeft(LogoParser.LeftContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-        this.painter.left(Integer.parseInt(var));
+        this.painter.left(visit(ctx.intExpression()));
         return super.visitLeft(ctx);
     }
 
@@ -517,18 +480,10 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
         this.painter.o(Boolean.parseBoolean(var),
                 Boolean.parseBoolean(var2));
-        return super.visitO(ctx);
+
+        return null;
     }
 
-    /**
-     * Metodo que se encarga del comando Ocultatortuga
-     * @param ctx Contexto de uso
-     */
-   /* @Override
-    public Void visitOcultatortuga(LogoParser.OcultatortugaContext ctx) {
-        this.painter.ocultar();
-        return super.visitOcultatortuga(ctx);
-    }*/
     /**
      * Metodo que se encarga del comando penDown
      * @param ctx Contexto de uso
@@ -536,7 +491,7 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     @Override
     public Integer visitPenDown(LogoParser.PenDownContext ctx) {
         this.painter.penDown();
-        return super.visitPenDown(ctx);
+        return null;
     }
     /**
      * Metodo que se encarga del comando penUp
@@ -545,69 +500,17 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     @Override
     public Integer visitPenUp(LogoParser.PenUpContext ctx) {
         this.painter.penUp();
-        return super.visitPenUp(ctx);
+        return null;
     }
-    /**
-     * Metodo que se encarga del comando poncolorlapiz
-     * @param ctx Contexto de uso
-     *//*
-    @Override
-    public Void visitPoncolorlapiz(LogoParser.PoncolorlapizContext ctx) {
-        this.painter.poncolorlapiz(ctx.colorExpression().getText());
-        return super.visitPoncolorlapiz(ctx);
-    }*/
 
-    /**
-     * Metodo que se encarga del comando ponx
-     * @param ctx Contexto de uso
-     *//*
-    @Override
-    public Void visitPonx(LogoParser.PonxContext ctx) {
-
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        this.painter.ponx(Integer.parseInt(var));
-        return super.visitPonx(ctx);
-    }
-    /**
-     * Metodo que se encarga del comando pony
-     * @param ctx Contexto de uso
-     *//*
-    @Override
-    public Void visitPony(LogoParser.PonyContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-        this.painter.pony(Integer.parseInt(var));
-        return super.visitPony(ctx);
-    }*/
     /**
      * Metodo que se encarga del comando potencia
      * @param ctx Contexto de uso
      */
     @Override
     public Integer visitPotencia(LogoParser.PotenciaContext ctx) {
-        String var = ctx.intExpression().get(0).getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        String var2 = ctx.intExpression().get(1).getText();
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        this.painter.potencia(Integer.parseInt(var),
-                Integer.parseInt(var2));
-        return super.visitPotencia(ctx);
+        return (int) painter.potencia(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
     }
     /**
      * Metodo que retorna el primer elemento de una lista
@@ -615,18 +518,12 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
      */
     @Override
     public Integer visitPrimero(LogoParser.PrimeroContext ctx) {
-        List<Double> list = new ArrayList<>();
-
-        for (LogoParser.IntExpressionContext x : ctx.lista().intExpression()){
-            String data = x.getText();
-            if(Objects.nonNull(variables.get(data))){
-                data = variables.get(data);
-            }
-            list.add(Double.parseDouble(data));
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.lista().intExpression().size() ; x++){
+            int var = visit(ctx.lista().intExpression().get(x));
+            numeros.add((double)var);
         }
-
-        this.painter.primero(list);
-        return super.visitPrimero(ctx);
+        return (int) painter.primero(numeros);
     }
     /**
      * Metodo que se encarga del comando producto
@@ -635,57 +532,22 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     @Override
     public Integer visitProducto(LogoParser.ProductoContext ctx) {
         List<Integer> numeros = new ArrayList<>();
-        for (LogoParser.IntExpressionContext x: ctx.intExpression()){
 
-            this.visit(x);
+        for (int x = 0; x < ctx.intExpression().size() ; x++){
 
-            String var = x.getText();
+            int var = visit(ctx.intExpression().get(x));
 
-            if(Objects.nonNull(variables.get(var))){
-                var = variables.get(var);
-            }
+            numeros.add(var);
 
-            numeros.add(Integer.parseInt(var));
         }
 
         return this.painter.producto(numeros);
     }
-    /**
-     * Metodo que se encarga del comando finish
-     * @param ctx Contexto de uso
-     */
-    /*
-    @Override
-    public Void visitProg(LogoParser.ProgContext ctx) {
-        this.painter.finish();
-        return super.visitProg(ctx);
-    }*/
+
     @Override
     public Integer visitRedondea(LogoParser.RedondeaContext ctx) {
-
-        this.visit(ctx.intExpression());
-
-        String var = ctx.intExpression().getText();
-
-        /*
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-         */
-
-        return this.painter.redondea(Double.parseDouble(var)).intValue();
+        return this.painter.redondea(visit(ctx.intExpression())).intValue();
     }
-    /**
-     * Metodo que se encarga del comando resetAngle
-     * @param ctx Contexto de uso
-     */
-    /*
-    @Override
-    public Void visitResetAngle(LogoParser.ResetAngleContext ctx) {
-        this.painter.resetAngle();
-        return super.visitResetAngle(ctx);
-    }*/
     /**
      * Metodo que se encarga del comando right
      * @param ctx Contexto de uso
@@ -693,25 +555,10 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitRight(LogoParser.RightContext ctx) {
-        String var = ctx.intExpression().getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        this.painter.right(Integer.parseInt(var));
-        return super.visitRight(ctx);
+        this.painter.right(visit(ctx.intExpression()));
+        System.out.println("giraderecha " + visit(ctx.intExpression()));
+        return null;
     }
-    /**
-     * Metodo que se encarga del comando Rumbo
-     * @param ctx Contexto de uso
-     */
-    /*
-    @Override
-    public Void visitRumbo(LogoParser.RumboContext ctx) {
-        this.painter.rumbo();
-        return super.visitRumbo(ctx);
-    }*/
 
     @Override
     public Integer visitSi(LogoParser.SiContext ctx) {
@@ -746,12 +593,10 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
                 this.visit(ctx.bloqExpression(i).logoExpression());
                 i++;
             }
-            return null;//visit(ctx.logoExpression(1));
+            return null;
 
 
         }
-
-        //return super.visitSisino(ctx);
     }
 
     /**
@@ -761,22 +606,12 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitSet(LogoParser.SetContext ctx) {
-        final String[] point = ctx.POINT().getText().split(",");
-        String var = point[0];
 
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-        String var2 = point[1];
+        System.out.println(ctx.intExpression().get(0));
+        System.out.println(ctx.intExpression().get(0));
 
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        System.out.println(var);
-        System.out.println(var2);
-        final int x = Integer.parseInt(var);
-        final int y = Integer.parseInt(var2);
+        int x = visit(ctx.intExpression().get(0));
+        int y = visit(ctx.intExpression().get(1));
 
         this.painter.set(x, y);
         return super.visitSet(ctx);
@@ -785,18 +620,16 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     @Override
     public Integer visitSuma(LogoParser.SumaContext ctx) {
         List<Integer> numeros = new ArrayList<>();
-        for (LogoParser.IntExpressionContext x: ctx.intExpression()){
-            this.visit(x);
-            String var = x.getText();
-            if(Objects.nonNull(variables.get(var))){
-                var = variables.get(var);
-            }
 
-            numeros.add(Integer.parseInt(var));
+        for (int x = 0; x < ctx.intExpression().size() ; x++){
+
+            int var = visit(ctx.intExpression().get(x));
+
+            numeros.add(var);
+
         }
 
-        this.painter.suma(numeros);
-        return super.visitSuma(ctx);
+        return this.painter.suma(numeros);
     }
 
 
@@ -808,16 +641,13 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     public Integer visitUltimo(LogoParser.UltimoContext ctx) {
         List<Double> list = new ArrayList<>();
 
-        for (LogoParser.IntExpressionContext x : ctx.lista().intExpression()){
-            String data = x.getText();
-            if(Objects.nonNull(variables.get(data))){
-                data = variables.get(data);
-            }
-            list.add(Double.parseDouble(data));
+        for (int x = 0; x < ctx.lista().intExpression().size(); x++){
+            int var = visit(ctx.lista().intExpression().get(x));
+            list.add((double)var);
         }
-        this.painter.ultimo(list);
-        return super.visitUltimo(ctx);
+        return (int) this.painter.ultimo(list);
     }
+
     /**
      * Metodo que se encarga del comando y logico
      * @param ctx Contexto de uso
