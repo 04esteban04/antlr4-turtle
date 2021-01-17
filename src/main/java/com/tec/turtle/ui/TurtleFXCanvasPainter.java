@@ -326,7 +326,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         }
         int result = x;
         while (n > 0){
-            result += 1;
+            result += x;
             n--;
         }
         System.out.println(result);

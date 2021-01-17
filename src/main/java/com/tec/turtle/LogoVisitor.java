@@ -27,7 +27,134 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
         return super.visitAparecetortuga(ctx);
     }*/
 
-    //TODO crear todas las funciones para las reglas de intExpression terminadas con I
+    @Override
+    public Integer visitIncI(LogoParser.IncIContext ctx) {
+        return painter.inc(visit(ctx.inc().intExpression().get(0)),
+                visit(ctx.inc().intExpression().get(1)));
+    }
+
+    @Override
+    public Integer visitElegirI(LogoParser.ElegirIContext ctx) {
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.elegir().lista().intExpression().size() ; x++){
+            int var = visit(ctx.elegir().lista().intExpression().get(x));
+            numeros.add((double)var);
+        }
+        return (int) painter.elegir(numeros);
+    }
+
+    @Override
+    public Integer visitPrimeroI(LogoParser.PrimeroIContext ctx) {
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.primero().lista().intExpression().size() ; x++){
+            int var = visit(ctx.primero().lista().intExpression().get(x));
+            numeros.add((double)var);
+        }
+        return (int) painter.primero(numeros);
+    }
+
+    @Override
+    public Integer visitElementoI(LogoParser.ElementoIContext ctx) {
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.elemento().lista().intExpression().size() ; x++){
+            int var = visit(ctx.elemento().lista().intExpression().get(x));
+            numeros.add((double)var);
+        }
+        return (int) painter.ultimo(numeros);
+    }
+
+    @Override
+    public Integer visitUltimoI(LogoParser.UltimoIContext ctx) {
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.ultimo().lista().intExpression().size() ; x++){
+            int var = visit(ctx.ultimo().lista().intExpression().get(x));
+            numeros.add((double)var);
+        }
+        return (int) painter.ultimo(numeros);
+    }
+
+    @Override
+    public Integer visitCuentaI(LogoParser.CuentaIContext ctx) {
+        List<Double> numeros = new ArrayList<>();
+        for (int x = 0; x < ctx.cuenta().lista().intExpression().size() ; x++){
+            int var = visit(ctx.cuenta().lista().intExpression().get(x));
+            numeros.add((double)var);
+        }
+        return this.painter.cuenta(numeros);
+    }
+
+    @Override
+    public Integer visitSumaI(LogoParser.SumaIContext ctx) {
+        List<Integer> numeros = new ArrayList<>();
+
+        for (int x = 0; x < ctx.suma().intExpression().size() ; x++){
+
+            int var = visit(ctx.suma().intExpression().get(x));
+
+            numeros.add(var);
+
+        }
+
+        return this.painter.suma(numeros);
+    }
+
+    @Override
+    public Integer visitRestoI(LogoParser.RestoIContext ctx) {
+        return this.painter.resto(visit(ctx.resto().intExpression().get(0)),
+                visit(ctx.resto().intExpression().get(1)));
+    }
+
+    @Override
+    public Integer visitMenosI(LogoParser.MenosIContext ctx) {
+        return painter.menos(visit(ctx.menos().intExpression()));
+    }
+
+    @Override
+    public Integer visitAzarI(LogoParser.AzarIContext ctx) {
+        return painter.azar(visit(ctx.azar().intExpression()));
+    }
+
+    @Override
+    public Integer visitPotenciaI(LogoParser.PotenciaIContext ctx) {
+        return (int) painter.potencia(visit(ctx.potencia().intExpression().get(0)),
+                visit(ctx.potencia().intExpression().get(1)));
+    }
+
+    @Override
+    public Integer visitDiferenciaI(LogoParser.DiferenciaIContext ctx) {
+        List<Integer> numeros = new ArrayList<>();
+
+        for (int x = 0; x < ctx.diferencia().intExpression().size() ; x++){
+
+            int var = visit(ctx.diferencia().intExpression().get(x));
+
+            numeros.add(var);
+
+        }
+
+        return this.painter.diferencia(numeros);
+    }
+
+    @Override
+    public Integer visitProductoI(LogoParser.ProductoIContext ctx) {
+        List<Integer> numeros = new ArrayList<>();
+
+        for (int x = 0; x < ctx.producto().intExpression().size() ; x++){
+
+            int var = visit(ctx.producto().intExpression().get(x));
+
+            numeros.add(var);
+
+        }
+
+        return this.painter.producto(numeros);
+    }
+
+    @Override
+    public Integer visitRumboI(LogoParser.RumboIContext ctx) {
+        double res = this.painter.rumbo();
+        return (int) res;
+    }
 
     @Override
     public Integer visitVariableI(LogoParser.VariableIContext ctx) {

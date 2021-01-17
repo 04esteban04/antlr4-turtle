@@ -190,14 +190,17 @@ public class LogoListener extends LogoBaseListener {
         this.painter.ocultar();
     }
 
+
     /**
      * Metodo que se encarga del comando Rumbo
      * @param ctx Contexto de uso
      */
+    /*
     @Override
     public void exitRumbo(RumboContext ctx){
         this.painter.rumbo();
     }
+    */
 
     /**
      * Metodo que se encarga del comando centro
