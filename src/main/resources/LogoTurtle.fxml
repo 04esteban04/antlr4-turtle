@@ -5,8 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-    xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tec.turtle.ui.TurtleFXUIController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tec.turtle.ui.TurtleFXUIController">
     <top>
         <MenuBar>
             <Menu text="Opciones">
@@ -16,12 +17,14 @@
         </MenuBar>
     </top>
     <center>
-        <SplitPane dividerPositions="0.65" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1300.0" prefWidth="2300.0">
-                <Pane maxHeight="600" maxWidth="800" minHeight="600" minWidth="800">
+        <SplitPane dividerPositions="0.72" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane maxWidth="1000" minHeight="681" minWidth="1000" prefHeight="681" prefWidth="1000" >
+                <Pane maxHeight="681" maxWidth="1000" minHeight="681" minWidth="1000">
                     <Group fx:id="logoCanvas"/>
                     <style>
                         -fx-background-color: #FFFFFF;
+                        -fx-border-color: #000000;
+                        -fx-border-width: 3px;
                     </style>
                 </Pane>
             </AnchorPane>

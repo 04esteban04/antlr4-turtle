@@ -23,7 +23,7 @@ public class TurtleFXUI extends Application {
 
         final Parent parent = fxmlLoader.load();
 
-        final Scene primaryScene = new Scene(parent, 1000, 620);
+        final Scene primaryScene = new Scene(parent, 1400, 720);
         primaryScene.getStylesheets().add("LogoTurtle.css");
 
         primaryStage.setTitle("Logo Turtle TEC");

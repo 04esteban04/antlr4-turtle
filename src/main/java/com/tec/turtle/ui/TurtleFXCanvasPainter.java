@@ -4,9 +4,13 @@ import com.tec.turtle.TurtlePainter;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineTo;
@@ -78,7 +82,10 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         this.anchura = this.region.getMaxWidth();
         this.altura = this.region.getMaxHeight();
 
-        this.tortuga = new Circle(this.anchura / 2, this.altura / 2, 5, Color.RED);
+        this.tortuga = new Circle(this.anchura / 2, this.altura / 2, 20, Color.RED);
+
+        Image im = new Image("http://clipart-library.com/new_gallery/356-3560956_shadow-silhouette-turtle-black-freetoedit-sea-turtle-silhouette.png",false);
+        tortuga.setFill(new ImagePattern(im));
 
         this.paintTurtle(this.tortuga.getCenterX(), this.tortuga.getCenterY());
 
@@ -565,16 +572,23 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void set(final int x, final int y) {
-        JavaFXThreadHelper.runOrDefer(() -> {
-            final boolean wasPenDown = this.seEstaDibujando;
-            if (this.seEstaDibujando) {
-                this.penUp();
-            }
-            this.moveTurtle(x, y);
-            if (wasPenDown) {
-                this.penDown();
-            }
-        });
+        try {
+            validarPosicionTortuga(x, y);
+
+            JavaFXThreadHelper.runOrDefer(() -> {
+                final boolean wasPenDown = this.seEstaDibujando;
+                if (this.seEstaDibujando) {
+                    this.penUp();
+                }
+                this.moveTurtle(x, y);
+                if (wasPenDown) {
+                    this.penDown();
+                }
+            });
+
+        } catch (Exception e){
+            TurtleFXUIController.error(e.getMessage(), "excepcion");
+        }
     }
 
     /**
@@ -659,16 +673,17 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         JavaFXThreadHelper.runOrDefer(() -> {
             if ((newX < 0 || newX > this.anchura) || (newY < 0 || newY > this.altura)) {
                 if (!boolError) {
-                    TurtleFXUIController.error(String.format("-> La tortuga se salio del canvas! " +
-                                                "\n\n    - Dimensiones del canvas = (%f, %f), " +
-                                                "\n    - Posicion actual = (%f, %f), " +
-                                                "\n    - Nueva posicion = (%f, %f)",
-                                                this.anchura,
-                                                this.altura,
-                                                this.tortuga.getCenterX(),
-                                                this.tortuga.getCenterY(),
-                                                newX,
-                                                newY), "excepcion");
+                    try {
+                        throw new Exception(String.format("-> La tortuga se salio del canvas! " +
+                                        "\n\n    - Dimensiones del canvas = (%f, %f), " +
+                                        "\n    - Posicion actual = (%f, %f), " +
+                                        "\n    - Nueva posicion = (%f, %f)",
+                                        this.anchura, this.altura,
+                                        this.tortuga.getCenterX(), this.tortuga.getCenterY(),
+                                        newX, newY));
+                    } catch (Exception e){
+                        TurtleFXUIController.error(e.getMessage(),"excepcion");
+                    }
                 }
             }
         });
