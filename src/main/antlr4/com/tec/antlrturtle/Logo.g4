@@ -1,12 +1,12 @@
-grammar Logo ;
+grammar Logo;
 
-prog: EJECUTA OPENBRA logoExpression+ CLOSEBRA EOF ;
+prog: EJECUTA OPENBRA logoExpression+ CLOSEBRA EOF;
 
 variableExpression:
                 intExpression
                 |booleanExpression
-                |STRING
                 |ID
+                |STRING
                 ;
 
 colorExpression:
@@ -29,31 +29,35 @@ booleanExpression:
                 |iguales
                 |TRUE
                 |FALSE
-                |ID
                 ;
 
 intExpression:
-                inc
-                |rumbo
-                |producto
-                |diferencia
-                |potencia
-                |redondea
-                |azar
-                |menos
-                |division
-                |resto
-                |suma
-                |cuenta
-                |ultimo
-                |elemento
-                |primero
-                |elegir
-                |INT
-                |ID
+                INT             #IntI
+                |ID             #VariableI
+                |inc            #IncI
+                |rumbo          #RumboI
+                |producto       #ProductoI
+                |diferencia     #DiferenciaI
+                |potencia       #PotenciaI
+                |redondea       #RedondeaI
+                |azar           #AzarI
+                |menos          #MenosI
+                |division       #DivisionI
+                |resto          #RestoI
+                |suma           #SumaI
+                |cuenta         #CuentaI
+                |ultimo         #UltimoI
+                |elemento       #ElementoI
+                |primero        #PrimeroI
+                |elegir         #ElegirI
                 ;
+
 bloqExpression: logoExpression;
-logoExpression: forward
+
+logoExpression: intExpression
+                |colorExpression
+                |booleanExpression
+                |forward
                 | back
                 | right
                 | left
@@ -74,13 +78,10 @@ logoExpression: forward
                 |poncolorlapiz
                 |espera
                 |ponrumbo
+                |repite
 
-                |colorExpression
                 |si
                 |sisino
-                |colorExpression
-                |intExpression
-                |booleanExpression
                 ;
 
 //Listas
@@ -91,6 +92,9 @@ ultimo: ULTIMO lista;
 elemento: ELEMENTO intExpression lista;
 
 lista : OPENBRA intExpression* CLOSEBRA;
+
+//ITERADORES
+repite: REPITE intExpression OPENBRA logoExpression* CLOSEBRA;
 
 //Condicionales
 si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
@@ -210,6 +214,7 @@ fragment UL: ('ultimo' | 'ul');
 fragment PRI: ('primero' | 'pri');
 fragment S: ('si' | 's');
 fragment SSN: ('sisino' | 'ssn');
+fragment REP: ('repite' | 'rep');
 
 
 MAYORQUE: MAQ;
@@ -246,7 +251,7 @@ ULTIMO:UL;
 PRIMERO:PRI;
 
 SI:S;
-
+REPITE: REP;
 SISINO:SSN;
 
 
@@ -280,8 +285,8 @@ OPENBRA : '[';
 CLOSEBRA : ']';
 EQUALS : '=';
 
-ID:[a-zA-Z_][a-zA-Z0-9_]*;
 INT: [0-9]+ ;
+ID:[a-zA-Z_][a-zA-Z0-9_]*;
 STRING: '"' ~('"')* '"';
 POINT: INT','INT;
 

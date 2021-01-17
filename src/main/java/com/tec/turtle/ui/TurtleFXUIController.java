@@ -69,6 +69,7 @@ public class TurtleFXUIController {
     /**
      * Animacion del boton compilar
      */
+    
     FadeTransition fadeTransitionCompilar;
     /**
      * Animacion del boton AST
