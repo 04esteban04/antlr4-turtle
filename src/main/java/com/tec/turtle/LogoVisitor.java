@@ -405,23 +405,9 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
      */
     @Override
     public Integer visitMayorque(LogoParser.MayorqueContext ctx) {
-        String var = ctx.intExpression().get(0).getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        String var2 = ctx.intExpression().get(1).getText();
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        this.painter.mayorque(Integer.parseInt(var),
-                Integer.parseInt(var2));
-
-
-        return super.visitMayorque(ctx);
+        this.painter.mayorque(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
+        return null;
     }
     /**
      * Metodo que se encarga del comando menorque
@@ -429,21 +415,9 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
      */
     @Override
     public Integer visitMenorque(LogoParser.MenorqueContext ctx) {
-        String var = ctx.intExpression().get(0).getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        String var2 = ctx.intExpression().get(1).getText();
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        this.painter.menorque(Integer.parseInt(var),
-                Integer.parseInt(var2));
-        return super.visitMenorque(ctx);
+        this.painter.menorque(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
+        return null;
     }
     /**
      * Metodo que se encarga del comando menos
