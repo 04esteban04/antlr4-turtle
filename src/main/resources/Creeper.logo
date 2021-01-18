@@ -1,0 +1,42 @@
+ejecuta[
+poncolorlapiz verde
+resetAngle
+avanza 100
+giraizquierda 90
+avanza 100
+resetangle
+giraderecha 90
+avanza 100
+giraizquierda 90
+retrocede 100
+giraderecha 90
+retrocede 100
+giraizquierda 90
+retrocede 50
+giraderecha 90
+avanza 50
+giraderecha 90
+avanza 150
+giraizquierda 90
+retrocede 50
+giraizquierda 90
+avanza 50
+giraizquierda 90
+avanza 100
+giraizquierda 90
+avanza 50
+giraizquierda 90
+retrocede 50
+giraderecha 90
+retrocede 150
+giraderecha 90
+retrocede 50
+giraizquierda 90
+retrocede 150
+giraizquierda 90
+retrocede 100
+giraderecha 90
+avanza 100
+giraizquierda 90
+avanza 100
+ponxy 150 150]
