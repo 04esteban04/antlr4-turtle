@@ -19,7 +19,7 @@ retrocede 25
 bajalapiz
 retrocede 25
 
-// Moverse a E
+// Moverse a E;
 subelapiz
 avanza 50
 giraderecha 90
