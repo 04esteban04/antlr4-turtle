@@ -102,7 +102,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     @Override
     public double elemento(List<Double> lista, int n) {
         Double elemento = lista.get(n);
-        System.out.println(elemento);
         return elemento;
     }
 
@@ -116,7 +115,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     public double ultimo(List<Double> lista) {
         int ultimoelemento = lista.size();
         double elemeto = lista.get(ultimoelemento - 1);
-        System.out.println(elemeto);
 
         return elemeto;
     }
@@ -130,7 +128,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     @Override
     public int cuenta(List<Double> lista) {
         int n = lista.size();
-        System.out.println(n);
         return n;
     }
 
@@ -143,9 +140,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     @Override
     public double elegir(List<Double> lista) {
         Random rand = new Random();
-        double randomElement = lista.get(rand.nextInt(lista.size()));
-        System.out.println(randomElement);
-        return randomElement;
+        return lista.get(rand.nextInt(lista.size()));
     }
 
     /**
@@ -156,9 +151,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public double primero(List<Double> lista) {
-        double elemento = lista.get(0);
-        System.out.println(elemento);
-        return elemento;
+        return lista.get(0);
     }
 
     /**
@@ -184,7 +177,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     @Override
     public void ponRumbo(int rumbo) {
         this.direccion = rumbo;
-        System.out.println(this.direccion);
     }
 
     /**
@@ -193,7 +185,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public double rumbo() {
-        System.out.println(this.direccion);
         return this.direccion;
     }
 
@@ -271,7 +262,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void poncolorlapiz(String color) {
-        System.out.println("color: " + color);
         if (color.equals("amarillo")){
             this.color = Color.YELLOW;
         }
@@ -314,9 +304,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public int azar(int n) {
-        int random = (int) (Math.random() * (n - 1)) + 1;
-        System.out.println(random);
-        return random;
+        return (int) (Math.random() * (n - 1)) + 1;
     }
 
     /**
@@ -336,7 +324,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
             result += 1;
             n--;
         }
-        System.out.println(result);
         return result;
     }
 
@@ -351,7 +338,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         for(Integer x : numeros){
             respuesta += x;
         }
-        System.out.println(respuesta);
         return respuesta;
     }
 
@@ -366,7 +352,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         for(Integer x : numeros){
             respuesta -= x;
         }
-        System.out.println(respuesta);
         return respuesta;
     }
 
@@ -377,9 +362,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public int menos(int x) {
-        int result = x - (2 * x);
-        System.out.println(result);
-        return result;
+        return x - (2 * x);
     }
 
     /**
@@ -390,9 +373,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public int resto(int x, int y) {
-        int respuesta = x - y;
-        System.out.println(respuesta);
-        return respuesta;
+        return x - y;
     }
 
     /**
@@ -403,9 +384,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public double potencia(int n, int p) {
-        double result = Math.pow(n, p);
-        System.out.println(result);
-        return result;
+        return Math.pow(n, p);
     }
 
     /**
@@ -419,7 +398,6 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         for(Integer x : numeros){
             respuesta *= x;
         }
-        System.out.println(respuesta);
         return respuesta;
     }
 
@@ -431,9 +409,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public int division(int x, int y) {
-        int result = x / y;
-        System.out.println(result);
-        return result;
+        return x / y;
     }
 
     /**
@@ -443,9 +419,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public Long redondea(double x) {
-        Long result = Math.round(x);
-        System.out.println(result);
-        return result;
+        return Math.round(x);
     }
 
     /**
@@ -456,9 +430,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public boolean o(boolean condicion, boolean condicion2) {
-        boolean result = condicion || condicion2;
-        System.out.println(result);
-        return result;
+        return condicion || condicion2;
     }
 
     /**
@@ -469,9 +441,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public boolean y(boolean condicion, boolean condicion2) {
-        boolean result = condicion && condicion2;
-        System.out.println(result);
-        return result;
+        return condicion && condicion2;
     }
 
     /**
@@ -482,9 +452,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public boolean iguales(int x, int y) {
-        boolean result = x == y;
-        System.out.println(result);
-        return result;
+        return x == y;
     }
 
     /**
@@ -495,9 +463,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public boolean menorque(int x, int y) {
-        boolean result = x < y;
-        System.out.println(result);
-        return result;
+        return x < y;
     }
 
     /**
@@ -508,9 +474,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public boolean mayorque(int x, int y) {
-        boolean result = x > y;
-        System.out.println(result);
-        return result;
+        return x > y;
     }
 
     /**

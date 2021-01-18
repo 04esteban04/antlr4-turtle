@@ -51,16 +51,16 @@ logoExpression: intExpression
                 |colorExpression
                 |booleanExpression
                 |forward
-                | back
-                | right
-                | left
-                | clearscreen
-                | set
-                | penUp
-                | penDown
-                | resetAngle
-                | ocultatortuga
-                | aparecetortuga
+                |back
+                |right
+                |left
+                |clearscreen
+                |set
+                |penUp
+                |penDown
+                |resetAngle
+                |ocultatortuga
+                |aparecetortuga
                 |haz
                 |haz2
                 |inic
@@ -92,6 +92,10 @@ lista : OPENBRA intExpression* CLOSEBRA;
 
 //ITERADORES
 repite: REPITE intExpression OPENBRA logoExpression* CLOSEBRA;
+hasta: HASTA OPENBRA (booleanExpression ) CLOSEBRA OPENBRA (logoExpression*) CLOSEBRA;
+mientras: MIENTRAS OPENBRA (booleanExpression ) CLOSEBRA OPENBRA(logoExpression*)CLOSEBRA;
+hazmientras:HAZMIENTRAS OPENBRA (logoExpression*) CLOSEBRA OPENBRA (booleanExpression ) CLOSEBRA;
+hazhasta:HAZHASTA OPENBRA (logoExpression*) CLOSEBRA OPENBRA(booleanExpression )CLOSEBRA;
 
 //Condicionales
 si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
@@ -134,12 +138,6 @@ inc: INC OPENBRA intExpression intExpression CLOSEBRA;
 inic: INIC ID EQUALS intExpression;
 haz2: HAZ ID;
 haz: HAZ ID intExpression;
-
-//ciclos
-hasta: HASTA OPENBRA (booleanExpression ) CLOSEBRA OPENBRA (logoExpression*) CLOSEBRA;
-mientras: MIENTRAS OPENBRA (booleanExpression ) CLOSEBRA OPENBRA(logoExpression*)CLOSEBRA;
-hazmientras:HAZMIENTRAS OPENBRA (logoExpression*) CLOSEBRA OPENBRA (booleanExpression ) CLOSEBRA;
-hazhasta:HAZHASTA OPENBRA (logoExpression*) CLOSEBRA OPENBRA(booleanExpression )CLOSEBRA;
 
 //Tortuga
 ocultatortuga: OCULTATORTUGA;
@@ -192,8 +190,8 @@ fragment CR: ('rojo' | 'cr');
 fragment PM: ('producto'| 'pm');
 fragment DR: ('diferencia' | 'dr');
 
-fragment PCL:('poncolorlapiz' | 'pcl');
-fragment GM: ('goma' | 'gm');
+fragment PCL:('poncolorlapiz' | 'poncl');
+fragment GM: ('goma' | 'go');
 fragment PX : ('ponx' | 'px');
 fragment PY : ('pony' | 'py');
 fragment R: ('rumbo' | 'r');
@@ -203,14 +201,14 @@ fragment OT: ('ocultatortuga' | 'ot');
 fragment IC: ('inc'| 'ic');
 fragment IN: ('inic' | 'in');
 fragment HZ: ('haz' | 'hz');
-fragment FD: ('avanza' | 'fd');
-fragment BK: ('retrocede' | 'bk');
-fragment LT: ('giraizquierda' | 'lt');
-fragment RT: ('giraderecha' | 'rt');
+fragment FD: ('avanza' | 'av');
+fragment BK: ('retrocede' | 're');
+fragment LT: ('giraizquierda' | 'gi');
+fragment RT: ('giraderecha' | 'gd');
 fragment CLS: ('borrapantalla' | 'cls');
 fragment ST: ('ponxy' | 'st');
-fragment PU: ('subelapiz' | 'pu');
-fragment PD: ('bajalapiz' | 'pd');
+fragment PU: ('subelapiz' | 'sb');
+fragment PD: ('bajalapiz' | 'bl');
 
 fragment EG: ('elegir'| 'elg');
 fragment CUE: ('cuenta' | 'cu');

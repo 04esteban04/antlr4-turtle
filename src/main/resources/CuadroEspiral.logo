@@ -1,0 +1,12 @@
+ejecuta[
+inic con = 0
+centro
+poncolorlapiz azul
+repite 200 [
+inic con = inc [con 1]
+aparecetortuga
+avanza producto con 2
+aparecetortuga
+giraderecha 91
+]
+]
