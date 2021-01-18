@@ -530,9 +530,11 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
     @Override
     public Integer visitIguales(LogoParser.IgualesContext ctx) {
-        this.painter.iguales(visit(ctx.intExpression().get(0)),
-                visit(ctx.intExpression().get(1)));
-        return null;
+        int result;
+        if(this.painter.iguales(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)))){result=1;}
+        else{result=0;}
+        return result;
     }
 
     @Override
@@ -748,5 +750,108 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
         }
         return (int) this.painter.ultimo(list);
     }
+    /**
+     * Metodo que se encarga del comando hasta
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitHasta(LogoParser.HastaContext ctx) {
+        //Obtener el booleando a partir de enteros (0 == false; 1 == true)
+        boolean bool = true;
+        while(bool){
 
+
+            int boolI = visit(ctx.booleanExpression());
+
+            if(boolI == 0){
+                bool = true;
+                if(bool){
+                    for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+                        this.visit(ctx.logoExpression().get(i));
+                    }
+                }
+            }else{
+                bool = false;
+            }
+        }
+        return null;
+
+    }
+    /**
+     * Metodo que se encarga del comando mientras
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitMientras(LogoParser.MientrasContext ctx) {
+        boolean bool = true;
+        while(bool){
+
+
+            int boolI = visit(ctx.booleanExpression());
+
+            if(boolI == 1){
+                bool = true;
+                if(bool){
+                    for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+                        this.visit(ctx.logoExpression().get(i));
+                    }
+                }
+            }else{
+                bool = false;
+            }
+        }
+        return null;
+    }
+    /**
+     * Metodo que se encarga del comando haz.hasta
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitHazhasta(LogoParser.HazhastaContext ctx) {
+        boolean bool = true;
+        for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+            this.visit(ctx.logoExpression().get(i));
+        }
+        while(bool){
+
+
+            int boolI = visit(ctx.booleanExpression());
+            if(boolI == 0){
+                bool = true;
+                if(bool){
+                    for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+                        this.visit(ctx.logoExpression().get(i));}
+                    }
+            }else{
+                bool = false;
+            }
+        }
+        return null;
+    }
+    /**
+     * Metodo que se encarga del comando haz.mientras
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitHazmientras(LogoParser.HazmientrasContext ctx) {
+        boolean bool = true;
+        for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+            this.visit(ctx.logoExpression().get(i));
+        }
+        while(bool){
+
+
+            int boolI = visit(ctx.booleanExpression());
+            if(boolI == 1){
+                bool = true;
+                if(bool){
+                    for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+                        this.visit(ctx.logoExpression().get(i));}
+                }
+            }else{
+                bool = false;
+            }
+        }
+        return null;
+    }
 }

@@ -72,10 +72,14 @@ logoExpression: intExpression
                 |espera
                 |ponrumbo
                 |repite
-
+                |hasta
+                |mientras
+                |hazmientras
+                |hazhasta
                 |si
                 |sisino
                 ;
+
 
 //Listas
 cuenta: CUENTA lista;
@@ -93,6 +97,8 @@ repite: REPITE intExpression OPENBRA logoExpression* CLOSEBRA;
 si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
 sisino : SISINO booleanExpression   OPENBRA (logoExpression*) CLOSEBRA
                                   OPENBRA (bloqExpression*) CLOSEBRA;
+
+
 
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
@@ -128,6 +134,12 @@ inc: INC OPENBRA intExpression intExpression CLOSEBRA;
 inic: INIC ID EQUALS intExpression;
 haz2: HAZ ID;
 haz: HAZ ID intExpression;
+
+//ciclos
+hasta: HASTA OPENBRA (booleanExpression ) CLOSEBRA OPENBRA (logoExpression*) CLOSEBRA;
+mientras: MIENTRAS OPENBRA (booleanExpression ) CLOSEBRA OPENBRA(logoExpression*)CLOSEBRA;
+hazmientras:HAZMIENTRAS OPENBRA (logoExpression*) CLOSEBRA OPENBRA (booleanExpression ) CLOSEBRA;
+hazhasta:HAZHASTA OPENBRA (logoExpression*) CLOSEBRA OPENBRA(booleanExpression )CLOSEBRA;
 
 //Tortuga
 ocultatortuga: OCULTATORTUGA;
@@ -208,7 +220,10 @@ fragment PRI: ('primero' | 'pri');
 fragment S: ('si' | 's');
 fragment SSN: ('sisino' | 'ssn');
 fragment REP: ('repite' | 'rep');
-
+fragment HST: ('hasta' | 'hst');
+fragment MNTR: ('mientras' | 'mntr');
+fragment HHST: ('haz.hasta' | 'hhst');
+fragment HMNTR: ('haz.mientras' | 'hmntr');
 
 MAYORQUE: MAQ;
 MENORQUE: MEQ;
@@ -246,6 +261,11 @@ PRIMERO:PRI;
 SI:S;
 REPITE: REP;
 SISINO:SSN;
+
+HASTA:HST;
+MIENTRAS:MNTR;
+HAZHASTA:HHST;
+HAZMIENTRAS:HMNTR;
 
 
 PONCOLORLAPIZ: PCL;
