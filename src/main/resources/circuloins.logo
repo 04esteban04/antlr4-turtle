@@ -1,0 +1,11 @@
+ejecuta[
+inic fig = 250
+
+repite 60 [
+avanza fig
+aparecetortuga
+giraizquierda 122
+inic fig = producto fig 7
+
+ ]
+]

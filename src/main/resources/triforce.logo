@@ -1,0 +1,26 @@
+ejecuta[
+poncolorlapiz azul
+resetAngle
+ponxy 325 285
+avanza 250
+giraizquierda 120
+avanza 250
+giraizquierda 120
+avanza 250
+
+ponxy 200 500
+resetAngle
+avanza 250
+giraizquierda 120
+avanza 250
+giraizquierda 120
+avanza 250
+
+ponxy 450 500
+resetAngle
+avanza 250
+giraizquierda 120
+avanza 250
+giraizquierda 120
+avanza 250
+]
