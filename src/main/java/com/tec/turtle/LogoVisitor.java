@@ -2,13 +2,11 @@ package com.tec.turtle;
 
 import com.tec.antlrturtle.LogoBaseVisitor;
 import com.tec.antlrturtle.LogoParser;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-
 
 public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
@@ -18,6 +16,172 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     public LogoVisitor(TurtlePainter painter) {
         this.painter = painter;
+    }
+
+    @Override
+    public Integer visitTrueB(LogoParser.TrueBContext ctx) {
+        return 1;
+    }
+
+    @Override
+    public Integer visitFalseB(LogoParser.FalseBContext ctx) {
+        return 0;
+    }
+
+    /**
+     * Metodo que se encarga del comando o logico
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitO(LogoParser.OContext ctx) {
+        int value = visit(ctx.booleanExpression().get(0));
+        int value2 = visit(ctx.booleanExpression().get(1));
+
+        boolean valueB = false;
+
+        boolean valueB2 = false;
+
+        if(value == 1){
+            valueB = true;
+        }
+        if(value2 == 1){
+            valueB2 = true;
+        }
+
+        boolean res = this.painter.o(valueB, valueB2);
+        int resB = 0;
+        if(res){
+            resB = 1;
+        }
+        return resB;
+    }
+
+    /**
+     * Metodo que se encarga del comando y logico
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitY(LogoParser.YContext ctx) {
+        int value = visit(ctx.booleanExpression().get(0));
+        int value2 = visit(ctx.booleanExpression().get(1));
+
+        boolean valueB = false;
+
+        boolean valueB2 = false;
+
+        if(value == 1){
+            valueB = true;
+        }
+        if(value2 == 1){
+            valueB2 = true;
+        }
+
+        boolean res = this.painter.y(valueB, valueB2);
+        int resB = 0;
+        if(res){
+            resB = 1;
+        }
+        return resB;
+    }
+
+    @Override
+    public Integer visitOB(LogoParser.OBContext ctx) {
+        int value = visit(ctx.o().booleanExpression().get(0));
+        int value2 = visit(ctx.o().booleanExpression().get(1));
+
+        boolean valueB = false;
+
+        boolean valueB2 = false;
+
+        if(value == 1){
+            valueB = true;
+        }
+        if(value2 == 1){
+            valueB2 = true;
+        }
+
+        boolean res = this.painter.o(valueB, valueB2);
+        int resB = 0;
+        if(res){
+            resB = 1;
+        }
+        return resB;
+    }
+
+    @Override
+    public Integer visitYB(LogoParser.YBContext ctx) {
+        int value = visit(ctx.y().booleanExpression().get(0));
+        int value2 = visit(ctx.y().booleanExpression().get(1));
+
+        boolean valueB = false;
+
+        boolean valueB2 = false;
+
+        if(value == 1){
+            valueB = true;
+        }
+        if(value2 == 1){
+            valueB2 = true;
+        }
+
+        boolean res = this.painter.y(valueB, valueB2);
+        int resB = 0;
+        if(res){
+            resB = 1;
+        }
+        return resB;
+    }
+
+    @Override
+    public Integer visitMayorQueB(LogoParser.MayorQueBContext ctx) {
+        boolean value = this.painter.mayorque(visit(ctx.mayorque().intExpression().get(0)),
+                visit(ctx.mayorque().intExpression().get(1)));
+        if(value){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
+    public Integer visitMenorQueB(LogoParser.MenorQueBContext ctx) {
+        boolean value = this.painter.menorque(visit(ctx.menorque().intExpression().get(0)),
+                visit(ctx.menorque().intExpression().get(1)));
+        if(value){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    /**
+     * Metodo que se encarga del comando mayorque
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitMayorque(LogoParser.MayorqueContext ctx) {
+        boolean value = this.painter.mayorque(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
+        if(value){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    /**
+     * Metodo que se encarga del comando menorque
+     * @param ctx Contexto de uso
+     */
+    @Override
+    public Integer visitMenorque(LogoParser.MenorqueContext ctx) {
+        boolean value = this.painter.menorque(visit(ctx.intExpression().get(0)),
+                visit(ctx.intExpression().get(1)));
+        if(value){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     @Override
@@ -400,26 +564,6 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando mayorque
-     * @param ctx Contexto de uso
-     */
-    @Override
-    public Integer visitMayorque(LogoParser.MayorqueContext ctx) {
-        this.painter.mayorque(visit(ctx.intExpression().get(0)),
-                visit(ctx.intExpression().get(1)));
-        return null;
-    }
-    /**
-     * Metodo que se encarga del comando menorque
-     * @param ctx Contexto de uso
-     */
-    @Override
-    public Integer visitMenorque(LogoParser.MenorqueContext ctx) {
-        this.painter.menorque(visit(ctx.intExpression().get(0)),
-                visit(ctx.intExpression().get(1)));
-        return null;
-    }
-    /**
      * Metodo que se encarga del comando menos
      * @param ctx Contexto de uso
      */
@@ -433,29 +577,6 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
         this.painter.menos(Integer.parseInt(var));
         return super.visitMenos(ctx);
-    }
-    /**
-     * Metodo que se encarga del comando o logico
-     * @param ctx Contexto de uso
-     */
-    @Override
-    public Integer visitO(LogoParser.OContext ctx) {
-        String var = ctx.booleanExpression().get(0).getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        String var2 = ctx.booleanExpression().get(1).getText();
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        this.painter.o(Boolean.parseBoolean(var),
-                Boolean.parseBoolean(var2));
-
-        return null;
     }
 
     /**
@@ -606,7 +727,6 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
         return this.painter.suma(numeros);
     }
 
-
     /**
      * Metodo para retornar el ultimo elemento de la lista
      * @param ctx Contexto de uso
@@ -621,31 +741,5 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
         }
         return (int) this.painter.ultimo(list);
     }
-
-    /**
-     * Metodo que se encarga del comando y logico
-     * @param ctx Contexto de uso
-     */
-    @Override
-    public Integer visitY(LogoParser.YContext ctx) {
-        String var = ctx.booleanExpression().get(0).getText();
-
-        if(Objects.nonNull(variables.get(var))){
-            var = variables.get(var);
-        }
-
-        String var2 = ctx.booleanExpression().get(1).getText();
-
-        if(Objects.nonNull(variables.get(var2))){
-            var2 = variables.get(var2);
-        }
-
-        this.painter.y(Boolean.parseBoolean(var),
-                Boolean.parseBoolean(var2));
-        return super.visitY(ctx);
-    }
-
-
-
 
 }
