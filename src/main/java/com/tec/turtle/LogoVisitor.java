@@ -674,16 +674,16 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitSisino(LogoParser.SisinoContext ctx) {
-        if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
-
-            int i =0;
-
-            for (LogoParser.LogoExpressionContext x : ctx.logoExpression()) {
-                this.visit(ctx.logoExpression(i));
-                i++;
+        int boolI = visit(ctx.booleanExpression());
+        boolean bool = false;
+        if(boolI == 1){
+            bool = true;
+        }
+        //Realizar condicional u operaciones iteradas
+        if(bool){
+            for (int i = 0; i < ctx.logoExpression().size() ; i ++) {
+                this.visit(ctx.logoExpression().get(i));
             }
-            return null;
-
         }
         else{
 
@@ -692,10 +692,13 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
                 this.visit(ctx.bloqExpression(i).logoExpression());
                 i++;
             }
-            return null;
+
 
 
         }
+        return null;
+
+
     }
 
     /**
