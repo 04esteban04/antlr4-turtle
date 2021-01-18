@@ -35,8 +35,6 @@ public class LogoListener extends LogoBaseListener {
         this.painter = painter;
     }
 
-
-
     /**
      * Metodo que se encarga del comando finish
      * @param ctx Contexto de uso

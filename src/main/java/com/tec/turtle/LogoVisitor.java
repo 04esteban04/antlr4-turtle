@@ -293,7 +293,7 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
             int var = visit(ctx.elemento().lista().intExpression().get(x));
             numeros.add((double)var);
         }
-        return (int) painter.ultimo(numeros);
+        return (int) painter.elemento(numeros, visit(ctx.elemento().intExpression()));
     }
 
     @Override
@@ -501,7 +501,7 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
             int var = visit(ctx.lista().intExpression().get(x));
             numeros.add((double)var);
         }
-        return (int) painter.ultimo(numeros);
+        return (int) painter.elemento(numeros, visit(ctx.intExpression()));
     }
 
     @Override
@@ -839,15 +839,11 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
             this.visit(ctx.logoExpression().get(i));
         }
         while(bool){
-
-
             int boolI = visit(ctx.booleanExpression());
             if(boolI == 1){
                 bool = true;
-                if(bool){
-                    for(int i = 0 ; i < ctx.logoExpression().size(); i++){
-                        this.visit(ctx.logoExpression().get(i));}
-                }
+                for(int i = 0 ; i < ctx.logoExpression().size(); i++){
+                    this.visit(ctx.logoExpression().get(i));}
             }else{
                 bool = false;
             }
