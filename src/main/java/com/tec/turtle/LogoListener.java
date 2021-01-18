@@ -14,7 +14,6 @@ import java.util.Objects;
  * Clase {@link LogoListener} que se encarga de recibir las llamadas del parser y delega
  * la ejecucion de los comandos al {@code painter}
  */
-
 public class LogoListener extends LogoBaseListener {
 
     /**
