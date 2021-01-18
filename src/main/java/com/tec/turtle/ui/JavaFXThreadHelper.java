@@ -17,7 +17,7 @@ public class JavaFXThreadHelper {
      * Metodo que ayuda a decidir si ejecutar o posponer la ejecucion de una tarea especifica
      * @param runnable Determina si la aplicacion puede ejecutar la tarea o no
      */
-    public static void runOrDefer(final Runnable runnable) {
+    public static void ejecutarOPosponer(final Runnable runnable) {
         if (Platform.isFxApplicationThread()) {
             runnable.run();
         } else {

@@ -4,10 +4,8 @@ import com.tec.turtle.TurtlePainter;
 import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -82,7 +80,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         this.anchura = this.region.getMaxWidth();
         this.altura = this.region.getMaxHeight();
 
-        this.tortuga = new Circle(this.anchura / 2, this.altura / 2, 20, Color.RED);
+        this.tortuga = new Circle(500, 340, 20, Color.RED);
 
         Image im = new Image("http://clipart-library.com/new_gallery/356-3560956_shadow-silhouette-turtle-black-freetoedit-sea-turtle-silhouette.png",false);
         tortuga.setFill(new ImagePattern(im));
@@ -101,8 +99,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public double elemento(List<Double> lista, int n) {
-        Double elemento = lista.get(n);
-        return elemento;
+        return lista.get(n);
     }
 
     /**
@@ -114,9 +111,8 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     @Override
     public double ultimo(List<Double> lista) {
         int ultimoelemento = lista.size();
-        double elemeto = lista.get(ultimoelemento - 1);
 
-        return elemeto;
+        return lista.get(ultimoelemento - 1);
     }
 
     /**
@@ -127,8 +123,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public int cuenta(List<Double> lista) {
-        int n = lista.size();
-        return n;
+        return lista.size();
     }
 
     /**
@@ -193,12 +188,12 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void centro() {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final boolean seEstabaDibujando = this.seEstaDibujando;
             if (this.seEstaDibujando) {
                 this.penUp();
             }
-            this.moveTurtle(320, 280);
+            this.moveTurtle(500, 340);
             if (seEstabaDibujando) {
                 this.penDown();
             }
@@ -226,7 +221,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void ponx(int point) {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final boolean wasPenDown = this.seEstaDibujando;
             if (this.seEstaDibujando) {
                 this.penUp();
@@ -244,7 +239,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void pony(int point) {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final boolean wasPenDown = this.seEstaDibujando;
             if (this.seEstaDibujando) {
                 this.penUp();
@@ -483,7 +478,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void forward(int points) {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final double radian = this.toRadian(this.direccion);
             final double x = this.tortuga.getCenterX() + points * Math.cos(radian);
             final double y = this.tortuga.getCenterY() - points * Math.sin(radian);
@@ -539,7 +534,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         try {
             validarPosicionTortuga(x, y);
 
-            JavaFXThreadHelper.runOrDefer(() -> {
+            JavaFXThreadHelper.ejecutarOPosponer(() -> {
                 final boolean wasPenDown = this.seEstaDibujando;
                 if (this.seEstaDibujando) {
                     this.penUp();
@@ -560,7 +555,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void penUp() {
-        JavaFXThreadHelper.runOrDefer(() -> this.seEstaDibujando = false);
+        JavaFXThreadHelper.ejecutarOPosponer(() -> this.seEstaDibujando = false);
     }
 
     /**
@@ -568,7 +563,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void penDown() {
-        JavaFXThreadHelper.runOrDefer(() -> this.seEstaDibujando = true);
+        JavaFXThreadHelper.ejecutarOPosponer(() -> this.seEstaDibujando = true);
     }
 
     /**
@@ -576,7 +571,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void cls() {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             this.animacion.getChildren().clear();
             this.canvas.getChildren().clear();
             this.paintTurtle(this.region.getWidth() / 2, this.region.getHeight() / 2);
@@ -588,7 +583,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void resetAngle() {
-        JavaFXThreadHelper.runOrDefer(()-> this.direccion = 0);
+        JavaFXThreadHelper.ejecutarOPosponer(()-> this.direccion = 0);
     }
 
     /**
@@ -596,7 +591,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     @Override
     public void finish() {
-        JavaFXThreadHelper.runOrDefer(this.animacion::play);
+        JavaFXThreadHelper.ejecutarOPosponer(this.animacion::play);
     }
 
     /**
@@ -605,7 +600,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      * @param y Posicion en eje y
      */
     private void moveTurtle(final double x, final double y) {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
 
             final Path path = new Path();
             path.getElements().add(new MoveTo(this.tortuga.getCenterX(), this.tortuga.getCenterY()));
@@ -634,7 +629,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      * @param newY Nueva posicion en eje Y
      */
     private void validarPosicionTortuga(final double newX, final double newY) {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             if ((newX < 0 || newX > this.anchura) || (newY < 0 || newY > this.altura)) {
                 if (!boolError) {
                     try {
@@ -659,7 +654,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      * @param y Posicion en eje y
      */
     private void paintTurtle(final double x, final double y) {
-        JavaFXThreadHelper.runOrDefer(() -> {
+        JavaFXThreadHelper.ejecutarOPosponer(() -> {
             this.tortuga.setCenterX(x);
             this.tortuga.setCenterY(y);
 

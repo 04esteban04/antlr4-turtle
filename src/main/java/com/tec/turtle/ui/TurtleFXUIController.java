@@ -69,7 +69,6 @@ public class TurtleFXUIController {
     /**
      * Animacion del boton compilar
      */
-    
     FadeTransition fadeTransitionCompilar;
     /**
      * Animacion del boton AST
@@ -476,7 +475,7 @@ public class TurtleFXUIController {
         if (Objects.nonNull(archivoLogo)) {
             try (final BufferedReader fileReader = new BufferedReader(new FileReader(archivoLogo))) {
                 final String programaLogo = fileReader.lines().collect(Collectors.joining("\n"));
-                JavaFXThreadHelper.runOrDefer(() -> this.editorDeTexto.setText(programaLogo));
+                JavaFXThreadHelper.ejecutarOPosponer(() -> this.editorDeTexto.setText(programaLogo));
             } catch (final IOException e) {
                 error(e.getMessage(),"abrirArchivo");
             }
