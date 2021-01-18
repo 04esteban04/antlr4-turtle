@@ -657,15 +657,19 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
 
     @Override
     public Integer visitSi(LogoParser.SiContext ctx) {
-       if(Boolean.parseBoolean(ctx.booleanExpression().getText())){
-           int i =0;
-           for (LogoParser.LogoExpressionContext x : ctx.logoExpression()) {
-               this.visit(ctx.logoExpression(i));
-               i++;
+        //Obtener el booleando a partir de enteros (0 == false; 1 == true)
+        int boolI = visit(ctx.booleanExpression());
+        boolean bool = false;
+        if(boolI == 1){
+            bool = true;
+        }
+        //Realizar condicional u operaciones iteradas
+       if(bool){
+           for (int i = 0; i < ctx.logoExpression().size() ; i ++) {
+               this.visit(ctx.logoExpression().get(i));
            }
-           return null;
        }
-       return visit(ctx.booleanExpression());
+       return null;
     }
 
     @Override
