@@ -193,7 +193,7 @@ public class TurtleFXUIController {
      */
     @FXML
     public void ejecutarPrograma() {
-        this.painter.cls();
+        this.painter.borrapantalla();
         this.backgroundThread.execute(() -> {
             try {
                 LogoLexer lexer = new LogoLexer(CharStreams.fromString(this.editorDeTexto.getText()));

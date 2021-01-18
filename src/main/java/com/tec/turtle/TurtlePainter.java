@@ -215,49 +215,49 @@ public interface TurtlePainter {
 
     /**
      * Metodo que se encarga del comando forward
-     * @param points Cantidad de puntos a moverse hacia adelante
+     * @param x Cantidad de puntos a moverse hacia adelante
      */
-    void forward(final int points);
+    void avanza(final int x);
 
     /**
      * Metodo que se encarga del comando back
-     * @param points Cantidad de puntos a moverse hacia atras
+     * @param x Cantidad de puntos a moverse hacia atras
      */
-    void back(final int points);
+    void retrocede(final int x);
 
     /**
      * Metodo que se encarga del comando right
-     * @param degrees Cantidad de grados a moverse hacia la derecha
+     * @param angulo Cantidad de grados a moverse hacia la derecha
      */
-    void right(final int degrees);
+    void giraderecha(final int angulo);
 
     /**
      * Metodo que se encarga del comando left
-     * @param degrees Cantidad de grados a moverse hacia la izquierda
+     * @param angulo Cantidad de grados a moverse hacia la izquierda
      */
-    void left(final int degrees);
+    void giraizquierda(final int angulo);
 
     /**
      * Metodo que se encarga del comando set
      * @param x Valor a establecer
      * @param y Valor a establecer
      */
-    void set(final int x, final int y);
+    void ponxy(final int x, final int y);
 
     /**
      * Metodo que se encarga del comando penUp
      */
-    void penUp();
+    void subelapiz();
 
     /**
      * Metodo que se encarga del comando penDown
      */
-    void penDown();
+    void bajalapiz();
 
     /**
      * Metodo que se encarga del comando cls
      */
-    void cls();
+    void borrapantalla();
 
     /**
      * Metodo que se encarga del comando resetAngle

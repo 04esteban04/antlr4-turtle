@@ -191,11 +191,11 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final boolean seEstabaDibujando = this.seEstaDibujando;
             if (this.seEstaDibujando) {
-                this.penUp();
+                this.subelapiz();
             }
             this.moveTurtle(500, 340);
             if (seEstabaDibujando) {
-                this.penDown();
+                this.bajalapiz();
             }
         });
 
@@ -211,7 +211,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
             long segundos = (n * 1000L) / 60;
             Thread.sleep(segundos);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            TurtleFXUIController.error(e.getMessage(), "excepcion");
         }
     }
 
@@ -224,11 +224,12 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final boolean wasPenDown = this.seEstaDibujando;
             if (this.seEstaDibujando) {
-                this.penUp();
+                this.subelapiz();
             }
+            this.validarPosicionTortuga(point, this.tortuga.getCenterY());
             this.moveTurtle(point, this.tortuga.getCenterY());
             if (wasPenDown) {
-                this.penDown();
+                this.bajalapiz();
             }
         });
     }
@@ -242,11 +243,12 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
         JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final boolean wasPenDown = this.seEstaDibujando;
             if (this.seEstaDibujando) {
-                this.penUp();
+                this.subelapiz();
             }
+            this.validarPosicionTortuga(this.tortuga.getCenterX(), point);
             this.moveTurtle(this.tortuga.getCenterX(), point);
             if (wasPenDown) {
-                this.penDown();
+                this.bajalapiz();
             }
         });
     }
@@ -473,75 +475,76 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     }
 
     /**
-     * Metodo que se encarga del comando forward
-     * @param points Cantidad de puntos a moverse hacia adelante
+     * Metodo que se encarga del comando avanza
+     * @param x Cantidad de puntos a moverse hacia adelante
      */
     @Override
-    public void forward(int points) {
+    public void avanza(int x) {
         JavaFXThreadHelper.ejecutarOPosponer(() -> {
             final double radian = this.toRadian(this.direccion);
-            final double x = this.tortuga.getCenterX() + points * Math.cos(radian);
-            final double y = this.tortuga.getCenterY() - points * Math.sin(radian);
+            final double x1 = this.tortuga.getCenterX() + x * Math.cos(radian);
+            final double y = this.tortuga.getCenterY() - x * Math.sin(radian);
 
-            this.validarPosicionTortuga(x, y);
+            this.validarPosicionTortuga(x1, y);
 
-            this.moveTurtle(x, y);
+            this.moveTurtle(x1, y);
         });
     }
 
     /**
-     * Metodo que se encarga del comando back
-     * @param points Cantidad de puntos a moverse hacia atras
+     * Metodo que se encarga del comando retrocede
+     * @param x Cantidad de puntos a moverse hacia atras
      */
     @Override
-    public void back(final int points) {
+    public void retrocede(final int x) {
         Platform.runLater(() -> {
             final double radian = this.toRadian(this.direccion);
-            final double x = this.tortuga.getCenterX() - points * Math.cos(radian);
-            final double y = this.tortuga.getCenterY() + points * Math.sin(radian);
+            final double x1 = this.tortuga.getCenterX() - x * Math.cos(radian);
+            final double y = this.tortuga.getCenterY() + x * Math.sin(radian);
 
-            this.validarPosicionTortuga(x, y);
+            this.validarPosicionTortuga(x1, y);
 
-            this.moveTurtle(x, y);
+            this.moveTurtle(x1, y);
         });
     }
 
     /**
-     * Metodo que se encarga del comando right
-     * @param degrees Cantidad de grados a moverse hacia la derecha
+     * Metodo que se encarga del comando giraderecha
+     * @param angulo Cantidad de grados a moverse hacia la derecha
      */
     @Override
-    public void right(final int degrees) {
-        Platform.runLater(() -> this.direccion = (this.direccion - degrees) % 360);
+    public void giraderecha(final int angulo) {
+        Platform.runLater(() -> this.direccion = (this.direccion - angulo) % 360);
     }
 
     /**
-     * Metodo que se encarga del comando left
-     * @param degrees Cantidad de grados a moverse hacia la izquierda
+     * Metodo que se encarga del comando giraizquierda
+     * @param angulo Cantidad de grados a moverse hacia la izquierda
      */
     @Override
-    public void left(final int degrees) {
-        Platform.runLater(() -> this.direccion = (this.direccion + degrees) % 360);
+    public void giraizquierda(final int angulo) {
+        Platform.runLater(() -> this.direccion = (this.direccion + angulo) % 360);
     }
 
     /**
-     * Metodo que se encarga del comando set
+     * Metodo que se encarga del comando ponxy
      * @param x Valor a establecer
      * @param y Valor a establecer
      */
     @Override
-    public void set(final int x, final int y) {
+    public void ponxy(final int x, final int y) {
         try {
             validarPosicionTortuga(x, y);
 
             JavaFXThreadHelper.ejecutarOPosponer(() -> {
                 final boolean wasPenDown = this.seEstaDibujando;
                 if (this.seEstaDibujando) {
-                    this.penUp();
+                    this.subelapiz();
                 }
+                this.validarPosicionTortuga(x,y);
                 this.moveTurtle(x, y);
                 if (wasPenDown) {
-                    this.penDown();
+                    this.bajalapiz();
                 }
             });
 
@@ -551,26 +554,26 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
     }
 
     /**
-     * Metodo que se encarga del comando penUp
+     * Metodo que se encarga del comando subelapiz
      */
     @Override
-    public void penUp() {
+    public void subelapiz() {
         JavaFXThreadHelper.ejecutarOPosponer(() -> this.seEstaDibujando = false);
     }
 
     /**
-     * Metodo que se encarga del comando penDown
+     * Metodo que se encarga del comando bajalapiz
      */
     @Override
-    public void penDown() {
+    public void bajalapiz() {
         JavaFXThreadHelper.ejecutarOPosponer(() -> this.seEstaDibujando = true);
     }
 
     /**
-     * Metodo que se encarga del comando cls
+     * Metodo que se encarga del comando borrapantalla
      */
     @Override
-    public void cls() {
+    public void borrapantalla() {
         JavaFXThreadHelper.ejecutarOPosponer(() -> {
             this.animacion.getChildren().clear();
             this.canvas.getChildren().clear();
@@ -618,7 +621,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
             }
 
             animacion.getChildren().add(pathTransition);
-
+            this.validarPosicionTortuga(x,y);
             this.paintTurtle(x, y);
         });
     }
@@ -655,6 +658,7 @@ public class TurtleFXCanvasPainter implements TurtlePainter {
      */
     private void paintTurtle(final double x, final double y) {
         JavaFXThreadHelper.ejecutarOPosponer(() -> {
+            this.validarPosicionTortuga(x,y);
             this.tortuga.setCenterX(x);
             this.tortuga.setCenterY(y);
 

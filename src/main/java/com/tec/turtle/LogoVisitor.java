@@ -265,13 +265,13 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitClearscreen
+     * Metodo que se encarga del comando visitBorrapantalla
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitClearscreen
+     * @return Resultado de ejecución del metodo visitBorrapantalla
      */
     @Override
-    public Integer visitClearscreen(LogoParser.ClearscreenContext ctx) {
-        this.painter.cls();
+    public Integer visitBorrapantalla(LogoParser.BorrapantallaContext ctx) {
+        this.painter.borrapantalla();
         return null;
     }
 
@@ -627,13 +627,13 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitBack
+     * Metodo que se encarga del comando visitRetrocede
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitBack
+     * @return Resultado de ejecución del metodo visitRetrocede
      */
     @Override
-    public Integer visitBack(LogoParser.BackContext ctx) {
-        this.painter.back(visit(ctx.intExpression()));
+    public Integer visitRetrocede(LogoParser.RetrocedeContext ctx) {
+        this.painter.retrocede(visit(ctx.intExpression()));
         return null;
     }
 
@@ -721,13 +721,13 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitForward
+     * Metodo que se encarga del comando visitAvanza
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitForward
+     * @return Resultado de ejecución del metodo visitAvanza
      */
     @Override
-    public Integer visitForward(LogoParser.ForwardContext ctx) {
-        this.painter.forward(visit(ctx.intExpression()));
+    public Integer visitAvanza(LogoParser.AvanzaContext ctx) {
+        this.painter.avanza(visit(ctx.intExpression()));
         return null;
     }
 
@@ -813,14 +813,14 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitLeft
+     * Metodo que se encarga del comando visitGiraIzquierda
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitLeft
+     * @return Resultado de ejecución del metodo visitGiraIzquierda
      */
     @Override
-    public Integer visitLeft(LogoParser.LeftContext ctx) {
-        this.painter.left(visit(ctx.intExpression()));
-        return super.visitLeft(ctx);
+    public Integer visitGiraizquierda(LogoParser.GiraizquierdaContext ctx) {
+        this.painter.giraizquierda(visit(ctx.intExpression()));
+        return super.visitGiraizquierda(ctx);
     }
 
     /**
@@ -841,24 +841,24 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitPenDown
+     * Metodo que se encarga del comando visitBajalapiz
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitPenDown
+     * @return Resultado de ejecución del metodo visitBajalapiz
      */
     @Override
-    public Integer visitPenDown(LogoParser.PenDownContext ctx) {
-        this.painter.penDown();
+    public Integer visitBajalapiz(LogoParser.BajalapizContext ctx) {
+        this.painter.bajalapiz();
         return null;
     }
 
     /**
-     * Metodo que se encarga del comando visitPenUp
+     * Metodo que se encarga del comando visitSubelapiz
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitPenUp
+     * @return Resultado de ejecución del metodo visitSubelapiz
      */
     @Override
-    public Integer visitPenUp(LogoParser.PenUpContext ctx) {
-        this.painter.penUp();
+    public Integer visitSubelapiz(LogoParser.SubelapizContext ctx) {
+        this.painter.subelapiz();
         return null;
     }
 
@@ -917,13 +917,13 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitRight
+     * Metodo que se encarga del comando visitGiraDerecha
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitRight
+     * @return Resultado de ejecución del metodo visitGiraDerecha
      */
     @Override
-    public Integer visitRight(LogoParser.RightContext ctx) {
-        this.painter.right(visit(ctx.intExpression()));
+    public Integer visitGiraderecha(LogoParser.GiraderechaContext ctx) {
+        this.painter.giraderecha(visit(ctx.intExpression()));
         return null;
     }
 
@@ -978,17 +978,17 @@ public class LogoVisitor extends LogoBaseVisitor<Integer> {
     }
 
     /**
-     * Metodo que se encarga del comando visitSet
+     * Metodo que se encarga del comando visitPonxy
      * @param ctx Contexto de uso
-     * @return Resultado de ejecución del metodo visitSet
+     * @return Resultado de ejecución del metodo visitPonxy
      */
     @Override
-    public Integer visitSet(LogoParser.SetContext ctx) {
+    public Integer visitPonxy(LogoParser.PonxyContext ctx) {
         int x = visit(ctx.intExpression().get(0));
         int y = visit(ctx.intExpression().get(1));
 
-        this.painter.set(x, y);
-        return super.visitSet(ctx);
+        this.painter.ponxy(x, y);
+        return super.visitPonxy(ctx);
     }
 
     /**

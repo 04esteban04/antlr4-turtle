@@ -50,14 +50,14 @@ bloqExpression: logoExpression;
 logoExpression: intExpression
                 |colorExpression
                 |booleanExpression
-                |forward
-                |back
-                |right
-                |left
-                |clearscreen
-                |set
-                |penUp
-                |penDown
+                |avanza
+                |retrocede
+                |giraderecha
+                |giraizquierda
+                |borrapantalla
+                |ponxy
+                |subelapiz
+                |bajalapiz
                 |resetAngle
                 |ocultatortuga
                 |aparecetortuga
@@ -102,8 +102,6 @@ si: SI booleanExpression OPENBRA logoExpression* CLOSEBRA;
 sisino : SISINO booleanExpression   OPENBRA (logoExpression*) CLOSEBRA
                                   OPENBRA (bloqExpression*) CLOSEBRA;
 
-
-
 //Booleans
 mayorque: MAYORQUE intExpression intExpression;
 menorque: MENORQUE intExpression intExpression;
@@ -142,14 +140,14 @@ haz: HAZ ID intExpression;
 //Tortuga
 ocultatortuga: OCULTATORTUGA;
 aparecetortuga: APARECETORTUGA;
-forward: FORWARD intExpression ;
-back: BACK intExpression ;
-right: RIGHT intExpression;
-left: LEFT intExpression;
-clearscreen: CLEARSCREEN;
-set: SET intExpression intExpression;
-penUp: PEN_UP;
-penDown: PEN_DOWN;
+avanza: AVANZA intExpression ;
+retrocede: RETROCEDE intExpression ;
+giraderecha: GIRADERECHA intExpression;
+giraizquierda: GIRAIZQUIERDA intExpression;
+borrapantalla: BORRAPANTALLA;
+ponxy: PONXY intExpression intExpression;
+subelapiz: SUBELAPIZ;
+bajalapiz: BAJALAPIZ;
 resetAngle: RESET_ANGLE;
 espera: ESPERA intExpression;
 centro : CENTRO;
@@ -161,7 +159,7 @@ rumbo: RUMBO;
 ponrumbo: PONRUMBO intExpression;
 
 
-// Lexer Rules
+// Reglas Lexicas
 fragment MAQ: ('mayorque?' | 'maq');
 fragment MEQ: ('menorque?' | 'meq');
 fragment IG: ('iguales?' | 'ig');
@@ -201,14 +199,14 @@ fragment OT: ('ocultatortuga' | 'ot');
 fragment IC: ('inc'| 'ic');
 fragment IN: ('inic' | 'in');
 fragment HZ: ('haz' | 'hz');
-fragment FD: ('avanza' | 'av');
-fragment BK: ('retrocede' | 're');
-fragment LT: ('giraizquierda' | 'gi');
-fragment RT: ('giraderecha' | 'gd');
-fragment CLS: ('borrapantalla' | 'cls');
-fragment ST: ('ponxy' | 'st');
-fragment PU: ('subelapiz' | 'sb');
-fragment PD: ('bajalapiz' | 'bl');
+fragment AV: ('avanza' | 'av');
+fragment RE: ('retrocede' | 're');
+fragment GI: ('giraizquierda' | 'gi');
+fragment GD: ('giraderecha' | 'gd');
+fragment BP: ('borrapantalla');
+fragment XY: ('ponxy');
+fragment SB: ('subelapiz' | 'sb');
+fragment BL: ('bajalapiz' | 'bl');
 
 fragment EG: ('elegir'| 'elg');
 fragment CUE: ('cuenta' | 'cu');
@@ -265,7 +263,6 @@ MIENTRAS:MNTR;
 HAZHASTA:HHST;
 HAZMIENTRAS:HMNTR;
 
-
 PONCOLORLAPIZ: PCL;
 GOMA: GM;
 PONX: PX;
@@ -277,14 +274,14 @@ OCULTATORTUGA : OT;
 INC : IC;
 INIC : IN;
 HAZ : HZ;
-FORWARD: FD;
-BACK: BK;
-LEFT: LT;
-RIGHT: RT;
-CLEARSCREEN: CLS;
-SET: ST;
-PEN_UP: PU;
-PEN_DOWN: PD;
+AVANZA: AV;
+RETROCEDE: RE;
+GIRAIZQUIERDA: GI;
+GIRADERECHA: GD;
+BORRAPANTALLA: BP;
+PONXY: XY;
+SUBELAPIZ: SB;
+BAJALAPIZ: BL;
 
 EJECUTA : 'ejecuta';
 
@@ -303,4 +300,3 @@ STRING: '"' ~('"')* '"';
 NEWLINE: '\r'? '\n' -> skip;
 WS: ' '+ -> skip;
 COMMENT: '//' ~[\n]* -> skip;
-
